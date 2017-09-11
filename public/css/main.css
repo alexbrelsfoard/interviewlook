@@ -1,0 +1,186 @@
+body {
+    background: rgba(0, 0, 0, 0) url("/images/home-bgimage.jpg") no-repeat scroll 0 0 / cover ;
+    height: auto;
+    color: #888;
+    font-family: "Roboto",sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+footer {
+	bottom: 0;
+    float: left;
+    position: fixed;
+    width: 100%;
+}
+
+#credits {
+    background: #153b65 none repeat scroll 0 0;
+    bottom: 0;
+    padding: 14px 0;
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.footer-text h5 {
+    color: #fff;
+    float: left;
+    font-family: roboto;
+    font-size: 14px;
+    padding-left: 3%;
+}
+
+h5, h6 {
+    letter-spacing: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.05em;
+    margin: 2em 0;
+    text-transform: uppercase;
+}
+
+.footer-socialicon ul {
+    margin-bottom: 0;
+}
+p, .wp-caption-text, .wp-audio-shortcode, ul, ol, div.gallery {
+    margin-bottom: 2em;
+}
+.footer-socialicon ul li {
+    display: inline-block;
+    padding: 20px 0;
+}
+
+.fm-outer {
+    overflow: visible;
+}
+
+#loader {
+    background: #fff none repeat scroll 0 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 50000;
+}
+a, button, .button, #header #main-nav > li:hover, .apply-with-facebook, .apply-with-linkedin, .apply-with-xing, .widget li {
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+}
+#header {
+    line-height: 40px;
+}
+#header, #header-background {
+    background-color: #14b1bb;
+}
+
+.sidenav {
+    height: 100vh;
+}
+.sidenav {
+    background-color: rgba(21, 59, 101, 0.65);
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+    z-index: 1;
+}
+#header a {
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    margin-left: 60px;
+    padding: 4px 0;
+    text-align: justify;
+    text-transform: capitalize;
+}
+a.closebtn {
+    position: absolute;
+    right: 20px;
+    z-index: 1001;
+}
+#main {
+    color: #fff;
+    padding: 0;
+    position: fixed;
+    right: 24px;
+    top: 28px;
+    transition: margin-top 0.5s ease 0s;
+    z-index: 9999;
+}
+#main span {
+    background: rgb(21, 59, 101) none repeat scroll 0 0;
+    border-radius: 50px;
+    display: inline;
+    font-size: 28px;
+    padding: 6px 10px;
+}
+.abc {
+    background: #153b65 none repeat scroll 0 0;
+    float: right;
+    height: 100vh;
+    padding-top: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+    z-index: 9;
+}
+.page-id-254 .header-logo {
+    text-align: center;
+}
+.page-id-254 .header-logo {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    box-shadow: none;
+}
+.header-logo {
+    background: #fff none repeat scroll 0 0;
+    box-shadow: 0 1px 3px #dad6d6;
+    height: 95px;
+    position: fixed;
+    text-align: justify;
+    width: 100%;
+}
+
+.page-id-254 .header-logo img {
+    margin-top: 50px;
+    width: 40%;
+}
+.header-logo img {
+    margin-left: 2%;
+    padding: 10px 0;
+    width: 80px;
+}
+.page-id-254 #title {
+    padding-bottom: 0;
+    padding-top: 20%;
+    text-align: center;
+}
+#title {
+    margin-top: 1%;
+    padding-bottom: 9px;
+    text-align: center;
+    width: 100%;
+}
+body.page section#content {
+    padding-bottom: 0;
+}
+section#content {
+    clear: both;
+    padding-bottom: 80px;
+}
+section#content {
+    margin-top: 40px;
+}
+.guest_user_home_search_main {
+    margin: 0 auto;
+    width: 61%;
+}
