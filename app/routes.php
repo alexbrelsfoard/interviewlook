@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 		'MainController@showWelcome');
+Route::get('/register', 'MainController@showRegister');
+Route::get('/contact',	'MainController@showContact');
+Route::get('/demos',	'MainController@showDemos');
+Route::get('/login',	'MainController@showLogin');
+
+
+// Route::get('/profile', 'LookieController@showProfile');

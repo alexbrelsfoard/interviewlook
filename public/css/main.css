@@ -1,4 +1,10 @@
 body {
+    height: auto;
+    color: #888;
+    font-family: "Roboto",sans-serif;
+}
+
+body.welcome {
     background: rgba(0, 0, 0, 0) url("/images/home-bgimage.jpg") no-repeat scroll 0 0 / cover ;
     height: auto;
     color: #888;
@@ -33,6 +39,7 @@ footer {
     font-family: roboto;
     font-size: 14px;
     padding-left: 3%;
+    margin: 15px 0px;
 }
 
 h5, h6 {
@@ -52,7 +59,7 @@ p, .wp-caption-text, .wp-audio-shortcode, ul, ol, div.gallery {
 }
 .footer-socialicon ul li {
     display: inline-block;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .fm-outer {
@@ -183,4 +190,113 @@ section#content {
 .guest_user_home_search_main {
     margin: 0 auto;
     width: 61%;
+}
+
+.footer-socialicon ul li i {
+    color: #fff;
+    font-size: 24px;
+    padding: 0 8px;
+}
+
+IMG.menu_icon {
+	height: 40px;
+	float: right;
+	margin: 10px 20px 0px 0px;
+	cursor: pointer;
+}
+HEADER {
+	height: 100px;
+	width: 100%;
+	border-bottom: 2px solid #EEE;
+	padding: 10px 0px 0px 0px;
+}
+HEADER IMG.logo{
+	height: 80px;
+	padding: 0px 0px 0px 100px;
+	float: left;
+}
+HEADER H1 {
+	text-align: center;
+	margin: 25px 0px 0px 0px;
+	font-family: "Roboto",sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #153b65;
+    text-indent: 200px;
+}
+HEADER IMG.menu_icon {
+	margin: 20px 20px 0px 0px;
+}
+.postform {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    float: left;
+    padding-left: 10px;
+    width: 152px;
+}
+
+NAV {
+	display: none;
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 300px;
+	background-color: #153b65;
+	color: #FFF;
+}
+
+NAV a{
+	color: #FFF;
+}
+
+NAV a.close {
+	text-align: right;
+    color: #FFF;
+/*     float: right; */
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 15px 10px 0px;
+/*     text-shadow: none; */
+    opacity: 1;
+    line-height: 24px;
+}
+
+NAV UL {
+	list-style: none;
+	margin: 0px 0px 0px 0px;
+	padding: 50px 10px 0px 50px;
+}
+
+NAV UL LI {
+	font-size: 20px;
+}
+
+SECTION#title {
+	padding: 40px 0px 0px 0px;
+}
+SECTION#title IMG {
+	width: 180px;
+}
+SECTION#title H1 {
+	color: #153b65;
+    font-family: "Roboto",sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    position: inherit;
+    text-align: center;
+    text-transform: initial;
+}
+
+INPUT {
+	height: 45px;
+}
+INPUT.search_icon {
+	margin: 0px 0px -10px 0px;
+}
+SELECT {
+	height: 45px;
 }

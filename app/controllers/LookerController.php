@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends BaseController {
+class MainController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -17,7 +17,10 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+		# call to function that builds menu based on login status.
+		# should probably reside in the User model.
+		$menu = User::buildMenu();
+		return View::make('index')->with('menu', $menu);
 	}
 
 }

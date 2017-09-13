@@ -12,15 +12,15 @@
 	
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" type="text/javascript" ></script>
+	<script type="text/javascript" src="{{ URL::asset('js/flexmenu.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/interviewlook.js') }}"></script>
+	
+	
 	@show
 </head>
-<body>
-	<header>
-		<img class="logo" src="/images/Interview-Look.png">
-		<img src="/images/menu.png" class="menu_icon"  onclick="IL.toggleMenu();"/>
-		<h1>@yield('page_title')</h1>
-	</header>
+<body class="welcome">
+<img src="/images/menu.png" class="menu_icon"  onclick="IL.toggleMenu();"/>
+
 <nav>
 	<a class="close" href="#" onclick="IL.toggleMenu();">X</a>
 	<ul>
