@@ -15,12 +15,39 @@ class MainController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function showProfile()
 	{
-		# call to function that builds menu based on login status.
-		# should probably reside in the User model.
-		$menu = User::buildMenu();
-		return View::make('index')->with('menu', $menu);
+		return View::make('profile');
+	}
+
+	public function showPJobs()
+	{
+		return View::make('jobs');
+	}
+
+	public function showApplication()
+	{
+		return View::make('application');
+	}
+
+	public function showBook()
+	{
+		return View::make('book');
+	}
+
+	public function showLooks()
+	{
+		return View::make('looks');
+	}
+
+	public function showAccount()
+	{
+		return View::make('account');
+	}
+
+	public function showQuestions()
+	{
+		return View::make('questions');
 	}
 
 }

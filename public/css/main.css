@@ -85,7 +85,11 @@ a, button, .button, #header #main-nav > li:hover, .apply-with-facebook, .apply-w
 #header, #header-background {
     background-color: #14b1bb;
 }
-
+.alert {
+	color: #900;
+	font-weight: bold;
+	font-style: italic;
+}
 .sidenav {
     height: 100vh;
 }
@@ -299,4 +303,271 @@ INPUT.search_icon {
 }
 SELECT {
 	height: 45px;
+}
+
+.main-loginform {
+    background: rgba(122, 149, 196, 0.68) none repeat scroll 0 0;
+    margin: 0 auto;
+    padding: 20px 80px;
+    width: 570px;
+}
+
+.main-loginform h1 {
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    margin: 10px 0 25px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.cjfm-login-form .fa {
+    border-right: 1px solid;
+    float: left;
+    font-size: 20px;
+    height: 100%;
+    line-height: 16px;
+    padding: 10px 25px 11px 10px;
+    top: 0;
+    width: 25px;
+    background-color: #FFF;
+    color: #ababab;
+    margin: 0px -1px 0px 0px;
+    
+}
+
+.cjfm-login-form input.form-control {
+	width: 375px;
+}
+.cjfm-form .control-group {
+    margin-bottom: 20px;
+}
+
+
+.cjfm-form .cjfm-btn {
+    background: #5cb85c none repeat scroll 0 0;
+    border: 1px solid #48a448;
+    color: #ffffff;
+}
+.control-group.submit-button button {
+    background-color: #265a94;
+    border-radius: 0;
+    float: right;
+    padding: 10px 25px;
+}
+.cjfm-login-form button#do_login {
+    font-size: 20px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.cjfm-form form .forgot-password-link {
+    float: right;
+}
+a.button-suffix.forgot-password-link {
+    color: #fff;
+}
+.cjfm-form .button-suffix {
+    margin-left: 10px;
+}
+
+span.cjfm-inline-block.button-suffix input {
+    height: 15px;
+    margin: 0;
+}
+
+label {
+    color: #222;
+    font-weight: normal;
+}
+.cjfm-form label {
+    line-height: 1.6;
+}
+.cj-form-edit-profile label {
+    color: #888;
+}
+.submit-button label {
+    text-transform: capitalize;
+}
+.cjfm-login-form span, .cjfm-login-form label {
+    color: #fff;
+}
+
+.cj-form-edit-profile form label.control-label {
+    float: left;
+    font-size: 16px;
+    text-transform: capitalize;
+    width: 40%;
+}
+.cj-form-edit-profile form span.cjfm-relative {
+    float: left;
+    width: 60%;
+}
+.close:hover, .close:focus {
+	color: #33a8de;
+}
+
+.cjfm-form {
+    max-width: 100%;
+    margin-bottom: 15px;
+}
+.cj-form-edit-profile {
+    margin-bottom: 93px;
+    width: 100%;
+}
+
+.cj-form-edit-profile form {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.job_filters {
+    float: left;
+    width: 100%;
+}
+.job_filters, .resume_filters {
+    background: #f8f8f8 none repeat scroll 0 0;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    margin-bottom: 60px;
+    padding: 15px;
+}
+form.job_filters {
+    background: #1d4068 none repeat scroll 0 0;
+    border: 0 none;
+}
+
+.search_jobs {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+}
+.search_jobs, .search_resumes {
+    display: table;
+    width: 100%;
+}
+
+.search_keywords, .search_location, .search_categories, .search_region, #content .gjm-filter-wrapper, #content .grm-filter-wrapper {
+    float: left;
+    padding: 15px;
+    width: 33.3333%;
+}
+.search_jobs .search_keywords, .search_jobs .search_location {
+    width: 50%;
+}
+
+.search_keywords label, .search_location label, .search_categories label {
+    display: block;
+    float: none;
+    width: 100%;
+}
+.search_jobs label, ul.job_types label {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.search_keywords input, .search_location input, .search_region input, .search_categories input, .search_categories select, .search_categories .input-text, .search_categories .postform, .search_categories .chosen-container-multi .chosen-choices, .search_categories .chosen-container-single .chosen-single, .search_region .chosen-container-multi .chosen-choices, .search_region .chosen-container-single .chosen-single, .gjm-filter-wrapper select, .grm-filter-wrapper select, .job-application-edit select, .job-application-edit input[name="application_rating"] {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e7e7e7;
+    border-radius: 0;
+    box-shadow: none;
+    height: 45px;
+    padding: 10px 15px;
+    width: 100%;
+}
+
+.job_types {
+    border-top: 1px solid #e7e7e7;
+    list-style: outside none none;
+    margin: 0 15px;
+    padding: 15px 0;
+}
+ul.job_types {
+    border: 0 none;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    width: 58%;
+}
+.job_types li {
+    float: left;
+    margin-right: 30px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 4px 4px 0 0;
+    position: relative;
+    top: 3px;
+}
+.job_types input[type="checkbox"] {
+    float: left;
+    margin: 2px 5px 0 0;
+    height: 14px;
+}
+
+TABLE.job_applications {
+	width: 90%;
+}
+
+TABLE.job_applications THEAD TR TH {
+	background: #14B1BB; /* #2d73b6; */
+	border: 1px solid #14B1BB;
+	padding-left: 10px;
+	color: #000;
+}
+
+TABLE.job_applications TBODY TR TD {
+	border: 1px solid #333;
+	padding: 2px 10px 2px 10px;
+	width: 33%;	
+}
+TABLE.job_applications TBODY TR {
+	cursor: pointer;
+}
+TABLE.job_applications TBODY TR:nth-child(even) {
+	background: #DDD;
+}
+TABLE.job_applications TBODY TR:hover {
+	background: #f7ffbc;
+}
+
+.pagination {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    padding: 0;
+    width: 100%;
+}
+.posted_jobs ul {
+    float: left;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.posted_jobs ul li {
+    background: #2d73b6 none repeat scroll 0 0;
+    color: #fff;
+    float: left;
+    margin: 5px;
+    padding: 50px;
+    width: 30%;
+    cursor: pointer;
+}
+ul.pagination li {
+    margin: 6px;
+    padding: 10px 15px;
+    text-align: center;
+    width: 4%;
+    background: #153B65;
+    color: #FFF;
+    cursor: pointer;
+}
+ul.pagination li.active {
+	background: #14B1BB;
+	color: #000;
+}
+ul.pagination li:hover {
+	background: #2d73b6 none repeat scroll 0 0;
 }

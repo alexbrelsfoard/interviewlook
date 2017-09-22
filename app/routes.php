@@ -11,11 +11,177 @@
 |
 */
 
+/*
 Route::get('/', 		'MainController@showWelcome');
 Route::get('/register', 'MainController@showRegister');
 Route::get('/contact',	'MainController@showContact');
 Route::get('/demos',	'MainController@showDemos');
 Route::get('/login',	'MainController@showLogin');
+Route::get('/logout',	'MainController@doLogout');
+*/
+
+// Lookie / Looker
+/*
+Route::get('/profile',	'LookController@showProfile');
+Route::get('/jobs',		'LookController@showJobs');
+Route::get('/application', 'LookController@showApplication');
+Route::get('/book',		'LookController@showBook');
+Route::get('/looks',	'LookController@showLooks');
+Route::get('/account',	'LookController@showAccount');
+Route::get('/questions','LookController@showQuestions');
+*/
+
+Route::get('/', function(){
+	return View::make('index');
+});
+
+Route::get('/register', function() {
+	return View::make('register');
+});
+
+Route::get('/contact', function() {
+	return View::make('contact');
+});
+
+Route::get('/demos', function() {
+	return View::make('demos');
+});
+
+Route::get('/login',	function() {
+	$data = array('error'=>'');
+	return View::make('login')->with($data);
+});
+
+Route::post('/login',	array('as' => 'login', function() {
+	$validator = getLoginValidator();
+	
+	if ($validator->passes()) {
+		$credentials = getLoginCredentials();
+
+		if (Auth::attempt($credentials)) {
+			return Redirect::route("profile");
+		}
+		$data['error'] = "Username and Password do not match!";
+	} else {
+		$data['error'] = "Invalid Username or Password!";
+		$data['errors'] = $validator->all();
+	}
+	return View::make('login')->with($data);
+}));
+
+Route::get('/logout',	function() {
+	Auth::logout();
+	return Redirect::route("login");
+});
 
 
-// Route::get('/profile', 'LookieController@showProfile');
+Route::get('/profile', array('as' => 'profile', function() {
+	$data = array('error'=>'');
+	$data['user'] = User::find(Auth::user()->id);
+	return View::make('profile')->with($data);
+}));
+Route::get('/edit-profile', array('as' => 'profile', function() {
+	$data = array('error'=>'');
+	$data['user'] = User::find(Auth::user()->id);
+	return View::make('profile')->with($data);
+}));
+
+Route::post('/edit-profile', function() {
+	$data = array('error'=>'');
+	$user = User::find(Auth::user()->id);
+	$validator = getProfileValidator();
+	
+	if ($validator->passes()) {
+		# udate user details
+		$user->name = Input::get('name');
+		$user->email = Input::get('email');
+		$password = Input::get('password');
+		if (!empty($password)) {
+			$user->password = hash::make($password);
+		}
+		$user->save();
+		
+	}else {
+		$data['error'] = "Missing or Invalid Field Data!";
+		$data['errors'] = $validator;
+	}
+	$data['user'] = $user;
+	return View::make('profile')->with( $data );
+});
+
+Route::get('/jobs', function() {
+	return View::make('jobs');
+});
+
+Route::get('/application', function() {
+	return View::make('application');
+});
+
+Route::get('/book', function() {
+	return View::make('book');
+});
+
+Route::get('/looks', function() {
+	return View::make('looks');
+});
+
+Route::get('/account', function() {
+	$data = array('error'=>'');
+	$data['user'] = User::find(Auth::user()->id);
+	return View::make('account')->with($data);
+});
+
+Route::post('/account', function() {
+	$data = array('error'=>'');
+	$user = User::find(Auth::user()->id);
+	$validator = getProfileValidator();
+	
+	if ($validator->passes()) {
+		# udate user details
+		$user->name = Input::get('name');
+		$user->email = Input::get('email');
+		$password = Input::get('password');
+		if (!empty($password)) {
+			$user->password = hash::make($password);
+		}
+		$user->save();
+		
+	}else {
+		$data['error'] = "Missing or Invalid Field Data!";
+		$data['errors'] = $validator;
+	}
+	$data['user'] = $user;
+	return View::make('account')->with( $data );
+});
+
+Route::get('/questions', function() {
+	return View::make('questions');
+});
+
+	
+function getLoginCredentials() {
+	return [
+		"email" 	=> Input::get("email"),
+		"password" 	=> Input::get("password")
+	];
+}
+
+function isPostRequest() {
+	return Input::server("REQUEST_METHOD") == "POST";
+}
+
+function getLoginValidator() {
+	return Validator::make(Input::all(), [
+		"email" 	=> "required",
+		"password" 	=> "required"
+	]);
+}
+
+function getProfileValidator() {
+	return Validator::make(Input::all(), [
+		"email" 	=> "required",
+		"name" 		=> "required",
+		"password"	=> "min:6",
+		"password_comfirm"	=> "same:password"
+	]);
+}

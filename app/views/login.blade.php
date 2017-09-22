@@ -1,49 +1,56 @@
-@extends('layouts.main')
+@extends('layouts.signup')
 
 @section('title')
-Contact Us
+Login
 @stop
 @section('page_title')
-Contact Us
+Login
 @stop
 
 @section('body')
 
+
 <section id="content">
-	<div class="container">
-		
-		<div class="col-md-12">
-			<div class="col-md-6">
-				Content
-			</div>
-			<div class="col-md-6">
-				<h3>Contact Us</h3>
-				<form action="/send_message" method="post">
-					<p>
-						<label>Your Name (Required)</label><br>
-						<input type="text" name="name" size="40"/>
-					</p>
-					<p>
-						<label>Your Email (Required)</label><br>
-						<input type="text" name="email" size="40"/>
-					</p>
-					<p>
-						<label>Subject</label><br>
-						<input type="text" name="subject" size="40"/>
-					</p>
-					<p>
-						<label>Message</label><br>
-						<textarea name="message" rows="10" cols="40"></textarea>
-					</p>
-					<p>
-						<input type="submit" class="btn btn-primary" value="Send"/>
-					</p>
+		<div class="main-loginform">
+			<h1>Login</h1>
+			@if ($error)
+			<p class="alert">Error: {{ $error }}
+				<ul>
+				<?php
+					foreach ($errors as $message) {
+					    echo "<li>$message</li>";
+					}
+				?>
+				</ul>
+			</p>
+			@endif
+			<div class="cjfm-form  cjfm-login-form  ">
+				<form action="/login" method="post">
+					<span class="cjfm-loading"></span>
+					<div id="container-login_form_user_login" class="control-group textbox clearfix">
+						<label class="control-label hidden" for="login_form_user_login">
+							<span class="label-login_form_user_login">Username or Email address: <span class="cjfm-required">*</span></span>
+						</label>
+						<span class="cjfm-relative">
+							<i class="fa fa-user"></i><input type="text" name="email" id="login_form_user_email" value=""  class="form-control form-type-login login_form_user_login"  placeholder="Email Address " >
+						</span>
+					</div>
 					
+					<div id="container-login_form_user_pass" class="control-group password clearfix">
+						<label class="control-label hidden" for="login_form_user_pass"><span class="label-login_form_user_pass">Password: <span class="cjfm-required">*</span></span></label>
+						<span class="cjfm-relative">
+							<i class="fa fa-lock"></i><input type="password" name="password" id="login_form_user_pass" value=""  class="form-control form-type-login login_form_user_pass"  placeholder="********" >
+						</span>
+					</div>
+					
+					<div class="control-group submit-button">
+						<button type="submit" name="do_login" id="do_login" class="submit cjfm-btn cjfm-btn-default " >Login</button>
+						<span class="cjfm-inline-block button-suffix"><label><input name="remember_me" type="checkbox" /> Remember me </label></span>
+						<a class="button-suffix forgot-password-link" href="http://interviewlook.com/recover-password/">Forgot password?</a>
+					</div>
 				</form>
 			</div>
 		</div>
-		
-	</div>
 </section>
 	
 @stop

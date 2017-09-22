@@ -33,36 +33,38 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'Register'	=> '/register'
 		);
 		
-		# if logged in as lookie
-/*
-		$menu = array(
-			'Home'		=> '/',
-			'My Profile'	=> '/profile',
-			'Find Jobs'	=> '/jobs',
-			'My Job Application' => '/application',
-			'My LOOKbook' => '/book',
-			'My LOOKs'	=> '/looks',
-			'My Account'=> '/account',
-			'Contact Us'=> '/contact',
-			'Demos'		=> '/demos',
-			'Logout'	=> '/logout',
-		);
-*/
-		
-		# if logged in as looker
-/*
-		$menu = array(
-			'Home'		=> '/',
-			'Add Questions'	=> '/questions',
-			'My Job' 	=> '/jobs',
-			'LOOKs Received' => '/looks',
-			'My LOOKbook'=> '/book',
-			'My Account' => '/account',
-			'Contact Us'=> '/contact',
-			'Demos'		=> '/demos',
-			'Logout'	=> '/logout',
-		);
-*/
+		if (Auth::check()) {
+			# if logged in as lookie
+			if (Auth::user()->type == 1) {
+			$menu = array(
+				'Home'		=> '/',
+				'My Profile'	=> '/profile',
+				'Find Jobs'	=> '/jobs',
+				'My Job Application' => '/application',
+				'My LOOKbook' => '/book',
+				'My LOOKs'	=> '/looks',
+				'My Account'=> '/account',
+				'Contact Us'=> '/contact',
+				'Demos'		=> '/demos',
+				'Logout'	=> '/logout',
+			);
+			}
+			# if logged in as looker
+			else {
+			
+				$menu = array(
+					'Home'		=> '/',
+					'Add Questions'	=> '/questions',
+					'My Job' 	=> '/jobs',
+					'LOOKs Received' => '/looks',
+					'My LOOKbook'=> '/book',
+					'My Account' => '/account',
+					'Contact Us'=> '/contact',
+					'Demos'		=> '/demos',
+					'Logout'	=> '/logout',
+				);
+			}
+		}
 		return $menu;
 	}
 

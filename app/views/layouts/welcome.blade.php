@@ -20,7 +20,7 @@
 </head>
 <body class="welcome">
 <img src="/images/menu.png" class="menu_icon"  onclick="IL.toggleMenu();"/>
-
+<?php $menu = User::buildMenu(); ?>
 <nav>
 	<a class="close" href="#" onclick="IL.toggleMenu();">X</a>
 	<ul>
