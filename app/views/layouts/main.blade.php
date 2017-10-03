@@ -14,10 +14,11 @@
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" type="text/javascript" ></script>
 	<script type="text/javascript" src="{{ URL::asset('js/interviewlook.js') }}"></script>
 	@show
+	@yield('head_code')
 </head>
 <body>
 	<header>
-		<img class="logo" src="/images/Interview-Look.png">
+		<a href="/"><img class="logo" src="/images/Interview-Look.png"></a>
 		<img src="/images/menu.png" class="menu_icon"  onclick="IL.toggleMenu();"/>
 		<h1>@yield('page_title')</h1>
 	</header>

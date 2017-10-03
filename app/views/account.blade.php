@@ -42,7 +42,7 @@ My Account
 					<input type="password_confirm" name="password" size="40"/>
 				</div>
 				<div class="control-group submit-button">
-					<button id="do_update_profile" class="submit cjfm-btn cjfm-btn- cjfm-btn-default" type="submit" name="do_update_profile">Update Account</button>
+					<button id="do_update_profile" class="btn btn-primary submit" type="submit" name="do_update_profile">Update Account</button>
 				</div>
 				
 			</form>

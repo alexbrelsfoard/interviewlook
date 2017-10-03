@@ -20,7 +20,7 @@
 </head>
 <body class="welcome">
 <header>
-	<img class="logo" src="/images/Interview-Look.png">
+	<a href="/"><img class="logo" src="/images/Interview-Look.png"></a>
 	<img src="/images/menu.png" class="menu_icon"  onclick="IL.toggleMenu();"/>
 	<h1>@yield('page_title')</h1>
 </header>

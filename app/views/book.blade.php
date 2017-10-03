@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
 @section('title')
-My LOOKbook
+My LOOKBook
 @stop
 @section('page_title')
-My LOOKbook
+My LOOKBook
 @stop
 
 @section('body')
@@ -12,37 +12,23 @@ My LOOKbook
 <section id="content">
 	<div class="container">
 		
-		<div class="col-md-12">
-			<div class="col-md-6">
-				Content
-			</div>
-			<div class="col-md-6">
-				<h3>Contact Us</h3>
-				<form action="/send_message" method="post">
-					<p>
-						<label>Your Name (Required)</label><br>
-						<input type="text" name="name" size="40"/>
-					</p>
-					<p>
-						<label>Your Email (Required)</label><br>
-						<input type="text" name="email" size="40"/>
-					</p>
-					<p>
-						<label>Subject</label><br>
-						<input type="text" name="subject" size="40"/>
-					</p>
-					<p>
-						<label>Message</label><br>
-						<textarea name="message" rows="10" cols="40"></textarea>
-					</p>
-					<p>
-						<input type="submit" class="btn btn-primary" value="Send"/>
-					</p>
-					
-				</form>
-			</div>
-		</div>
+		<h3>My Documents:</h3>
 		
+		<form>
+			<button class="submit btn btn-primary">Upload New File</button>
+		</form>
+		
+		<div class="clear"></div>
+		
+		<hr>
+		
+		<h3>My LOOKs&reg;</h3>
+		
+		<form action="/looks" method="get">
+			<button class="submit btn btn-primary">Create New LOOK&reg;</button>
+		</form>
+		
+		<div class="clear"></div>
 	</div>
 </section>
 	

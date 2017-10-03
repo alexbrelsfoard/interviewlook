@@ -12,7 +12,7 @@ class CreateUserTable extends Migration {
 	 */
 	public function up()
 	{
-		// Create the Users table
+		// Create the users table
 		Schema::create('users', function($newTable){
 			$newTable -> increments('id');
 			$newTable -> string('email');
@@ -60,7 +60,7 @@ class CreateUserTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		// drop users table
 		Schema::dropIfExists('users');
 	}
 

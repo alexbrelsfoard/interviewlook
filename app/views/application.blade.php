@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
 @section('title')
-My Application
+My Submitted LOOKs
 @stop
 @section('page_title')
-My Application
+My Submitted LOOKs
 @stop
 
 @section('body')

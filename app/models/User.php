@@ -23,6 +23,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 	
+	public function profile() {
+		return $this->hasOne('Profile', 'user_id');
+	}
+	
 	public static function buildMenu() {
 		$menu = array(
 			'Home'		=> '/',
@@ -39,9 +43,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			$menu = array(
 				'Home'		=> '/',
 				'My Profile'	=> '/profile',
-				'Find Jobs'	=> '/jobs',
-				'My Job Application' => '/application',
-				'My LOOKbook' => '/book',
+				'Find Jobs'	=> '/',
+				'My Submitted LOOKs' => '/applications',
+				'My LOOKBook' => '/book',
 				'My LOOKs'	=> '/looks',
 				'My Account'=> '/account',
 				'Contact Us'=> '/contact',
@@ -57,7 +61,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 					'Add Questions'	=> '/questions',
 					'My Job' 	=> '/jobs',
 					'LOOKs Received' => '/looks',
-					'My LOOKbook'=> '/book',
 					'My Account' => '/account',
 					'Contact Us'=> '/contact',
 					'Demos'		=> '/demos',

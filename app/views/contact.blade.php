@@ -14,7 +14,8 @@ Contact Us
 		
 		<div class="col-md-12">
 			<div class="col-md-6">
-				Content
+				<p>Content</p>
+				<p><img class="alignnone size-medium" src="/images/Mock-UI-photo-750x422.jpg" style="height: auto; max-width: 100%;"/></p>
 			</div>
 			<div class="col-md-6">
 				<h3>Contact Us</h3>

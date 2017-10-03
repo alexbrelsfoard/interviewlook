@@ -12,7 +12,7 @@ class CreateProfileTable extends Migration {
 	 */
 	public function up()
 	{
-		// Create the Users table
+		// Create the profiles table
 		Schema::create('profiles', function($newTable){
 			$newTable -> increments('id');
 			$newTable -> integer('user_id');
@@ -34,7 +34,7 @@ class CreateProfileTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		// drop profiles table
 		Schema::dropIfExists('profiles');
 	}
 
