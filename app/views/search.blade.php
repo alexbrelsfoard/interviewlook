@@ -19,11 +19,11 @@ Home
 <section id="content">
 	<div class="container">
 		<div class="guest_user_home_search_main">
-			<form id="form" action="/" method="get"><input type="hidden" name="search" value="1"/>
+			<form id="form" action="/search" method="get"><input type="hidden" name="search" value="1"/>
 				<div class="search_input">
 					<input type='text' id='job_title_search' name="job_title_search" placeholder="Job Title" value="" class="postform auto_com_desi">
 					<select name="job_location" id="job_location" class="postform">
-						<option vaue="">-- Please Select a State --</option>
+						<option vaue="0">-- Please Select a State --</option>
 						<option value="99">Remote</option>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>

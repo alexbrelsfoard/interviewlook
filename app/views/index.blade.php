@@ -30,7 +30,7 @@ Home
 				<div class="search_input">
 					<input type='text' id='job_title_search' name="job_title_search" placeholder="Job Title" value="" class="postform auto_com_desi">
 					<select name="job_location" id="job_location" class="postform">
-						<option vaue="">-- Please Select a State --</option>
+						<option vaue="0">-- Please Select a State --</option>
 						<option value="99">Remote</option>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
