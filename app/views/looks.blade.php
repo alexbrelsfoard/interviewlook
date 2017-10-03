@@ -72,7 +72,7 @@ LOOKs&reg;
 <!-- 								Need to have some JS constantly checking for new videos for this section. -->
 									<div id="list_of_questions">
 										<ul>
-											<li><div class="screenshot" style="background-image:url('http://brelsfoard.com/~interviewlook/videos/vs1506952118349_650.jpg');"><img src="/images/play-video-triangle.png"></div><p>Who Are You?</p></li>
+											<li><div class="screenshot" style="background-image:url('http://brelsfoard.com/~interviewlook/videos/vs1506901506556_810.jpg');"><img src="/images/play-video-triangle.png"></div><p>Who Are You?</p></li>
 											<li><div class="screenshot" style="background-image:url('http://brelsfoard.com/~interviewlook/videos/vs1506907196484_307.jpg');"><img src="/images/play-video-triangle.png"></div><p>Tell us a bit about yourself</p></li>
 											<li><div class="screenshot" style="background-image:url('http://brelsfoard.com/~interviewlook/videos/vs1506903419655_587.jpg');"><img src="/images/play-video-triangle.png"></div><p>What is your favorite programming language, and why?</p></li>
 											<li><div class="screenshot" style="background-image:url('http://brelsfoard.com/~interviewlook/videos/vs1506903378953_888.jpg');"><img src="/images/play-video-triangle.png"></div><p>Who Are You?</p></li>
