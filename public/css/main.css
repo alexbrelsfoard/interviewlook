@@ -679,7 +679,7 @@ ul.nav, ul.nav-pills {
 	border-radius: 10px;
     height: 370px;
     margin: 10px auto;
-    padding: 20px 0 20px;
+    padding: 20px 0 0px 20px;
     text-align: center;
     width: 440px;
 /* 	text-align: center; */
