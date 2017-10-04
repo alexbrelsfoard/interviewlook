@@ -835,6 +835,10 @@ div#exTab1 {
 	border-top: 1px dashed #DDD;
 }
 
+.question_lookup_suggestion {
+	margin: 30px 0px 0px 40px;
+}
+
 #questions-list {
 	overflow-y: auto;
 	height: 100%;

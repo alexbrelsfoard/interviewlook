@@ -18,9 +18,23 @@ LOOKs&reg;
 <script type="text/javascript">
 	$( function() {
 		var knownQuestions = <?php echo Question::getDistinctQuestions(); ?>;
-		$('#question').autocomplete({ source: knownQuestions, appendTo: ".record_video" });
+		$('#question').autocomplete({ 
+			source: knownQuestions, 
+			appendTo: "#question_input",
+			open: function () {
+		        $(this).data("uiAutocomplete").menu.element.addClass("question_lookup_suggestion");
+		    } 
+		});
 	});
 </script>
+<style>
+	.ui-autocomplete {
+		margin: 80px 0px 0px 77px;
+	}
+	.ui-autocomplete LI {
+		border-bottom: 1px dashed #DDD;
+	}
+</style>
 @stop
 
 @section('body')
