@@ -720,6 +720,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
 -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 	padding: 20px;
+	z-index: 15;
 }
 #video-complete-message button{
 	border-radius: 10px;
