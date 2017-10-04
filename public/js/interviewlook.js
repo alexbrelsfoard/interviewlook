@@ -69,7 +69,8 @@ var IL = {
 function startVideoRecorder() {
 	var pipe = document.createElement('script'); 
 	pipe.type = 'text/javascript'; 
-	pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';
+	pipe.async = true;
+	pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';
 	var s = document.getElementsByTagName('script')[0]; 
 	s.parentNode.insertBefore(pipe, s);
 }

@@ -106,7 +106,22 @@ Route::post('/shinytuesday', function(){
 	$video_name = $webhookData['data']['videoName'];
 	list($user_id, $question) = explode(':', $webhookData['data']['payload']);
 	// lookup question to see if new one needs to be created.
+	$question_lookup = DB::table('questions')->select('id')->where('question', $question)->get();
 	// get question ID
+	$question_id = $question_lookup['id'];
+	if (!$question_id) {
+		$ques = new Question();
+		$ques->question = $question;
+		$ques->creator = $user_id;
+		$ques->save();
+		$question_id = $ques->id;
+	}
+	
+	$user_question = new UserQuestions();
+	$user_question->user_id = $user_id;
+	$user_question->question = $question_id;
+	$user_question->video = $video_name;
+	$user_question->save();
 	
 	// save new users_question
 	print header();
