@@ -99,7 +99,7 @@ Route::get('/logout',	function() {
 	return Redirect::route("home");
 });
 
-Route::post('/shinytuesday', function(){
+Route::any('/shinytuesday', function(){
 	// check to make sure that these calls are coming from a safe IP address.
 	// 178.62.150.224 and 85.9.27.220
 	$webhookData = json_decode($_POST["payload"], true);
