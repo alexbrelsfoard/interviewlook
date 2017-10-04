@@ -99,6 +99,20 @@ Route::get('/logout',	function() {
 	return Redirect::route("home");
 });
 
+Route::post('/shinytuesday', function(){
+	// check to make sure that these calls are coming from a safe IP address.
+	// 178.62.150.224 and 85.9.27.220
+	$webhookData = json_decode($_POST["payload"], true);
+	$video_name = $webhookData['data']['videoName'];
+	list($user_id, $question) = explode(':', $webhookData['data']['payload']);
+	// lookup question to see if new one needs to be created.
+	// get question ID
+	
+	// save new users_question
+	print header();
+	print 'OK';
+});
+
 Route::resource('job', 'JobController');
 
 Route::group(array('before' => 'auth'), function() {
