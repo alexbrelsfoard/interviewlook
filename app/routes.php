@@ -102,29 +102,33 @@ Route::get('/logout',	function() {
 Route::any('/shinytuesday', function(){
 	// check to make sure that these calls are coming from a safe IP address.
 	// 178.62.150.224 and 85.9.27.220
-	$webhookData = json_decode($_POST["payload"], true);
+	// also check payload->data->httpReferer should be https://www.interviewlook.com/looks
+	$webhookData = json_decode($_GET["payload"], true);
 	$video_name = $webhookData['data']['videoName'];
 	list($user_id, $question) = explode(':', $webhookData['data']['payload']);
 	// lookup question to see if new one needs to be created.
 	$question_lookup = DB::table('questions')->select('id')->where('question', $question)->get();
+// 	Log::warning('**** Questions lookup: '.var_export($question_lookup, true));
+
 	// get question ID
-	$question_id = $question_lookup['id'];
-	if (!$question_id) {
+	if (empty($question_lookup)) {
+		// new question; save it.
 		$ques = new Question();
 		$ques->question = $question;
 		$ques->creator = $user_id;
 		$ques->save();
 		$question_id = $ques->id;
+	}else {
+		$question_id = $question_lookup[0]->id;
 	}
 	
+	// save new users_question
 	$user_question = new UserQuestions();
 	$user_question->user_id = $user_id;
-	$user_question->question = $question_id;
+	$user_question->question_id = $question_id;
 	$user_question->video = $video_name;
 	$user_question->save();
 	
-	// save new users_question
-	print header();
 	print 'OK';
 });
 

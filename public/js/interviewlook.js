@@ -75,6 +75,13 @@ function startVideoRecorder() {
 	s.parentNode.insertBefore(pipe, s);
 }
 
+function onSaveOk(streamName, streamDuration, userId, cameraName, micName, recorderId, audioCodec, videoCodec, fileType, videoId) {
+	$('#video-complete-message').fadeIn();
+	$('#question').val('');
+	removePipeRecorder();
+	startVideoRecorder();
+}
+/*
 function onUploadDone(streamName, streamDuration, userId, recorderId, audioCodec, videoCodec, fileType){
 	$('#video-complete-message').fadeIn();
 	$('#question').val('');
@@ -87,6 +94,7 @@ function onVideoUploadSuccess(filename,filetype,videoId){
 	removePipeRecorder();
 	startVideoRecorder();
 }
+*/
 function onVideoUploadFailed(error){
 	var args = Array.prototype.slice.call(arguments);
 	alert("Failed to save video ("+args.join(', ')+")");
