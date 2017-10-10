@@ -20,6 +20,9 @@ My Profile
 				<th class="clearfix">Name</th><td>{{ $user->name }} <small style="float: right">(<a href="/account">Account Settings</a> page to edit this)</small></td>
 			</tr>
 			<tr>
+				<th>Email</th><td>{{ $user->email }}</td>
+			</tr>
+			<tr>
 				<th>Current Position</th><td><input type="text" name="current_position" value="{{ $user->profile->current_position }}" size="40"/></td>
 			</tr>
 			<tr>
@@ -34,14 +37,8 @@ My Profile
 			<tr>
 				<th>Total Experience</th><td><input type="text" name="years_experience" value="{{ $user->profile->years_experience }}" size="40"/></td>
 			</tr>
-		</table>
-		
-		<table class="profile" cellspacing="0">
 			<tr>
 				<th>Highest Degree</th><td><input type="text" name="highest_degree" value="{{ $user->profile->highest_degree }}" size="40"/></td>
-			</tr>
-			<tr>
-				<th>Email</th><td>{{ $user->email }}</td>
 			</tr>
 			<tr>
 				<th>City</th><td><input type="text" name="city" value="{{ $user->profile->city }}" size="40"/></td>

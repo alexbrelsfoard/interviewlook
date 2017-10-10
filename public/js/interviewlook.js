@@ -8,6 +8,16 @@ var IL = {
 		}
 	},
 	
+	selectUserType : function() {
+		var user_type = $('#user_type').val();
+		if (user_type == 2) {
+			$('#looker_details').slideDown();
+		}else {
+			$('#looker_details').slideUp();
+			
+		}
+	},
+	
 	switchToIntros : function() {
 		$('#transitionwindow').fadeIn('fast');
 		setTimeout(function(){

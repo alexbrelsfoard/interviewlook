@@ -23,6 +23,9 @@ My Profile
 				<th>Name</th><td>{{ $user->name}}</td>
 			</tr>
 			<tr>
+				<th>Email</th><td>{{ $user->email }}</td>
+			</tr>
+			<tr>
 				<th>Current Position</th><td>{{ $user->profile->current_position }}</td>
 			</tr>
 			<tr>
@@ -35,25 +38,10 @@ My Profile
 				<th>Preferred Location</th><td>{{ $user->profile->preferred_location }}</td>
 			</tr>
 			<tr>
-				<th>Current Position</th><td>{{ $user->profile->current_position }}</td>
-			</tr>
-			<tr>
 				<th>Years Experience</th><td>{{ $user->profile->years_experience }}</td>
 			</tr>
 			<tr>
-				<th>Current Position</th><td>{{ $user->profile->current_position }}</td>
-			</tr>
-		</table>
-		
-		<table class="profile" cellspacing="0">
-			<tr>
 				<th>Highest Degree</th><td>{{ $user->profile->highest_degree }}</td>
-			</tr>
-			<tr>
-				<th>Email</th><td>{{ $user->email }}</td>
-			</tr>
-			<tr>
-				<th>City</th><td>{{ $user->profile->city }}</td>
 			</tr>
 		</table>
 		

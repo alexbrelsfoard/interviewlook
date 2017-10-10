@@ -5,10 +5,6 @@
 | Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
 */
 
 /*
@@ -36,6 +32,41 @@ Route::any('/', array('as'=>'home', function(){
 	return View::make('index')->with($data);
 }));
 
+Route::get('/contact', function() {
+	return View::make('contact');
+});
+
+Route::get('/demos', function() {
+	return View::make('demos');
+});
+
+Route::get('/login',	function() {
+	$data = array('error'=>'');
+	return View::make('login')->with($data);
+});
+
+Route::post('/login',	array('as' => 'login', function() {
+	$validator = getLoginValidator();
+	$data = array('error'=>'');
+	if ($validator->passes()) {
+		$credentials = getLoginCredentials();
+		$remember_login = Input::get('remember_me');
+		if (Auth::attempt($credentials, $remember_login)) {
+			return Redirect::route("profile");
+		}
+		$data['error'] = "Username and Password do not match!";
+	} else {
+		$data['error'] = "Invalid Username or Password!";
+		$data['errors'] = $validator->all();
+	}
+	return View::make('login')->with($data);
+}));
+
+Route::get('/logout',	function() {
+	Auth::logout();
+	return Redirect::route("home");
+});
+
 Route::get('/search', function(){
 	$data = array('results' => null);
 	if (Input::get('search')) {
@@ -58,84 +89,57 @@ Route::get('/search', function(){
 });
 
 Route::get('/register', function() {
-	return View::make('register');
-});
-
-Route::get('/contact', function() {
-	return View::make('contact');
-});
-
-Route::get('/demos', function() {
-	return View::make('demos');
-});
-
-Route::get('/login',	function() {
 	$data = array('error'=>'');
-	return View::make('login')->with($data);
+	return View::make('register')->with( $data );
 });
 
-Route::post('/login',	array('as' => 'login', function() {
-	$validator = getLoginValidator();
+Route::post('/register', function() {
+// 	read in details.
+// 	create new user.
+// 	send to register-thankyou
 	$data = array('error'=>'');
+	$validator = getAccountValidator();
+	
 	if ($validator->passes()) {
-		$credentials = getLoginCredentials();
-		$remember_login = false;
-		// check if user wants login to be remembered.  If so, set $remember to true
-// 		$remember_login = ? Input::get('remember_me') true : false;
-		$remember_login = Input::get('remember_me');
-		if (Auth::attempt($credentials, $remember_login)) {
-			return Redirect::route("profile");
+		# new user details
+		$user = new User();
+		$user->name = Input::get('name');
+		$user->email = Input::get('email');
+		$password = Input::get('password');
+		if (!empty($password)) {
+			$user->password = Hash::make($password);
 		}
-		$data['error'] = "Username and Password do not match!";
-	} else {
-		$data['error'] = "Invalid Username or Password!";
-		$data['errors'] = $validator->all();
-	}
-	return View::make('login')->with($data);
-}));
-
-Route::get('/logout',	function() {
-	Auth::logout();
-	return Redirect::route("home");
-});
-
-Route::any('/shinytuesday', function(){
-	// check to make sure that these calls are coming from a safe IP address.
-	// 178.62.150.224 and 85.9.27.220
-	// also check payload->data->httpReferer should be https://www.interviewlook.com/looks
-	$webhookData = json_decode($_GET["payload"], true);
-	$video_name = $webhookData['data']['videoName'];
-	list($user_id, $question) = explode(':', $webhookData['data']['payload']);
-	// lookup question to see if new one needs to be created.
-	$question_lookup = DB::table('questions')->select('id')->where('question', $question)->get();
-// 	Log::warning('**** Questions lookup: '.var_export($question_lookup, true));
-
-	// get question ID
-	if (empty($question_lookup)) {
-		// new question; save it.
-		$ques = new Question();
-		$ques->question = $question;
-		$ques->creator = $user_id;
-		$ques->save();
-		$question_id = $ques->id;
+		$user->type = Input::get('type');
+		if ($user->type == User::LOOKER) {
+			$user->company_name = Input::get('company_name');
+			$user->membership = Input::get('membership');
+			$user->last_billed = Carbon\Carbon::now()->toDateTimeString();
+		}
+		$user->save();
+		$data['user'] = $user;
+		
+		Mail::send('emails.new-user', $data, function($message) use ($user)
+		{
+		    $message->to($user->email, $user->name)->subject('Welcome to interviewLook!')->from('info@interviewlook.com', 'interviewLook');
+		});
+		
+		return View::make('register-thankyou')->with( $data );
 	}else {
-		$question_id = $question_lookup[0]->id;
+		$data['error'] = "Missing or Invalid Field Data!";
+		$data['errors'] = $validator;
+		return View::make('register')->with( $data );
 	}
-	
-	// save new users_question
-	$user_question = new UserQuestions();
-	$user_question->user_id = $user_id;
-	$user_question->question_id = $question_id;
-	$user_question->video = $video_name;
-	$user_question->save();
-	
-	print 'OK';
 });
 
-Route::resource('job', 'JobController');
+
+//----------------------------------------------//
+// --- PRIVATE ROUTES  --  MUST BE LOGGED IN  --//
+//----------------------------------------------//
 
 Route::group(array('before' => 'auth'), function() {
 	
+	Route::resource('job', 'JobController');
+
 	Route::get('/profile', array('as' => 'profile', function() {
 		$data = array('error'=>'');
 		$data['user'] = User::find(Auth::user()->id);
@@ -154,7 +158,7 @@ Route::group(array('before' => 'auth'), function() {
 		$validator = getProfileValidator();
 		
 		if ($validator->passes()) {
-			# udate user's profile details
+			# update user's profile details
 			$user->profile->current_position 	= Input::get('current_position');
 			$user->profile->current_company 	= Input::get('current_company');
 			$user->profile->current_location 	= Input::get('current_location');
@@ -204,12 +208,12 @@ Route::group(array('before' => 'auth'), function() {
 		$validator = getAccountValidator();
 		
 		if ($validator->passes()) {
-			# udate user details
+			# update user details
 			$user->name = Input::get('name');
 			$user->email = Input::get('email');
 			$password = Input::get('password');
 			if (!empty($password)) {
-				$user->password = hash::make($password);
+				$user->password = Hash::make($password);
 			}
 			$user->save();
 			
@@ -224,6 +228,42 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('/questions', function() {
 		return View::make('questions');
 	});
+});
+
+
+// SECRET API CALL TO RECEIVE DATA FROM addpipe.com ABOUT VIDEOS BEING MADE
+// http://interviewlook.localhost.com/shinytuesday/?payload={"version":"1.0","event":"video_copied_ftp","data":{"ftpUploadStatus":"upload success","videoName":"vsrtc1507127055_449","duration":5.83,"audioCodec":"AAC","videoCodec":"H.264","type":"MP4","size":261862,"width":640,"height":480,"orientation":"landscape","id":"559198","payload":"1:Testing","httpReferer":"https://www.interviewlook.com/looks"}}
+Route::post('/shinytuesday', function(){
+	// check to make sure that these calls are coming from a safe IP address.
+	// 178.62.150.224 and 85.9.27.220
+	// also check payload->data->httpReferer should be https://www.interviewlook.com/looks
+	$webhookData = json_decode($_GET["payload"], true);
+	$video_name = $webhookData['data']['videoName'];
+	list($user_id, $question) = explode(':', $webhookData['data']['payload']);
+	// lookup question to see if new one needs to be created.
+	$question_lookup = DB::table('questions')->select('id')->where('question', $question)->get();
+// 	Log::warning('**** Questions lookup: '.var_export($question_lookup, true));
+
+	// get question ID
+	if (empty($question_lookup)) {
+		// new question; save it.
+		$ques = new Question();
+		$ques->question = $question;
+		$ques->creator = $user_id;
+		$ques->save();
+		$question_id = $ques->id;
+	}else {
+		$question_id = $question_lookup[0]->id;
+	}
+	
+	// save new users_question
+	$user_question = new UserQuestions();
+	$user_question->user_id = $user_id;
+	$user_question->question_id = $question_id;
+	$user_question->video = $video_name;
+	$user_question->save();
+	
+	print 'OK';
 });
 	
 function getLoginCredentials() {

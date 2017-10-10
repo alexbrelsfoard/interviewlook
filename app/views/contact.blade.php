@@ -14,7 +14,7 @@ Contact Us
 		
 		<div class="col-md-12">
 			<div class="col-md-6">
-				<p>Content</p>
+				<p>For more information please contact us at <a href="mailto:info@interviewlook.com">info@interviewlook.com</a>, or simply complete the form on this page.</p>
 				<p><img class="alignnone size-medium" src="/images/Mock-UI-photo-750x422.jpg" style="height: auto; max-width: 100%;"/></p>
 			</div>
 			<div class="col-md-6">
