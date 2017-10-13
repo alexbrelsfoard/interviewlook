@@ -74,7 +74,7 @@ LOOKs&reg;
 								<!-- begin video recorder code -->
 								<script type="text/javascript">
 								var size = {width:400,height:330};
-								var flashvars = {qualityurl: "avq/480p.xml",accountHash:"2a5253109beafb980996e06737d4a4fe", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:"{{ $user->id }}:"+$('#question').value};
+								var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:"{{ $user->id }}:"+$('#question').value};
 								(
 								function() {
 									startVideoRecorder();
