@@ -102,6 +102,7 @@ var IL = {
 				
 				// update video source
 				$('#video_dialog video source').attr('src','/videos/'+video_name+'.mp4');
+				$("#video_dialog video")[0].load();
 				// create modal dialog
 				$('#modal').fadeIn();
 				
