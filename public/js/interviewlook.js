@@ -91,6 +91,7 @@ var IL = {
 					//append to '#list_of_questions ul'
 					$('#list_of_questions ul').append('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png"></div><p>'+data.videos[i].question+'</p></li>');
 				}
+				IL.lastVideoID = latest_video_id;
 			}
 		});
 	}
