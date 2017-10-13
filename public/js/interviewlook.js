@@ -1,4 +1,5 @@
 var IL = {
+	lastVideoID : 0,
 	
 	toggleMenu : function() {
 		if ($('nav').is(':visible')) {
@@ -73,6 +74,25 @@ var IL = {
 		$('#transitionwindow').fadeOut('fast');
 		}, 300);
 		}, 300);
+	},
+	
+	checkForNewVideos : function() {
+		// query the server to get a list of videos for this user
+		$.get("/uservideos", function(data){
+			data = JSON.parse(data);
+			// check to see if the last users_questions_id > IL.lastVideoID
+			var latest_video_id = data.lastVideoID;
+			// if so, rebuild the UL list of videos.
+			if (latest_video_id > IL.lastVideoID) {
+				// empty the list first.
+				$('#list_of_questions ul').empty();
+				//loop through each video
+				for(var i = 0; i < data.videos.length; i++) {
+					//append to '#list_of_questions ul'
+					$('#list_of_questions ul').append('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png"></div><p>'+data.videos[i].question+'</p></li>');
+				}
+			}
+		});
 	}
 };
 

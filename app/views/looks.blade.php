@@ -25,6 +25,12 @@ LOOKs&reg;
 		        $(this).data("uiAutocomplete").menu.element.addClass("question_lookup_suggestion");
 		    } 
 		});
+		// get the list of videos.
+		IL.checkForNewVideos();
+		// Check for new videos every 2 seconds.
+		setInterval(function(){
+			IL.checkForNewVideos();
+		}, 2000);
 	});
 </script>
 <style>
