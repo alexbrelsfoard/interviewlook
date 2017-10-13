@@ -233,8 +233,12 @@ Route::group(array('before' => 'auth'), function() {
 		$videos = DB::table('users_questions')->join('questions', 'questions.id','=','users_questions.question_id')->select('users_questions.id', 'users_questions.video', 'questions.question')->where('users_questions.user_id', Auth::user()->id)->where('users_questions.active', 1)->orderBy('users_questions.id', 'asc')->get();
 		Log::warning("VIDEOS:\n".var_export($videos, true));
 		
+		$lastVideoID = 0;
+		if (sizeof($videos)) {
+			$lastVideoID = $videos[sizeof($videos)-1]->id;
+		}
 		$data = array(
-			'lastVideoID' => $videos[sizeof($videos)-1]->id,
+			'lastVideoID' => $lastVideoID,
 			'videos' => $videos
 		);
 		
@@ -251,13 +255,14 @@ Route::post('/shinytuesday', function(){
 	// also check payload->data->httpReferer should be https://www.interviewlook.com/looks
 	$webhookData = json_decode($_GET["payload"], true);
 	$video_name = $webhookData['data']['videoName'];
+	Log::warning('**** Video Received: '.$video_name);
 	list($user_id, $question) = explode(':', $webhookData['data']['payload']);
 	// lookup question to see if new one needs to be created.
 	$question_lookup = DB::table('questions')->select('id')->where('question', $question)->get();
-// 	Log::warning('**** Questions lookup: '.var_export($question_lookup, true));
+ 	Log::warning('**** Questions lookup: '.var_export($question_lookup, true));
 
 	// get question ID
-	if (empty($question_lookup)) {
+	if (empty($question_lookup) || gettype($question_lookup) != 'array') {
 		// new question; save it.
 		$ques = new Question();
 		$ques->question = $question;
