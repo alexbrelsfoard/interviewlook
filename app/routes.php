@@ -253,7 +253,7 @@ Route::post('/shinytuesday', function(){
 	// check to make sure that these calls are coming from a safe IP address.
 	// 178.62.150.224 and 85.9.27.220
 	// also check payload->data->httpReferer should be https://www.interviewlook.com/looks
-	$webhookData = json_decode($_GET["payload"], true);
+	$webhookData = json_decode(Input::get("payload"), true);
 	$video_name = $webhookData['data']['videoName'];
 	Log::warning('**** Video Received: '.$video_name);
 	list($user_id, $question) = explode(':', $webhookData['data']['payload']);

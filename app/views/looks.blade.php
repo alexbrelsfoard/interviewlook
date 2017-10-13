@@ -83,7 +83,7 @@ LOOKs&trade;
 								</script>
 								<div id="video-complete-message">
 								  <p><span class="ui-icon ui-icon-info" style="float:left; margin:12px 12px 20px 0;"></span>You're video is now being saved.</p>
-								  <p>Very shortly it will show up to the left of this recorder.</p>
+								  <p>Very shortly it will show up to the right of this recorder.</p>
 								  <p>Once there you can edit the question, attach it to a LOOK&trade;, or delete the whole thing.</p>
 								  <p>Meanwhile, fee free to answer this question again or start a new one.</p>
 								  <button onclick="$('#video-complete-message').fadeOut();">OK</button>
