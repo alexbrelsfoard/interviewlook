@@ -30,7 +30,7 @@ LOOKs&trade;
 		// Check for new videos every 2 seconds.
 		setInterval(function(){
 			IL.checkForNewVideos();
-		}, 2000);
+		}, 5000);
 	});
 </script>
 <style>
@@ -44,7 +44,18 @@ LOOKs&trade;
 @stop
 
 @section('body')
+<div id="modal" class="modal">
 
+	<!-- Modal content -->
+	<div id="video_dialog">
+		<img class="modal_close" src="/images/close.png" onclick="IL.closeVideoModal()"/>
+		<video width="640" height="480" controls>
+			<source src="" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+	</div>
+</div>
+</div>
 <section id="content">
 	<div class="container">
 		

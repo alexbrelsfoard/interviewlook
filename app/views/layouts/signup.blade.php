@@ -12,7 +12,6 @@
 	
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js" type="text/javascript" ></script>
-	<script type="text/javascript" src="{{ URL::asset('js/flexmenu.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/interviewlook.js') }}"></script>
 	
 	

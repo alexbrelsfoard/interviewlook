@@ -78,7 +78,7 @@ var IL = {
 	
 	checkForNewVideos : function() {
 		// query the server to get a list of videos for this user
-		$.get("/uservideos", function(data){
+		$.get("/uservideos?li="+IL.lastVideoID, function(data){
 			data = JSON.parse(data);
 			// check to see if the last users_questions_id > IL.lastVideoID
 			var latest_video_id = data.lastVideoID;
@@ -89,11 +89,29 @@ var IL = {
 				//loop through each video
 				for(var i = 0; i < data.videos.length; i++) {
 					//append to '#list_of_questions ul'
-					$('#list_of_questions ul').append('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png"></div><p>'+data.videos[i].question+'</p></li>');
+					$('#list_of_questions ul').append('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
 				}
 				IL.lastVideoID = latest_video_id;
 			}
 		});
+	},
+	
+	playVideo : function(id) {
+		$.get("/getvideo?i="+id, function(video_name){
+			if (video_name) {
+				
+				// update video source
+				$('#video_dialog video source').attr('src','/videos/'+video_name+'.mp4');
+				// create modal dialog
+				$('#modal').fadeIn();
+				
+			}
+		});
+	},
+	
+	closeVideoModal : function() {
+		$('#modal').fadeOut();
+		$('#video_dialog video source').attr('src','');
 	}
 };
 
