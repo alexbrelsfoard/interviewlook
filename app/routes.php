@@ -231,7 +231,7 @@ Route::group(array('before' => 'auth'), function() {
 	
 	Route::get('/uservideos', function(){
 		$videos = DB::table('users_questions')->join('questions', 'questions.id','=','users_questions.question_id')->select('users_questions.id', 'users_questions.video', 'questions.question')->where('users_questions.user_id', Auth::user()->id)->where('users_questions.active', 1)->orderBy('users_questions.id', 'asc')->get();
-		Log::warning("VIDEOS:\n".var_export($videos, true));
+		//Log::warning("VIDEOS:\n".var_export($videos, true));
 		
 		$lastVideoID = 0;
 		if (sizeof($videos)) {
