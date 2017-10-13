@@ -4,7 +4,7 @@
 LOOKs
 @stop
 @section('page_title')
-LOOKs&reg;
+LOOKs&trade;
 @stop
 
 @section('head_code')
@@ -51,13 +51,13 @@ LOOKs&reg;
 		<div id="exTab1" class="">
 			<ul class="nav nav-pills">
 				<li id="intros_tab_title" class="" onclick="IL.switchToIntros();">
-					My Intro LOOKs&reg;
+					My Intro LOOKs&trade;
 				</li>
 				<li id="questions_tab_title" class="active" onclick="IL.switchToQuestions();">
 					My Questions
 				</li>
 				<li id="looks_tab_title" onclick="IL.switchToLooks();">
-					Complete LOOK&reg;
+					Complete LOOK&trade;
 				</li>
 			</ul>
 			<div class="tab-content clearfix">
@@ -66,7 +66,7 @@ LOOKs&reg;
 						<div class="col-md-12 record_video_main" style="overflow-y:hidden;">
 							<div id="transitionwindow">&nbsp;</div>
 							<div class="col-md-6 hidden" id="new_look">
-								<h3>Compile New LOOK&reg;</h3>
+								<h3>Compile New LOOK&trade;</h3>
 							</div>
 							<div class="col-md-6 record_video">
 								<h3>Record New Question</h3>
@@ -84,7 +84,7 @@ LOOKs&reg;
 								<div id="video-complete-message">
 								  <p><span class="ui-icon ui-icon-info" style="float:left; margin:12px 12px 20px 0;"></span>You're video is now being saved.</p>
 								  <p>Very shortly it will show up to the left of this recorder.</p>
-								  <p>Once there you can edit the question, attach it to a LOOK&reg;, or delete the whole thing.</p>
+								  <p>Once there you can edit the question, attach it to a LOOK&trade;, or delete the whole thing.</p>
 								  <p>Meanwhile, fee free to answer this question again or start a new one.</p>
 								  <button onclick="$('#video-complete-message').fadeOut();">OK</button>
 								  <div class="clear"></div>

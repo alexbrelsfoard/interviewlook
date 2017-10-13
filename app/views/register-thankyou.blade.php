@@ -14,7 +14,7 @@ Register
 		
 		<div class="col-md-12">
 			Thank you for registering.  Please look for an email confirmation, including instructions on verifying your email address.<br>
-			You may now <a href="/login">log in</a> to your new interviewLook&reg; account.
+			You may now <a href="/login">log in</a> to your new interviewLook&trade; account.
 		</div>
 		
 	</div>

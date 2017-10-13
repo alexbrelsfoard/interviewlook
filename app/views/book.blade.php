@@ -22,10 +22,10 @@ My LOOKBook
 		
 		<hr>
 		
-		<h3>My LOOKs&reg;</h3>
+		<h3>My LOOKs&trade;</h3>
 		
 		<form action="/looks" method="get">
-			<button class="submit btn btn-primary">Create New LOOK&reg;</button>
+			<button class="submit btn btn-primary">Create New LOOK&trade;</button>
 		</form>
 		
 		<div class="clear"></div>
