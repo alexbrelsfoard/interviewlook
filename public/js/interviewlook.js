@@ -117,6 +117,7 @@ var IL = {
 };
 
 function startVideoRecorder() {
+	flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
 	var pipe = document.createElement('script'); 
 	pipe.type = 'text/javascript'; 
 	pipe.async = true;
@@ -130,6 +131,7 @@ function onSaveOk(streamName, streamDuration, userId, cameraName, micName, recor
 	$('#question').val('');
 	removePipeRecorder();
 	startVideoRecorder();
+	$('.recorder object').hide();
 }
 /*
 function onUploadDone(streamName, streamDuration, userId, recorderId, audioCodec, videoCodec, fileType){

@@ -81,17 +81,8 @@ LOOKs&trade;
 							</div>
 							<div class="col-md-6 record_video">
 								<h3>Record New Question</h3>
-								<div id="question_input"><b>Question:</b> <input type="text" id="question" size="40" /></div>
-								<!-- begin video recorder code -->
-								<script type="text/javascript">
-								var size = {width:400,height:330};
-								var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:"{{ $user->id }}:"+$('#question').value};
-								(
-								function() {
-									startVideoRecorder();
-								})();
-								
-								</script>
+								<div id="question_input"><b>Question:</b> <input type="text" id="question" size="40" /><button class="btn btn-primary" onclick="$('.recorder object').show();">Start</button></div>
+								<!-- store video recorder code -->
 								<div id="video-complete-message">
 								  <p><span class="ui-icon ui-icon-info" style="float:left; margin:12px 12px 20px 0;"></span>You're video is now being saved.</p>
 								  <p>Very shortly it will show up to the right of this recorder.</p>
@@ -100,6 +91,13 @@ LOOKs&trade;
 								  <button onclick="$('#video-complete-message').fadeOut();">OK</button>
 								  <div class="clear"></div>
 								</div>
+								<script type="text/javascript">
+									var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
+									var size = {width:400,height:330};
+								(function() {
+									startVideoRecorder();
+								})();
+								</script>
 								<div id="hdfvr-content" class="recorder"></div>
 								<!-- end video recorder code -->
 							</div>
@@ -129,4 +127,5 @@ LOOKs&trade;
 	</div>
 </section>
 	
+<input type="hidden" id="user_id" value="{{ $user->id }}"/>
 @stop
