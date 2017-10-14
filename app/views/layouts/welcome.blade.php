@@ -2,7 +2,7 @@
 <head>
 	<title>InterviewLook - @yield('title')</title>
 	@section('head')
-	<link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet">
+	<link href="{{ URL::asset('css/jquery-ui.css') }}" rel="stylesheet"><!-- smoothness theme -->
 	<link href="{{ URL::asset('css/bootstrap.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('css/jquery.flexmenu.css') }}" rel="stylesheet">
@@ -10,8 +10,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
-	<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js" type="text/javascript" ></script>
+    <script src="{{ URL::asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+	<script src="{{ URL::asset('js/jquery-ui.min.js') }}" type="text/javascript" ></script>
 	<script type="text/javascript" src="{{ URL::asset('js/interviewlook.js') }}"></script>
 	@show
 	@yield('head_code')
