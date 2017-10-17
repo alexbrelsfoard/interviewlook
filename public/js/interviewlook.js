@@ -131,7 +131,7 @@ function startVideoRecorder() {
 function showRecorder() {
 	$('div.recorder img#loading').show();
 	$('.recorder object').show();
-	flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
+	flashvars.payload = $('#user_id').val()+":"+$('#question').val();
 }
 
 function onSaveOk(streamName, streamDuration, userId, cameraName, micName, recorderId, audioCodec, videoCodec, fileType, videoId) {
