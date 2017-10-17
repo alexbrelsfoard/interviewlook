@@ -164,7 +164,7 @@ function onRecorderInit(recorderId) {
 		}
 	}
 	
-	$('param[name="flashvarsstring"]').val(newString);
+	$('param[name=flashvars]').val(newString);
 	
 }
 /*
