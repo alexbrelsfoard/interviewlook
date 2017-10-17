@@ -962,6 +962,12 @@ IMG.modal_close {
 DIV.recorder object {
 	display: none;
 }
-
+DIV.recorder IMG#loading {
+	margin: 70px auto 0px auto;
+	text-align: center;
+	display: none;
+	width: 200px;
+	padding: 0px 35px 0px 0px;
+}
 
 

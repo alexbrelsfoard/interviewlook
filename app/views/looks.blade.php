@@ -8,14 +8,11 @@ LOOKs&trade;
 @stop
 
 @section('head_code')
-	<script type="text/javascript">
-		// on page load:
-		//  - populate the list of quetions and intros
-		//  - save the last id of each questions and intros
-		//  - start the repeatedly polling the server for new videos (anything new after saved last id?
-		//      - should probably make sure that the API call returns the last id easily enough.
-	</script>
 <script type="text/javascript">
+	// Set vars for Pipe Video Recorder.
+	var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
+	var size = {width:400,height:330};
+
 	$( function() {
 		var knownQuestions = <?php echo Question::getDistinctQuestions(); ?>;
 		$('#question').autocomplete({ 
@@ -55,7 +52,8 @@ LOOKs&trade;
 		</video>
 	</div>
 </div>
-</div>
+
+
 <section id="content">
 	<div class="container">
 		
@@ -80,8 +78,9 @@ LOOKs&trade;
 								<h3>Compile New LOOK&trade;</h3>
 							</div>
 							<div class="col-md-6 record_video">
+								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
 								<h3>Record New Question</h3>
-								<div id="question_input"><b>Question:</b> <input type="text" id="question" size="40" /><button class="btn btn-primary" onclick="$('.recorder object').show();">Start</button></div>
+								<div id="question_input"><b>Question:</b> <input type="text" id="question" size="40" /><button class="btn btn-primary" onclick="showRecorder();">Start</button></div>
 								<!-- store video recorder code -->
 								<div id="video-complete-message">
 								  <p><span class="ui-icon ui-icon-info" style="float:left; margin:12px 12px 20px 0;"></span>You're video is now being saved.</p>
@@ -92,13 +91,13 @@ LOOKs&trade;
 								  <div class="clear"></div>
 								</div>
 								<script type="text/javascript">
-									var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
-									var size = {width:400,height:330};
 								(function() {
 									startVideoRecorder();
 								})();
 								</script>
-								<div id="hdfvr-content" class="recorder"></div>
+								<div id="hdfvr-content" class="recorder">
+									<img src="/images/loading_blue_blocks.gif" id="loading"/>
+								</div>
 								<!-- end video recorder code -->
 							</div>
 							<div class="col-md-6" style="height: 96%;">
@@ -127,5 +126,4 @@ LOOKs&trade;
 	</div>
 </section>
 	
-<input type="hidden" id="user_id" value="{{ $user->id }}"/>
 @stop
