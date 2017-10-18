@@ -130,8 +130,30 @@ function startVideoRecorder() {
 
 function showRecorder() {
 	$('div.recorder img#loading').show();
-	$('.recorder object').show();
 	flashvars.payload = $('#user_id').val()+":"+$('#question').val();
+	var newString;
+	for (var k in flashvars) {
+		if (typeof newString != "undefined") {
+			if(k == "payload"){
+				newString += "&" + k + "=" + encodeURIComponent(flashvars[k]);
+			}else{
+				newString += "&" + k + "=" + flashvars[k];
+			}
+		}
+		else{
+			if(k== "payload"){
+				newString = k + "=" + encodeURIComponent(flashvars[k]);
+			}else{
+				newString = k + "=" + flashvars[k];	
+			}
+		}
+	}
+	$('param[name=flashvars]').val(newString);
+	
+	var el = $('object#VideoRecorder');
+	el.clone().appendTo(el.closest("div"));
+	el.remove();
+	$('.recorder object').show();
 }
 
 function onSaveOk(streamName, streamDuration, userId, cameraName, micName, recorderId, audioCodec, videoCodec, fileType, videoId) {
