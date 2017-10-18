@@ -89,7 +89,7 @@ var IL = {
 				//loop through each video
 				for(var i = 0; i < data.videos.length; i++) {
 					//append to '#list_of_questions ul'
-					$('#list_of_questions ul').append('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
+					$('#list_of_questions ul').prepend('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
 				}
 				IL.lastVideoID = latest_video_id;
 			}

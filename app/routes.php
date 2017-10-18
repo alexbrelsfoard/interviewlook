@@ -230,7 +230,7 @@ Route::group(array('before' => 'auth'), function() {
 	});
 	
 	Route::get('/getvideo', function(){
-		$video_name = DB::table('users_questions')->select('video')->where('user_id',Auth::user()->id)->where('id', Input::get('i'))->get();
+		$video_name = DB::table('users_questions')->select('video')->where('user_id',Auth::user()->id)->where('id', Input::get('i'))->orderBy('id', 'desc')->get();
 		return $video_name[0]->video;
 	});
 	
