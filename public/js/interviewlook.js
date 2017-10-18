@@ -85,7 +85,7 @@ var IL = {
 			// if so, rebuild the UL list of videos.
 			if (latest_video_id > IL.lastVideoID) {
 				// empty the list first.
-				$('#list_of_questions ul').empty();
+				//$('#list_of_questions ul').empty();
 				//loop through each video
 				for(var i = 0; i < data.videos.length; i++) {
 					//append to '#list_of_questions ul'
@@ -165,7 +165,6 @@ function onRecorderInit(recorderId) {
 	}
 	
 	$('param[name=flashvars]').val(newString);
-	
 }
 /*
 function onUploadDone(streamName, streamDuration, userId, recorderId, audioCodec, videoCodec, fileType){
