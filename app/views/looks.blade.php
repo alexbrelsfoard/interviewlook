@@ -9,10 +9,22 @@ LOOKs&trade;
 
 @section('head_code')
 <script type="text/javascript">
+	var jsready = 0;
+	function activateStartButton() {
+		if (jsready) {
+			if ($('#question').val().length > 4) {
+				$('#start_button').removeAttr("disabled");
+				$('#start_button').removeClass('disabled');
+			}else {
+				$('#start_button').attr('disabled','disabled');
+				$('#start_button').addClass('disabled');
+			}
+		}
+	}
 	// Set vars for Pipe Video Recorder.
 	var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
 	var size = {width:400,height:330};
-
+	
 	$( function() {
 		var knownQuestions = <?php echo Question::getDistinctQuestions(); ?>;
 		$('#question').autocomplete({ 
@@ -28,6 +40,10 @@ LOOKs&trade;
 		setInterval(function(){
 			IL.checkForNewVideos();
 		}, 5000);
+	});
+	$(document).ready(function() {
+		jsready = 1;
+		activateStartButton();
 	});
 </script>
 <style>
@@ -80,7 +96,7 @@ LOOKs&trade;
 							<div class="col-md-6 record_video">
 								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
 								<h3>Record New Question</h3>
-								<div id="question_input"><b>Question:</b> <input type="text" id="question" size="40" /><button class="btn btn-primary" onclick="showRecorder();">Start</button></div>
+								<div id="question_input"><b>Question:</b> <input type="text" id="question" size="40" onkeyup="activateStartButton();" /><button id="start_button" class="btn btn-primary" onclick="showRecorder();" disabled="disabled">Start</button></div>
 								<!-- store video recorder code -->
 								<div id="video-complete-message">
 								  <p><span class="ui-icon ui-icon-info" style="float:left; margin:12px 12px 20px 0;"></span>You're video is now being saved.</p>

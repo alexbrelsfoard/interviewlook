@@ -166,27 +166,6 @@ function onSaveOk(streamName, streamDuration, userId, cameraName, micName, recor
 
 function onRecorderInit(recorderId) {
 	$('div.recorder img#loading').hide();
-	flashvars.payload = $('#user_id').val()+":"+$('#question').val();
-	
-	var newString;
-	for (var k in flashvars) {
-		if (typeof newString != "undefined") {
-			if(k == "payload"){
-				newString += "&" + k + "=" + encodeURIComponent(flashvars[k]);
-			}else{
-				newString += "&" + k + "=" + flashvars[k];
-			}
-		}
-		else{
-			if(k== "payload"){
-				newString = k + "=" + encodeURIComponent(flashvars[k]);
-			}else{
-				newString = k + "=" + flashvars[k];	
-			}
-		}
-	}
-	
-	$('param[name=flashvars]').val(newString);
 }
 /*
 function onUploadDone(streamName, streamDuration, userId, recorderId, audioCodec, videoCodec, fileType){

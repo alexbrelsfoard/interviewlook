@@ -970,4 +970,7 @@ DIV.recorder IMG#loading {
 	padding: 0px 35px 0px 0px;
 }
 
-
+BUTTON.disabled, .btn-primary.disabled, .btn-primary[disabled] {
+	background: #CCC;
+	color: #111;
+}
