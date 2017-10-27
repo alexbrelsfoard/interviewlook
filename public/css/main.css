@@ -282,7 +282,7 @@ HEADER IMG.logo{
 }
 HEADER H1 {
 	text-align: center;
-	margin: 25px 0px 0px 0px;
+	margin: 25px 360px 0px 0px;
 	font-family: "Roboto",sans-serif;
     font-size: 34px;
     font-weight: 600;
@@ -690,7 +690,7 @@ ul.nav, ul.nav-pills {
     float: left;
     padding: 30px;
     width: 100%;
-    height: 580px;
+    min-height: 580px;
 }
 #exTab1 .tab-content {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -704,6 +704,7 @@ ul.nav, ul.nav-pills {
 }
 .tab-content h3 {
 	margin: 0px 0px 15px 0px;
+	text-align: left;
 }
 .tab-content .list_videos {
     padding-left: 0;
@@ -878,24 +879,34 @@ div#exTab1 {
 }
 
 #questions-list {
-	overflow-y: auto;
-	height: 100%;
+	min-height: 500px;
 	border: 1px dotted #AAA;
 }
 
-#list_of_questions UL {
+#questions-list-for-looks {
+	min-height: 500px;
+	border: 1px dotted #AAA;
+}
+
+#new_look_collection {
+	min-height: 500px;
+	border: 1px dotted #AAA;
+}
+
+.questions-list UL {
 	list-style: none;
 	list-style-type: none;
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 }
-#list_of_questions UL LI {
+.questions-list UL LI {
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
 	height: 106px;
 	width: 100%;
+	z-index: 5;
 }
-#list_of_questions UL LI DIV.screenshot {
+.questions-list UL LI DIV.screenshot {
 	padding: 5px 5px 5px 5px;
 	border-right: 1px solid #444;
 	float: left;
@@ -905,14 +916,14 @@ div#exTab1 {
 	width: 140px;
 	height: 105px;
 }
-#list_of_questions UL LI DIV.screenshot IMG {
+.questions-list UL LI DIV.screenshot IMG {
 	height: 60px;
     margin: 15px 30px;
 	text-align: center;
 	cursor: pointer;
 }
 
-#list_of_questions UL LI P {
+.questions-list UL LI P {
 	margin: 15px 0px 0px 0px;
 }
 

@@ -36,6 +36,10 @@ Route::get('/contact', function() {
 	return View::make('contact');
 });
 
+Route::get('/under_development', function() {
+	return View::make('under_development');
+});
+
 Route::get('/demos', function() {
 	return View::make('demos');
 });

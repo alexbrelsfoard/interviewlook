@@ -40,8 +40,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'Register'	=> '/register',
 			'Contact Us'=> '/contact',
 			'Demos'		=> '/demos',
-			'Login'		=> '/login',
-			'Register'	=> '/register'
+			'Login'		=> '/under_development',//'/login',
+			'Register'	=> '/under_development',//'/register'
 		);
 		
 		if (Auth::check()) {
