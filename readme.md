@@ -57,6 +57,7 @@ Clone the code to production using:
     composer update
 
 Create .env file on root folder of application and copy .env.example content to .env and change the variables according to production environment.
+
     APP_NAME='Interview Look'
     APP_ENV=local
     APP_KEY=base64:VKuOKiQzL+Gv84dyWLAQW41YoLIqfVZGFPCOQbrX66s=
@@ -94,8 +95,11 @@ Create .env file on root folder of application and copy .env.example content to 
 
     LINKEDIN_KEY=
     LINKEDIN_SECRET=
-    LINKEDIN_REDIRECT_URI=https://interviewlook.com/linkedin/callback
+    LINKEDIN_REDIRECT_URI=https://interviewlook.com/social/linkedin/callback
 
+    FACEBOOK_KEY=
+    FACEBOOK_SECRET=
+    FACEBOOK_REDIRECT_URI=https://interviewlook.com/social/facebook/callback
 
 ## Run Migrations
     php artisan migrate
