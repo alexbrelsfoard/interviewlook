@@ -21,6 +21,8 @@ use Symfony\Component\CssSelector\XPath\XPathExpr;
  * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
  *
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
+ *
+ * @internal
  */
 class PseudoClassExtension extends AbstractExtension
 {
@@ -42,8 +44,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      */
     public function translateRoot(XPathExpr $xpath)
@@ -52,8 +52,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      */
     public function translateFirstChild(XPathExpr $xpath)
@@ -65,8 +63,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      */
     public function translateLastChild(XPathExpr $xpath)
@@ -78,8 +74,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      *
      * @throws ExpressionErrorException
@@ -96,8 +90,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      *
      * @throws ExpressionErrorException
@@ -114,8 +106,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      */
     public function translateOnlyChild(XPathExpr $xpath)
@@ -127,8 +117,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      *
      * @throws ExpressionErrorException
@@ -143,8 +131,6 @@ class PseudoClassExtension extends AbstractExtension
     }
 
     /**
-     * @param XPathExpr $xpath
-     *
      * @return XPathExpr
      */
     public function translateEmpty(XPathExpr $xpath)

@@ -1,6 +1,8 @@
 <?php
 
-interface PHPParser_Node
+namespace PhpParser;
+
+interface Node
 {
     /**
      * Gets the type of the node.
@@ -27,6 +29,8 @@ interface PHPParser_Node
      * Sets line the node started in.
      *
      * @param int $line Line
+     *
+     * @deprecated
      */
     public function setLine($line);
 
@@ -35,9 +39,18 @@ interface PHPParser_Node
      *
      * The doc comment has to be the last comment associated with the node.
      *
-     * @return null|PHPParser_Comment_Doc Doc comment object or null
+     * @return null|Comment\Doc Doc comment object or null
      */
     public function getDocComment();
+
+    /**
+     * Sets the doc comment of the node.
+     *
+     * This will either replace an existing doc comment or add it to the comments array.
+     *
+     * @param Comment\Doc $docComment Doc comment to set
+     */
+    public function setDocComment(Comment\Doc $docComment);
 
     /**
      * Sets an attribute on a node.

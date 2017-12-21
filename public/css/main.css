@@ -23,7 +23,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', end
 }
 
 body.welcome {
-    background: rgba(0, 0, 0, 0) url("/images/home-bgimage.jpg") no-repeat scroll 0 0 / cover ;
+    background: rgba(0, 0, 0, 0) url("images/home-bgimage.jpg") no-repeat scroll 0 0 / cover ;
     height: auto;
     color: #000;
     font-family: "Roboto",sans-serif;

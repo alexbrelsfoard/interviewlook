@@ -1,18 +1,17 @@
 <?php
 
-abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggregate
+namespace PhpParser;
+
+abstract class NodeAbstract implements Node, \JsonSerializable
 {
-    protected $subNodes;
     protected $attributes;
 
     /**
      * Creates a Node.
      *
-     * @param array $subNodes   Array of sub nodes
      * @param array $attributes Array of attributes
      */
-    public function __construct(array $subNodes = array(), array $attributes = array()) {
-        $this->subNodes   = $subNodes;
+    public function __construct(array $attributes = array()) {
         $this->attributes = $attributes;
     }
 
@@ -22,16 +21,7 @@ abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggrega
      * @return string Type of the node
      */
     public function getType() {
-        return substr(get_class($this), 15);
-    }
-
-    /**
-     * Gets the names of the sub nodes.
-     *
-     * @return array Names of sub nodes
-     */
-    public function getSubNodeNames() {
-        return array_keys($this->subNodes);
+        return strtr(substr(rtrim(get_class($this), '_'), 15), '\\', '_');
     }
 
     /**
@@ -47,6 +37,8 @@ abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggrega
      * Sets line the node started in.
      *
      * @param int $line Line
+     *
+     * @deprecated
      */
     public function setLine($line) {
         $this->setAttribute('startLine', (int) $line);
@@ -57,7 +49,7 @@ abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggrega
      *
      * The doc comment has to be the last comment associated with the node.
      *
-     * @return null|PHPParser_Comment_Doc Doc comment object or null
+     * @return null|Comment\Doc Doc comment object or null
      */
     public function getDocComment() {
         $comments = $this->getAttribute('comments');
@@ -66,7 +58,7 @@ abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggrega
         }
 
         $lastComment = $comments[count($comments) - 1];
-        if (!$lastComment instanceof PHPParser_Comment_Doc) {
+        if (!$lastComment instanceof Comment\Doc) {
             return null;
         }
 
@@ -74,22 +66,35 @@ abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggrega
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the doc comment of the node.
+     *
+     * This will either replace an existing doc comment or add it to the comments array.
+     *
+     * @param Comment\Doc $docComment Doc comment to set
      */
+    public function setDocComment(Comment\Doc $docComment) {
+        $comments = $this->getAttribute('comments', []);
+
+        $numComments = count($comments);
+        if ($numComments > 0 && $comments[$numComments - 1] instanceof Comment\Doc) {
+            // Replace existing doc comment
+            $comments[$numComments - 1] = $docComment;
+        } else {
+            // Append new comment
+            $comments[] = $docComment;
+        }
+
+        $this->setAttribute('comments', $comments);
+    }
+
     public function setAttribute($key, $value) {
         $this->attributes[$key] = $value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function hasAttribute($key) {
         return array_key_exists($key, $this->attributes);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function &getAttribute($key, $default = null) {
         if (!array_key_exists($key, $this->attributes)) {
             return $default;
@@ -98,28 +103,11 @@ abstract class PHPParser_NodeAbstract implements PHPParser_Node, IteratorAggrega
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getAttributes() {
         return $this->attributes;
     }
 
-    /* Magic interfaces */
-
-    public function &__get($name) {
-        return $this->subNodes[$name];
-    }
-    public function __set($name, $value) {
-        $this->subNodes[$name] = $value;
-    }
-    public function __isset($name) {
-        return isset($this->subNodes[$name]);
-    }
-    public function __unset($name) {
-        unset($this->subNodes[$name]);
-    }
-    public function getIterator() {
-        return new ArrayIterator($this->subNodes);
+    public function jsonSerialize() {
+        return ['nodeType' => $this->getType()] + get_object_vars($this);
     }
 }

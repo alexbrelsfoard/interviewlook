@@ -1,6 +1,8 @@
 <?php
 
-interface PHPParser_NodeVisitor
+namespace PhpParser;
+
+interface NodeVisitor
 {
     /**
      * Called once before traversal.
@@ -9,9 +11,9 @@ interface PHPParser_NodeVisitor
      *  * null:      $nodes stays as-is
      *  * otherwise: $nodes is set to the return value
      *
-     * @param PHPParser_Node[] $nodes Array of nodes
+     * @param Node[] $nodes Array of nodes
      *
-     * @return null|PHPParser_Node[] Array of nodes
+     * @return null|Node[] Array of nodes
      */
     public function beforeTraverse(array $nodes);
 
@@ -19,29 +21,41 @@ interface PHPParser_NodeVisitor
      * Called when entering a node.
      *
      * Return value semantics:
-     *  * null:      $node stays as-is
-     *  * otherwise: $node is set to the return value
+     *  * null
+     *        => $node stays as-is
+     *  * NodeTraverser::DONT_TRAVERSE_CHILDREN
+     *        => Children of $node are not traversed. $node stays as-is
+     *  * NodeTraverser::STOP_TRAVERSAL
+     *        => Traversal is aborted. $node stays as-is
+     *  * otherwise
+     *        => $node is set to the return value
      *
-     * @param PHPParser_Node $node Node
+     * @param Node $node Node
      *
-     * @return null|PHPParser_Node Node
+     * @return null|int|Node Node
      */
-    public function enterNode(PHPParser_Node $node);
+    public function enterNode(Node $node);
 
     /**
      * Called when leaving a node.
      *
      * Return value semantics:
-     *  * null:      $node stays as-is
-     *  * false:     $node is removed from the parent array
-     *  * array:     The return value is merged into the parent array (at the position of the $node)
-     *  * otherwise: $node is set to the return value
+     *  * null
+     *        => $node stays as-is
+     *  * NodeTraverser::REMOVE_NODE
+     *        => $node is removed from the parent array
+     *  * NodeTraverser::STOP_TRAVERSAL
+     *        => Traversal is aborted. $node stays as-is
+     *  * array (of Nodes)
+     *        => The return value is merged into the parent array (at the position of the $node)
+     *  * otherwise
+     *        => $node is set to the return value
      *
-     * @param PHPParser_Node $node Node
+     * @param Node $node Node
      *
-     * @return null|PHPParser_Node|false|PHPParser_Node[] Node
+     * @return null|false|int|Node|Node[] Node
      */
-    public function leaveNode(PHPParser_Node $node);
+    public function leaveNode(Node $node);
 
     /**
      * Called once after traversal.
@@ -50,9 +64,9 @@ interface PHPParser_NodeVisitor
      *  * null:      $nodes stays as-is
      *  * otherwise: $nodes is set to the return value
      *
-     * @param PHPParser_Node[] $nodes Array of nodes
+     * @param Node[] $nodes Array of nodes
      *
-     * @return null|PHPParser_Node[] Array of nodes
+     * @return null|Node[] Array of nodes
      */
     public function afterTraverse(array $nodes);
 }

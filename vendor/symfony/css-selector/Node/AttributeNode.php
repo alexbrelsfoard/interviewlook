@@ -18,32 +18,15 @@ namespace Symfony\Component\CssSelector\Node;
  * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
  *
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
+ *
+ * @internal
  */
 class AttributeNode extends AbstractNode
 {
-    /**
-     * @var NodeInterface
-     */
     private $selector;
-
-    /**
-     * @var string
-     */
     private $namespace;
-
-    /**
-     * @var string
-     */
     private $attribute;
-
-    /**
-     * @var string
-     */
     private $operator;
-
-    /**
-     * @var string
-     */
     private $value;
 
     /**

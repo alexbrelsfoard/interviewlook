@@ -26,18 +26,20 @@ array(
         name: A
         stmts: array(
             0: Stmt_ClassMethod(
-                type: 1
+                flags: MODIFIER_PUBLIC (1)
                 byRef: false
+                name: a
                 params: array(
                 )
+                returnType: null
                 stmts: array(
                 )
-                name: a
             )
         )
     )
     1: Stmt_Class(
-        type: 0
+        flags: 0
+        name: B
         extends: null
         implements: array(
         )
@@ -65,7 +67,7 @@ array(
                     0: Stmt_TraitUseAdaptation_Alias(
                         trait: null
                         method: a
-                        newModifier: 2
+                        newModifier: MODIFIER_PROTECTED (2)
                         newName: b
                     )
                     1: Stmt_TraitUseAdaptation_Alias(
@@ -77,7 +79,7 @@ array(
                     2: Stmt_TraitUseAdaptation_Alias(
                         trait: null
                         method: e
-                        newModifier: 4
+                        newModifier: MODIFIER_PRIVATE (4)
                         newName: null
                     )
                 )
@@ -128,7 +130,7 @@ array(
                             )
                         )
                         method: b
-                        newModifier: 2
+                        newModifier: MODIFIER_PROTECTED (2)
                         newName: c
                     )
                     2: Stmt_TraitUseAdaptation_Alias(
@@ -148,12 +150,11 @@ array(
                             )
                         )
                         method: f
-                        newModifier: 4
+                        newModifier: MODIFIER_PRIVATE (4)
                         newName: null
                     )
                 )
             )
         )
-        name: B
     )
 )

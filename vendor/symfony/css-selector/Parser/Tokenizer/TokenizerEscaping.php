@@ -18,17 +18,13 @@ namespace Symfony\Component\CssSelector\Parser\Tokenizer;
  * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
  *
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
+ *
+ * @internal
  */
 class TokenizerEscaping
 {
-    /**
-     * @var TokenizerPatterns
-     */
     private $patterns;
 
-    /**
-     * @param TokenizerPatterns $patterns
-     */
     public function __construct(TokenizerPatterns $patterns)
     {
         $this->patterns = $patterns;

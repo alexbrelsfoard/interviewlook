@@ -18,6 +18,8 @@ namespace Symfony\Component\CssSelector\Parser;
  * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
  *
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
+ *
+ * @internal
  */
 class Token
 {
@@ -29,19 +31,8 @@ class Token
     const TYPE_NUMBER = 'number';
     const TYPE_STRING = 'string';
 
-    /**
-     * @var int
-     */
     private $type;
-
-    /**
-     * @var string
-     */
     private $value;
-
-    /**
-     * @var int
-     */
     private $position;
 
     /**
@@ -89,8 +80,6 @@ class Token
     }
 
     /**
-     * @param array $values
-     *
      * @return bool
      */
     public function isDelimiter(array $values = array())
