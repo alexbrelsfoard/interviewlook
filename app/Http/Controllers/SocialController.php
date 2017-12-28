@@ -30,6 +30,7 @@ class SocialController extends Controller
                 'id' => $user['id'],
                 'name' => $user['formattedName'],
                 'email' => $user['emailAddress'],
+                'photo' => $response->avatar_original,
             ];
         } catch (Exception $e) {
             Session::flash('alert-danger', 'Something went wrong. Please try again later.');
@@ -60,6 +61,7 @@ class SocialController extends Controller
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
+                'photo' => $response->avatar_original,
             ];
         } catch (Exception $e) {
             Session::flash('alert-danger', 'Something went wrong. Please try again later.');
@@ -81,7 +83,10 @@ class SocialController extends Controller
     private function findOrCreateUser($data, $provider)
     {
         if ($authUser = User::where($provider, $data['id'])->orWhere('email', $data['email'])->first()) {
-            User::where('email', $authUser->email)->update([$provider => $data['id']]);
+            User::where('email', $authUser->email)->update([
+                $provider => $data['id'],
+                'photo' => $data['photo'],
+            ]);
             return $authUser;
         }
 
@@ -92,6 +97,7 @@ class SocialController extends Controller
             'email_token' => generateRandomString(25),
             $provider => $data['id'],
             'password' => '',
+            'photo' => $data['photo'],
         ]);
         $user->notify(new EmailConfirmation($user->email_token));
         Notification::route('mail', 'rico.thompson@interviewlook.com')->notify(new AccountCreated($user));

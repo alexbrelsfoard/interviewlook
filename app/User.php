@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'role', 'email_token', 'email_verified', 'account_status', 'facebook_id', 'linkedin_id',
+        'name', 'email', 'password', 'username', 'role', 'email_token', 'email_verified', 'account_status', 'facebook_id', 'linkedin_id', 'photo',
     ];
 
     /**
@@ -26,4 +26,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile');
+    }
+
+    public function social()
+    {
+        return $this->hasOne('App\Models\Social');
+    }
+
+    public function privacy()
+    {
+        return $this->hasOne('App\Models\Privacy');
+    }
 }
