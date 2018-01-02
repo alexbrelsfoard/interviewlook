@@ -156,12 +156,12 @@ var IL = {
 			var videos = [];
 			if ($("#new_look_collection UL li").length) {
 				$("#new_look_collection UL li").each(function(idx, li) {
-					var video_name = $(li).find('div').prop('video-name');
+					var video_name = $(li).find(">:first-child").prop('video-name');
 					videos[idx] = video_name;
 				});
 				var videos_json = JSON.stringify(videos);
 				
-				$.get("/getvideo?i="+id, function(video_name){
+				$.post("/savelook?i="+id, function(video_name){
 					if (video_name) {
 						
 						// update video source
