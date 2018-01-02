@@ -154,7 +154,7 @@ var IL = {
 	saveLook : function() {
 		if ($('#name_of_look').val().length > 3) {
 			var videos = [];
-			if ($("#new_look_collection UL li").count()) {
+			if ($("#new_look_collection UL li").length) {
 				$("#new_look_collection UL li").each(function(idx, li) {
 					var video_name = $(li).prop('video-name');
 					videos[idx] = video_name;
