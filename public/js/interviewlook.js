@@ -156,7 +156,7 @@ var IL = {
 			var videos = [];
 			if ($("#new_look_collection UL li").length) {
 				$("#new_look_collection UL li").each(function(idx, li) {
-					var video_name = $(li).prop('video-name');
+					var video_name = $(li).find('div').prop('video-name');
 					videos[idx] = video_name;
 				});
 				var videos_json = JSON.stringify(videos);
