@@ -24,11 +24,13 @@ var IL = {
 		$('#transitionwindow').fadeIn('fast');
 		setTimeout(function(){
 		$('#questions-list').hide('fast');
-		$('#questions-list-for-looks').hide('fast');
+		$('#list_of_looks').hide('fast');
 		$('#new_look').hide('fast');
+		$('#list_of_videos_for_look').hide('fast');
 		$('#right-half-title').text('Saved Intros');
 		$('#intros-list').fadeIn('fast');
-		$('.record_video').fadeIn('fast');
+		$('#video_recorder').fadeIn('fast');
+		$('#list_of_videos').fadeIn('fast');
 		$('#questions_tab_title').removeClass('active');
 		$('#looks_tab_title').removeClass('active');
 		$('#intros_tab_title').addClass('active');
@@ -46,13 +48,15 @@ var IL = {
 		$('#transitionwindow').fadeIn('fast');
 		setTimeout(function(){
 		$('#intros-list').hide('fast');
+		$('#list_of_looks').hide('fast');
 		$('#new_look').hide('fast');
+		$('#list_of_videos_for_look').hide('fast');
 		$('#intro_header').hide('fast');
-		$('#questions-list-for-looks').hide('fast');
 		$('#hdfvr-content').hide('fast');
 		$('#right-half-title').text('Saved Questions');
 		$('#questions-list').fadeIn('fast');
-		$('.record_video').fadeIn('fast');
+		$('#video_recorder').fadeIn('fast');
+		$('#list_of_videos').fadeIn('fast');
 		$('#looks_tab_title').removeClass('active');
 		$('#intros_tab_title').removeClass('active');
 		$('#questions_tab_title').addClass('active');
@@ -72,15 +76,17 @@ var IL = {
 		$('#intro_header').hide('fast');
 		$('#questions-list').hide('fast');
 		$('#hdfvr-content').hide('fast');
-		$('#questions-list-for-looks').fadeIn('fast');
 		$('#right-half-title').text('Saved Questions');
 		$('#looks-list').fadeIn('fast');
 		$('#questions_tab_title').removeClass('active');
 		$('#intros_tab_title').removeClass('active');
 		$('#looks_tab_title').addClass('active');
 		$('#question_input').hide('fast');
-		$('.record_video').hide('fast');
+		$('#video_recorder').hide('fast');
+		$('#list_of_videos').hide('fast');
+		$('#list_of_looks').fadeIn('fast');
 		$('#new_look').fadeIn('fast');
+		$('#list_of_videos_for_look').fadeIn('fast');
 		IL.activateStartButton();
 		setTimeout(function(){
 		$('#transitionwindow').fadeOut('fast');

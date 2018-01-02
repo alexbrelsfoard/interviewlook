@@ -50,6 +50,7 @@ LOOKs&trade;
 				$(this).data("uiAutocomplete").menu.element.addClass("question_lookup_suggestion");
 			}
 		});
+		
 		// get the list of videos.
 		IL.checkForNewVideos();
 		// Check for new videos every 2 seconds.
@@ -108,13 +109,32 @@ LOOKs&trade;
 					<div class="row">
 						<div class="col-md-12 record_video_main" style="overflow-y:hidden;">
 							<div id="transitionwindow">&nbsp;</div>
-							<div class="col-md-6 hidden" id="new_look">
-								<h3>Compile New LOOK&trade;</h3>
+							<div class="col-md-2 hidden" id="list_of_looks">
+								<h3>LOOKs&trade;</h3>
+								<div id="looks">
+									<ul>
+										
+									</ul>
+									<img id="new_icon" src="/images/add-icon.png" />
+								</div>
+							</div>
+							<div class="col-md-5 hidden" id="new_look">
+								<div style="padding: 0px 0px 5px 0px;">Title: <input type="text" size="30" id="name_of_look"/> &nbsp; <button class="btn btn-primary" style="padding: 3px 20px;">Save</button></div>
 								<div id="new_look_collection" class="questions-list">
 									
 								</div>
 							</div>
-							<div class="col-md-6 record_video">
+							<div class="col-md-5 hidden" id="list_of_videos_for_look">
+								<h3>Available Videos</h3>
+								<div id="questions-list-for-looks">
+									<div id="list_of_questions_for_looks" class="questions-list">
+										<ul class="sortable">
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 record_video" id="video_recorder">
 								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
 								<div id="question_input">
 									<h3>Record New Question</h3>
@@ -143,20 +163,12 @@ LOOKs&trade;
 									<img src="/images/loading_blue_blocks.gif" id="loading"/>
 								</div>
 							</div>
-							<div class="col-md-6" style="height: 96%;">
+							<div class="col-md-6" id="list_of_videos" style="height: 96%;">
 								<h3 id="right-half-title">Saved Questions</h3>
 								
 								<div id="questions-list">
 									<div id="list_of_questions" class="questions-list">
 										<ul>
-											
-										</ul>
-									</div>
-								</div>
-								
-								<div id="questions-list-for-looks" class="hidden">
-									<div id="list_of_questions_for_looks" class="questions-list">
-										<ul class="sortable">
 											
 										</ul>
 									</div>
