@@ -200,16 +200,16 @@ Route::group(array('before' => 'auth'), function() {
 		return View::make('looks')->with( $data );
 	});
 	
-	Route::post('/savelook' function() {
-		$data = array('error'=>'');
+//	Route::post('/savelook' function() {
+//		$data = array('error'=>'');
 		//$data['user'] = User::find(Auth::user()->id);
 		//$look_title   = Input::get('t');
 		//$look_videos  = json_decode(Input::get('l'));
 		# save the look in the system.
 		
 		# return the new id.
-		return "OK";
-	});
+//		return "OK";
+//	});
 	
 	Route::get('/account', function() {
 		$data = array('error'=>'');
