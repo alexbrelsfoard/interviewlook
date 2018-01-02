@@ -161,16 +161,12 @@ var IL = {
 					videos[idx] = video_name;
 				});
 				var videos_json = JSON.stringify(videos);
-				
-				$.post("/savelook?i="+id, function(video_name){
-					if (video_name) {
-						
-						// update video source
-						$('#video_dialog video source').attr('src','/videos/'+video_name+'.mp4');
-						$("#video_dialog video")[0].load();
-						// create modal dialog
-						$('#modal').fadeIn();
-						
+				var title = $('#name_of_look').val();
+				$.post("/savelook?t="+title+'&l='+videos_json, function(response){
+					if (response == 'OK') {
+						// move LI items to videos list.
+						// move title to left menu
+						$('#looks ul').append($('<li>'+title+'</li>'));
 					}
 				});
 			}
