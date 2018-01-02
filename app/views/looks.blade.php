@@ -119,7 +119,7 @@ LOOKs&trade;
 								</div>
 							</div>
 							<div class="col-md-5 hidden" id="new_look">
-								<div style="padding: 0px 0px 5px 0px;">Title: <input type="text" size="30" id="name_of_look"/> &nbsp; <button class="btn btn-primary" style="padding: 3px 20px;">Save</button></div>
+								<div style="padding: 0px 0px 5px 0px;">Title: <input type="text" size="30" id="name_of_look"/> &nbsp; <button class="btn btn-primary" style="padding: 3px 20px;" onclick="IL.saveLook();">Save</button></div>
 								<div id="new_look_collection" class="questions-list">
 									
 								</div>

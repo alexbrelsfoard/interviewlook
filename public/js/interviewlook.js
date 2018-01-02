@@ -107,8 +107,8 @@ var IL = {
 				//loop through each video
 				for(var i = 0; i < data.videos.length; i++) {
 					//append to '#list_of_questions ul'
-					$('#list_of_questions ul').prepend('<li><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
-					$('#list_of_questions_for_looks ul').prepend('<li class="draggable"><div class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
+					$('#list_of_questions ul').prepend('<li><div class="screenshot" video-name="'+data.videos[i].video+'" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
+					$('#list_of_questions_for_looks ul').prepend('<li class="draggable"><div video-name="'+data.videos[i].video+'" class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
 				}
 				IL.lastVideoID = latest_video_id;
 				$( "li.draggable" ).draggable({ snap: "#new_look_collection, #questions-list-for-looks", helper: "clone" });
@@ -148,6 +148,33 @@ var IL = {
 				$('#start_button_intro').attr('disabled','disabled');
 				$('#start_button_intro').addClass('disabled');
 			}
+		}
+	},
+	
+	saveLook : function() {
+		if ($('#name_of_look').val().length > 3) {
+			var videos = [];
+			if ($("#new_look_collection UL li").count()) {
+				$("#new_look_collection UL li").each(function(idx, li) {
+					var video_name = $(li).prop('video-name');
+					videos[idx] = video_name;
+				});
+				var videos_json = JSON.stringify(videos);
+				
+				$.get("/getvideo?i="+id, function(video_name){
+					if (video_name) {
+						
+						// update video source
+						$('#video_dialog video source').attr('src','/videos/'+video_name+'.mp4');
+						$("#video_dialog video")[0].load();
+						// create modal dialog
+						$('#modal').fadeIn();
+						
+					}
+				});
+			}
+		}else {
+			alert("Please provide a name for this LOOK");
 		}
 	}
 };
