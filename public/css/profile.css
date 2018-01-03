@@ -953,3 +953,12 @@
 .privacy_buttons .radio-inline input {
 	top: -10px;
 }
+
+.metrics-panel {
+	padding: 15px;
+	background: #659be0;
+	color: #fff;
+	font-size: 25px;
+	font-weight: bold;
+	border: 1px solid #fff;
+}

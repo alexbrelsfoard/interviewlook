@@ -12,7 +12,7 @@
 			<a href="{{ route('user.profile', auth()->user()->username) }}">My Profile</a>
 		</li>
 		<li>
-			<a href="">Create a look</a>
+			<a href="{{ route('look.looks') }}">Create a look</a>
 		</li>
 		<li>
 			<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

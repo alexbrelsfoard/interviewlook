@@ -2,7 +2,17 @@
 
 <section id="content" class="profile">
 	<div class="container">
-
+		<div class="col-md-12">
+			<div class="flash-message">
+				@foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
+				<p class="alert alert-{{ $msg }}">
+					{{ Session::get('alert-' . $msg) }}
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				</p>
+				@endif @endforeach
+			</div>
+		</div>
+		<div class="clearfix"></div>
 		<div class="col-md-12">
 			<div class="profile-body">
 				<div class="profile-bio">
@@ -35,7 +45,7 @@
 								<div class=" padding-10">
 									<h2 class="color-blue">
 										<strong>{{ $user->name }}</strong>
-										{!! auth()->check() ? '
+										{!! auth()->check() && $user->id == auth()->user()->id ? '
 										<a class="btn btn-success margin-left-10" href="'.$url.'">Edit Profile</a>':'' !!}
 									</h2>
 								</div>
@@ -79,11 +89,25 @@
 							<div class="clearfix"></div>
 							<br/>
 						</div>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-4 metrics-panel">
+									<div class="metrics-content"># of views: </div>
+								</div>
+								<div class="col-md-4 metrics-panel">
+									<div class="metrics-content">Who viewed: </div>
+								</div>
+								<div class="col-md-4 metrics-panel">
+									<div class="metrics-content">Last viewed:</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<hr/>
 			</div>
 		</div>
+
 	</div>
 </section>
 

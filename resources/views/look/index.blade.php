@@ -1,22 +1,25 @@
-@extends('layouts.welcome')
-
-@section('title', 'Home')
-
-@section('head_code')
+@extends('layouts.welcome') @section('title', 'Home') @section('head_code')
 <script type="text/javascript">
 	$( function() {
 		var availableTitles = {{  $available_titles }};
 		$('#job_title_search').autocomplete({ source: availableTitles, appendTo: ".search_input" });
 	});
-</script>
-@stop
 
-@section('body')
+</script>
+@stop @section('body')
 
 <section id="title" class="page-title-sec">
 	<div class="container">
 		<img src="{{ asset('images/Interview-Look.png') }}" />
 		<h1>Welcome to interviewLOOK</h1>
+		<div class="flash-message">
+			@foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
+			<p class="alert alert-{{ $msg }}">
+				{{ Session::get('alert-' . $msg) }}
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			</p>
+			@endif @endforeach
+		</div>
 	</div>
 </section>
 
@@ -24,7 +27,8 @@
 <section id="content">
 	<div class="container">
 		<div class="guest_user_home_search_main">
-			<form id="form" action="/search" method="get"><input type="hidden" name="search" value="1"/>
+			<form id="form" action="/search" method="get">
+				<input type="hidden" name="search" value="1" />
 				<div class="search_input">
 					<input type='text' id='job_title_search' name="job_title_search" placeholder="Job Title" value="" class="postform auto_com_desi">
 					<select name="job_location" id="job_location" class="postform">
@@ -84,9 +88,9 @@
 					</select>
 					<select name="job_type" id="job_type" class="postform">
 						<option value="">-- Select Job Type --</option>
-						@for ($i=0; $i < sizeof($job_types); $i++)
-							<option value='{{ $i }}'>{{ $job_types[$i] }}</option>
-						@endfor
+						@for ($i=0; $i
+						< sizeof($job_types); $i++) <option value='{{ $i }}'>{{ $job_types[$i] }}</option>
+							@endfor
 					</select>
 					<input class="search_icon" type="image" src="{{ asset('images/search-icon.png') }}" />
 				</div>
@@ -94,5 +98,5 @@
 		</div>
 	</div>
 </section>
-	
+
 @stop

@@ -33,7 +33,3 @@
 		</div>
 	</div>
 </footer>
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/jquery-ui.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-<script type="text/javascript" src="{{ asset('js/interviewlook.js') }}"></script>

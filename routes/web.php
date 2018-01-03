@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Look Routes
 Route::get('/demos', 'LookController@demos')->name('look.demos');
 Route::get('/about', 'LookController@about')->name('look.about');
+Route::post('/contact/send', 'LookController@send')->name('look.contact.send');
 Route::get('/verify/email/{token}', 'LookController@verifyEmail')->name('look.verify.email');
 
 // User Routes
@@ -27,6 +28,10 @@ Route::get('user/{username}', 'UserController@profile')->name('user.profile');
 Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
     Route::get('edit', 'UserController@edit')->name('profile.edit');
     Route::post('update', 'UserController@update')->name('profile.update');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/looks', 'LookController@showLooks')->name('look.looks');
 });
 
 // Social Login Routes

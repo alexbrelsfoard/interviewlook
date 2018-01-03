@@ -10,15 +10,15 @@ class Job extends Model
 
     public function company()
     {
-        return $this->hasOne('Company', 'id', 'company_id');
+        return $this->hasOne('App\Models\Company', 'id', 'company_id');
     }
     public function skills()
     {
-        return $this->hasMany('JobSkills', 'job_id');
+        return $this->hasMany('App\Models\JobSkill', 'job_id');
     }
     public function questions()
     {
-        return $this->hasMany('JobQuestions', 'job_id');
+        return $this->hasMany('App\Models\JobQuestion', 'job_id');
     }
 
     public static function getDistinctTitles()

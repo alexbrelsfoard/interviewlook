@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function profile($username)
     {
-        $user = User::where('username', $username)->with('profile', 'social', 'privacy')->first();
+        $user = User::where('username', $username)->with('profile', 'social', 'privacy', 'metrics')->first();
         if ($user) {
             return view('user.profile', compact('user'));
         } else {

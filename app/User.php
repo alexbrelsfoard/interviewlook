@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Privacy');
     }
+
+    public function metrics()
+    {
+        return $this->hasMany('App\Models\Metric');
+    }
 }
