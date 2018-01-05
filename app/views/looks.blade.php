@@ -138,7 +138,7 @@ LOOKs&trade;
 								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
 								<div id="question_input">
 									<h3>Record New Question</h3>
-									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="activateStartButton();" />
+									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="IL.activateStartButton();" />
 									<button id="start_button" class="btn btn-primary" onclick="showRecorder();" disabled="disabled">Start</button>
 								</div>
 								<div id="intro_header" class="center hidden">
