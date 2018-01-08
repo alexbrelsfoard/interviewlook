@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Metric;
 use App\Models\Privacy;
 use App\Models\Profile;
 use App\Models\Social;
@@ -10,6 +11,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use Storage;
 
 class UserController extends Controller
 {
@@ -18,7 +20,25 @@ class UserController extends Controller
     {
         $user = User::where('username', $username)->with('profile', 'social', 'privacy', 'metrics')->first();
         if ($user) {
-            return view('user.profile', compact('user'));
+            if ($user->id != auth()->user()->id) {
+                $viewed_by = auth()->check() ? auth()->user()->id : 0;
+                $metrics_array = [
+                    'user_id' => $user->id,
+                    'viewed_by' => $viewed_by,
+                    'ip' => request()->ip(),
+                ];
+                $metrics = Metric::where([
+                    'user_id' => $user->id,
+                    'viewed_by' => $viewed_by,
+                    'ip' => request()->ip(),
+                ])->pluck('id')->first();
+                if (!$metrics) {
+                    Metric::create($metrics_array);
+                }
+            }
+            $metrics_count = Metric::where('user_id', $user->id)->count();
+            $latest_metric = Metric::where('user_id', $user->id)->orderBy('id', 'desc')->first();
+            return view('user.profile', compact('user', 'metrics_count', 'latest_metric'));
         } else {
             return view('errors.404');
         }
@@ -33,14 +53,16 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $v = Validator::make($request->all(), [
+            'email' => 'required|string|email|unique:users,email,' . auth()->user()->id,
+            'photo' => 'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=200,min_height=200',
             'industry_summary' => 'required|max:191',
             'current_position' => 'required|max:191',
             'current_company' => 'required|max:191',
             'current_location' => 'required|max:191',
             'skills' => 'required|max:191',
-            'facebook' => 'required|max:191',
-            'twitter' => 'required|max:191',
-            'instagram' => 'required|max:191',
+            'facebook' => 'nullable|max:191|url',
+            'twitter' => 'nullable|max:191|url',
+            'instagram' => 'nullable|max:191|url',
             'current_position_privacy' => 'required',
             'current_company_privacy' => 'required',
             'current_location_privacy' => 'required',
@@ -57,6 +79,8 @@ class UserController extends Controller
             $profile = Profile::where('user_id', auth()->user()->id)->first();
             $social = Social::where('user_id', auth()->user()->id)->first();
             $privacy = Privacy::where('user_id', auth()->user()->id)->first();
+            User::where('id', auth()->user()->id)->update(['email' => $request->input('email')]);
+
             $profile_array = [
                 'user_id' => auth()->user()->id,
                 'current_position' => $request->input('current_position'),
@@ -68,6 +92,17 @@ class UserController extends Controller
                 'industry_summary' => $request->input('industry_summary'),
                 'skills' => $request->input('skills'),
             ];
+            if ($request->hasFile('photo')) {
+                $file_path = 'user';
+                if (!is_dir(public_path($file_path))) {
+                    mkdir(public_path($file_path), 0777);
+                }
+                $photo = auth()->user()->username . '.' . $request->file('photo')->getClientOriginalExtension();
+                Storage::disk('user')->put($photo, file_get_contents($request->file('photo')));
+                $photo_path = url('user/' . $photo);
+                $profile_array['photo'] = $photo_path;
+            }
+
             $social_array = [
                 'user_id' => auth()->user()->id,
                 'facebook' => $request->input('facebook'),
@@ -113,7 +148,7 @@ class UserController extends Controller
                 Session::flash('alert-danger', 'Something went wrong. Please try again.');
             }
 
-            return redirect()->route('profile.edit');
+            return redirect()->route('user.profile', auth()->user()->username);
         }
     }
 }

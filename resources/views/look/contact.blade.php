@@ -1,4 +1,4 @@
-@extends('layouts.main') @section('title') Contact Us @stop @section('page_title') Contact Us @stop @section('body')
+@extends('layouts.main') @section('title') Contact Us @stop @section('page_title') About Us @stop @section('body')
 
 <section id="content">
 	<div class="container">

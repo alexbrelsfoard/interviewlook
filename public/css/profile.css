@@ -909,7 +909,12 @@
 }
 
 .blue-frame-10 {
+	max-width: 250px;
 	border: 10px solid #659be0;
+}
+
+.blue-frame-10 img {
+	max-width: 100%;
 }
 
 .blue-frame-5 {

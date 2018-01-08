@@ -107,7 +107,7 @@ if (!function_exists('slugify')) {
     function slugify($text)
     {
       // replace non letter or digits by -
-      $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+      $text = preg_replace('~[^\pL\d]+~u', '', $text);
     
       // transliterate
       $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);

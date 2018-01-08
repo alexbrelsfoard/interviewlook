@@ -5,9 +5,6 @@
 		<div class="col-md-12">
 			<div class="profile-body">
 				<div class="profile-bio">
-					<center>
-						<h3>Edit Profile</h3>
-					</center>
 					<div class="flash-message">
 						@foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
 						<p class="alert alert-{{ $msg }}">
@@ -16,8 +13,43 @@
 						</p>
 						@endif @endforeach
 					</div>
-					<form class="form-horizontal privacy_buttons" method="post" action="{{ route('profile.update') }}">
+					<form class="form-horizontal privacy_buttons" method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
 						{{ csrf_field() }}
+						<center>
+							<h3>Account Setting</h3>
+						</center>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="email">Profile Photo:</label>
+							<div class="col-sm-10">
+								<div class="blue-frame-10">
+									<div class="white-frame-10">
+										<div class="blue-frame-5">
+											<img class="img-responsive md-margin-bottom-10" src="{{ $user->photo }}" alt="">
+										</div>
+									</div>
+								</div>
+								<br/>
+								<input type="file" class="form-control" id="photo" name="photo">
+								<div class="error">
+									@if ($errors->has('photo')) {{ $errors->first('photo') }} @endif
+								</div>
+							</div>
+						</div>
+						<hr/>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="email">Email Address:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="email" placeholder="me@example.com" name="email" value="{{ old( 'email') ?
+									 old( 'email'): $user->email }}">
+								<div class="error">
+									@if ($errors->has('email')) {{ $errors->first('email') }} @endif
+								</div>
+							</div>
+						</div>
+						<hr/>
+						<center>
+							<h3>Edit Profile</h3>
+						</center>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">Industry Summary:</label>
 							<div class="col-sm-10">
@@ -175,12 +207,12 @@
 						</div>
 						<hr/>
 						<center>
-							<h3>Social</h3>
+							<h3>Social Network</h3>
 						</center>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">Facebook:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="facebook" placeholder="Facebook Full Link" name="facebook" value="{{ old( 'facebook') ?
+								<input type="text" class="form-control" id="facebook" placeholder="https://www.facebook.com/username" name="facebook" value="{{ old( 'facebook') ?
 								 old( 'facebook'): (isset($user->social->facebook) ? $user->social->facebook : '') }}">
 								<div class="error">
 									@if ($errors->has('facebook')) {{ $errors->first('facebook') }} @endif
@@ -191,7 +223,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">Twitter:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="twitter" placeholder="Twitter Full Link" name="twitter" value="{{ old( 'twitter') ? old(
+								<input type="text" class="form-control" id="twitter" placeholder="https://www.twitter.com/username" name="twitter" value="{{ old( 'twitter') ? old(
 								 'twitter'): (isset($user->social->twitter) ? $user->social->twitter : '') }}">
 								<div class="error">
 									@if ($errors->has('twitter')) {{ $errors->first('twitter') }} @endif
@@ -202,7 +234,8 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">Instagram:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="instagram" placeholder="Instagram Full Link" name="instagram" value="{{ old( 'instagram')
+								<input type="text" class="form-control" id="instagram" placeholder="https://www.instagram.com/username" name="instagram"
+								 value="{{ old( 'instagram')
 								 ? old( 'instagram'): (isset($user->social->instagram) ? $user->social->instagram : '') }}">
 								<div class="error">
 									@if ($errors->has('instagram')) {{ $errors->first('instagram') }} @endif

@@ -47,7 +47,7 @@ class LookController extends Controller
         $v = Validator::make($request->all(), [
             'user_name' => 'required|max:191',
             'email' => 'required|email',
-            'message' => "required|regex:/^[\r\n0-9a-zA-Z \/_:,.?@;-]+$/",
+            'message' => "required",
         ], [
             'message.regex' => 'This is not a valid message format, please use only alpha numeric characters.',
         ]);
@@ -56,7 +56,7 @@ class LookController extends Controller
             return redirect()->back()->withErrors($v)->withInput();
         } else {
             Notification::route('mail', 'rico.thompson@interviewlook.com')->notify(new ContactEmail($request->all()));
-            Session::flash('alert-success', 'Email sent successfully.');
+            Session::flash('alert-success', 'Thank you for your feedback.');
             return redirect()->route('look.about');
         }
     }

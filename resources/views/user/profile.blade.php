@@ -18,24 +18,30 @@
 				<div class="profile-bio">
 					<div class="row">
 						<div class="col-md-4">
-							<div class="blue-frame-10">
-								<div class="white-frame-10">
-									<div class="blue-frame-5">
-										<img class="img-responsive md-margin-bottom-10" src="{{ $user->photo }}" alt="">
+							<center>
+								<div class="blue-frame-10">
+									<div class="white-frame-10">
+										<div class="blue-frame-5">
+											<img class="img-responsive md-margin-bottom-10" src="{{ isset($user->profile->photo) && $user->profile->photo ? $user->profile->photo : $user->photo }}" alt="">
+										</div>
 									</div>
 								</div>
-							</div>
+							</center>
 							<br/> @if($user->social)
 							<center>
+								@if($user->social->facebook)
 								<a class="btn btn-info btn-xs" href="{{ $user->social->facebook }}">
 									<i class="fa fa-facebook"></i>
 								</a>
+								@endif @if($user->social->twitter)
 								<a class="btn btn-info btn-xs" href="{{ $user->social->twitter }}">
 									<i class="fa fa-twitter"></i>
 								</a>
+								@endif @if($user->social->instagram)
 								<a class="btn btn-info btn-xs" href="{{ $user->social->instagram }}">
 									<i class="fa fa-instagram"></i>
 								</a>
+								@endif
 							</center>
 							@endif
 						</div>
@@ -57,14 +63,19 @@
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Experience: {!! isset($user->privacy->years_experience) && $user->privacy->years_experience ? $user->profile->years_experience:'
+										<strong>Experience: {!! isset($user->privacy->years_experience) && $user->privacy->years_experience ? $user->profile->years_experience.'
+											years':'
 											<i>Private</i>' !!}</strong>
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Education: {!! isset($user->privacy->highest_degree) && $user->privacy->highest_degree ? $user->profile->highest_degree:'
-											<i>Private</i>' !!}</strong>
+										<strong>Education: @if(isset($user->privacy->highest_degree) && $user->privacy->highest_degree) @if($user->profile->highest_degree
+											== 'hsd') High School Diploma @elseif($user->profile->highest_degree == 'sc') Some College @elseif($user->profile->highest_degree
+											== 'ad') Associate's Degree @elseif($user->profile->highest_degree == 'bd') Bachelor's Degree @elseif($user->profile->highest_degree
+											== 'md') Master's Degree @else {{ $user->profile->highest_degree }} @endif @else
+											<i>Private</i>
+											@endif
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
@@ -91,14 +102,11 @@
 						</div>
 						<div class="col-md-12">
 							<div class="row">
-								<div class="col-md-4 metrics-panel">
-									<div class="metrics-content"># of views: </div>
+								<div class="col-md-6 metrics-panel">
+									<div class="metrics-content"># of views: {{ $metrics_count }}</div>
 								</div>
-								<div class="col-md-4 metrics-panel">
-									<div class="metrics-content">Who viewed: </div>
-								</div>
-								<div class="col-md-4 metrics-panel">
-									<div class="metrics-content">Last viewed:</div>
+								<div class="col-md-6 metrics-panel">
+									<div class="metrics-content">Last viewed: {{ $latest_metric ? date('m/d/Y', strtotime($latest_metric->created_at)).' at '.date('h:ia', strtotime($latest_metric->created_at)):'' }}</div>
 								</div>
 							</div>
 						</div>

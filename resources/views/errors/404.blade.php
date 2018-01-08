@@ -1,32 +1,41 @@
-@extends('layouts.main')
+@extends('layouts.main') @section('title') LOOKs @stop @section('page_title') LOOKs&trade; @stop @section('body')
+<style>
+	body {
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg==);
+	}
 
-@section('title')
-LOOKs
-@stop
-@section('page_title')
-LOOKs&trade;
-@stop
+	.error-template {
+		padding: 40px 15px;
+		text-align: center;
+	}
 
-@section('body')
+	.error-actions {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
 
-<section id="content">
-	<div class="container">
-		<div class="error-spacer"></div>
-		<div role="main" class="main">
-			<?php $messages = array('We need a map.', 'I think we\'re lost.', 'We took a wrong turn.'); ?>
-	
-			<h2><?php echo $messages[mt_rand(0, 2)]; ?></h2>
-	
-			<h1>Server Error: 404 (Not Found)</h1>
-	
-			<hr>
-	
-			<h3>What does this mean?</h3>
-	
-			<p>We couldn't find the page you requested on our servers.</p>
-	
-			<p>Perhaps you would like to go to our <a href="{{{ URL::to('/') }}}">home page</a>?</p>
+	.error-actions .btn {
+		margin-right: 10px;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="error-template">
+				<h1>
+					Oops!</h1>
+				<h2>
+					404 Not Found</h2>
+				<div class="error-details">
+					Sorry, an error has occured, Requested page not found!
+				</div>
+				<div class="error-actions">
+					<a href="{{ url('/') }}" class="btn btn-primary btn-lg">
+						<span class="glyphicon glyphicon-home"></span>
+						Take Me Home </a>
+				</div>
+			</div>
 		</div>
 	</div>
-</section>
+</div>
 @stop

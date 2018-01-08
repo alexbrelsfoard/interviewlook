@@ -90,9 +90,14 @@ class SocialController extends Controller
             return $authUser;
         }
 
+        $username = slugify($data['name']);
+        $db_username = User::where('username', $username)->first();
+        if ($db_username) {
+            $username = $db_username->username . '-' . $db_username->id;
+        }
         $user = User::create([
             'name' => $data['name'],
-            'username' => time() . '-' . slugify($data['name']),
+            'username' => $username,
             'email' => $data['email'],
             'email_token' => generateRandomString(25),
             $provider => $data['id'],
