@@ -42,7 +42,7 @@ LOOKs&trade;
 	}
 	
 	$( function() {
-		var knownQuestions = {!! $knownQuestions !!};
+		var knownQuestions = {{ $knownQuestions }};
 		$('#question').autocomplete({ 
 			source: knownQuestions, 
 			appendTo: "#question_input",
@@ -80,7 +80,7 @@ LOOKs&trade;
 
 	<!-- Modal content -->
 	<div id="video_dialog">
-		<img class="modal_close" src="{{ asset('images/close.png') }}" onclick="IL.closeVideoModal()"/>
+		<img class="modal_close" src="/images/close.png" onclick="IL.closeVideoModal()"/>
 		<video width="640" height="480" controls>
 			<source src="" type="video/mp4">
 			Your browser does not support the video tag.
@@ -115,7 +115,7 @@ LOOKs&trade;
 									<ul>
 										
 									</ul>
-									<img id="new_icon" src="{{ asset('images/add-icon.png') }}" />
+									<img id="new_icon" src="/images/add-icon.png" />
 								</div>
 							</div>
 							<div class="col-md-5 hidden" id="new_look">
@@ -138,7 +138,7 @@ LOOKs&trade;
 								<input type="hidden" id="user_id" value="{{ auth()->user()->id }}"/>
 								<div id="question_input">
 									<h3>Record New Question</h3>
-									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="activateStartButton();" />
+									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="IL.activateStartButton();" />
 									<button id="start_button" class="btn btn-primary" onclick="showRecorder();" disabled="disabled">Start</button>
 								</div>
 								<div id="intro_header" class="center hidden">

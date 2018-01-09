@@ -1044,10 +1044,34 @@ div#exTab1 {
     min-height: 500px;
     border: 1px dotted #AAA;
 }
+#list_of_looks {
+	min-height: 500px;
+}
+#looks {
+	border: 1px solid #333;
+	border-left: 0;
+	min-height: 500px;
+	position: relative;
+}
+
+#looks #new_icon {
+	position: absolute;
+	bottom: 2px;
+	left: 2px;
+	height: 40px;
+	cursor: pointer;
+}
 
 #new_look_collection {
-    min-height: 500px;
-    border: 1px dotted #AAA;
+	min-height: 500px;
+	border: 1px dotted #AAA;
+}
+INPUT#name_of_look {
+	height: 30px;
+}
+
+#list_of_videos_for_look {
+	min-height: 500px;
 }
 
 .questions-list UL {
