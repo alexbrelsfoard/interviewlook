@@ -57,43 +57,50 @@
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										Industry Summary: {!! isset($user->privacy->industry_summary) && $user->privacy->industry_summary ? $user->profile->industry_summary:'
-										<i>Private</i>' !!}
+										Industry Summary: <span class="color-dark-blue">{!! isset($user->privacy->industry_summary) && $user->privacy->industry_summary ? $user->profile->industry_summary:'
+										<i>Private</i>' !!}</span>
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Experience: {!! isset($user->privacy->years_experience) && $user->privacy->years_experience ? $user->profile->years_experience.'
+										<strong>Experience: <span class="color-dark-blue">{!! isset($user->privacy->years_experience) && $user->privacy->years_experience ? $user->profile->years_experience.'
 											years':'
-											<i>Private</i>' !!}</strong>
+											<i>Private</i>' !!}</span></strong>
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Education: @if(isset($user->privacy->highest_degree) && $user->privacy->highest_degree) @if($user->profile->highest_degree
+										<strong>Education: <span class="color-dark-blue">@if(isset($user->privacy->highest_degree) && $user->privacy->highest_degree) @if($user->profile->highest_degree
 											== 'hsd') High School Diploma @elseif($user->profile->highest_degree == 'sc') Some College @elseif($user->profile->highest_degree
 											== 'ad') Associate's Degree @elseif($user->profile->highest_degree == 'bd') Bachelor's Degree @elseif($user->profile->highest_degree
 											== 'md') Master's Degree @else {{ $user->profile->highest_degree }} @endif @else
 											<i>Private</i>
 											@endif
+										</span>
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Skills: {!! isset($user->privacy->skills) && $user->privacy->skills ? $user->profile->skills:'
-											<i>Private</i>' !!}</strong>
+										<strong>Skills: <span class="color-dark-blue">{!! isset($user->privacy->skills) && $user->privacy->skills ? $user->profile->skills:'
+											<i>Private</i>' !!}
+										</span>
+										</strong>
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Current Position: {!! isset($user->privacy->current_position) && $user->privacy->current_position ? $user->profile->current_position:'
-											<i>Private</i>' !!}</strong>
+										<strong>Current Position: <span class="color-dark-blue">{!! isset($user->privacy->current_position) && $user->privacy->current_position ? $user->profile->current_position:'
+											<i>Private</i>' !!}
+										</span>
+										</strong>
 									</h3>
 								</div>
 								<div class="blue-frame-2 margin-top-bottom-15 padding-10">
 									<h3 class="color-blue">
-										<strong>Location: {!! isset($user->privacy->current_location) && $user->privacy->current_location ? $user->profile->current_location:'
-											<i>Private</i>' !!}</strong>
+										<strong>Location: <span class="color-dark-blue">{!! isset($user->privacy->current_location) && $user->privacy->current_location ? $user->profile->current_location:'
+											<i>Private</i>' !!}
+										</span>
+										</strong>
 									</h3>
 								</div>
 							</div>

@@ -174,9 +174,10 @@
 									<option value="other" {{ $highest_degree=='other' ? 'selected': '' }}>Other</option>
 								</select>
 								<br/>
+								@php($degrees_array = ['hsd','sc','ad','bd','md','dd'])
 								<label>Other</label>
 								<input type="text" class="form-control" id="highest_degree_other" placeholder="Education" name="highest_degree_other" value="{{ old(
-								 'highest_degree_other') ? old( 'highest_degree_other'): (isset($user->profile->highest_degree) ? $user->profile->highest_degree : '') }}">
+								 'highest_degree_other') ? old( 'highest_degree_other'): (isset($user->profile->highest_degree) && !in_array($user->profile->highest_degree, $degrees_array) ? $user->profile->highest_degree : '') }}">
 								<div class="error">
 									@if ($errors->has('highest_degree_other')) {{ $errors->first('highest_degree_other') }} @endif
 								</div>

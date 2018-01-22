@@ -967,3 +967,11 @@
 	font-weight: bold;
 	border: 1px solid #fff;
 }
+
+.color-dark-blue {
+	color: darkblue;
+}
+
+span.color-dark-blue {
+	display: inline !important;
+}
