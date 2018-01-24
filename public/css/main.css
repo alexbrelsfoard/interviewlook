@@ -1182,3 +1182,10 @@ BUTTON.disabled,
     background: #CCC;
     color: #111;
 }
+
+.landing .subtitle {
+    color: #fff;
+    font-style: normal;
+    margin-top: -70px;
+    font-size: 20px;
+}

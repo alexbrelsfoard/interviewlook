@@ -7,10 +7,11 @@
 
 </script>
 @stop @section('body')
-<section id="title" class="page-title-sec">
+<section id="title" class="page-title-sec landing">
 	<div class="container">
 		<img src="{{ asset('images/Interview-Look.png') }}" />
 		<h1>Welcome to interviewLOOK</h1>
+		<h3 class="subtitle">We help job-seekers land the perfect job.</h3>
 		<div class="flash-message">
 			@foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
 			<p class="alert alert-{{ $msg }}">
