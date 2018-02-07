@@ -1,10 +1,16 @@
 @extends('layouts.welcome') @section('title', 'Home') @section('head_code')
 <script type="text/javascript">
-	$( function() {
-		var availableTitles = {{  $available_titles }};
-		$('#job_title_search').autocomplete({ source: availableTitles, appendTo: ".search_input" });
+	$(function () {
+		var availableTitles = {
+			{
+				$available_titles
+			}
+		};
+		$('#job_title_search').autocomplete({
+			source: availableTitles,
+			appendTo: ".search_input"
+		});
 	});
-
 </script>
 @stop @section('body')
 <section id="title" class="page-title-sec landing">
@@ -22,21 +28,51 @@
 		</div>
 	</div>
 </section>
+<section id="title" class="page-title-sec landing">
+	<div class="container">
+		<h3 class="section_h4">We are currently testing our beta, to get access please send your name and email</h3>
+		<center>
+			<div class="cjfm-form  cjfm-login-form">
+				<form class="form-horizontal" method="POST" action="{{ route('welcome.request') }}">
+					{{ csrf_field() }}
+					<div class="form-group">
+						<label class="color-blue">Name</label>
+						<input type="text" class="form-control" name="user_name" value="{{ old('user_name') }}"/>
+						@if ($errors->has('user_name'))
+							<div class="error">
+								<strong>{{ $errors->first('user_name') }}</strong>
+							</div>
+						@endif
+					</div>
+					<div class="form-group">
+						<label class="color-blue">Email</label>
+						<input type="email" class="form-control" name="email" value="{{ old('email') }}"/>
+						@if ($errors->has('email'))
+							<div class="error">
+								<strong>{{ $errors->first('email') }}</strong>
+							</div>
+						@endif
+					</div>
+					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+				</form
+			</div>
+
+		</center>
+	</div>
+</section>
 @if(!auth()->check())
-<section id="content">
+<section id="content" class="hidden">
 	<div class="main-loginform">
 		<h1>Login</h1>
 		<div class="cjfm-form  cjfm-login-form  ">
-            <div class="flash-message">
-                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                    @if(Session::has('alert-' . $msg))
-                        <p class="alert alert-{{ $msg }}">
-                            {{ Session::get('alert-' . $msg) }}
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        </p>
-                    @endif
-            @endforeach
-        </div>
+			<div class="flash-message">
+				@foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
+				<p class="alert alert-{{ $msg }}">
+					{{ Session::get('alert-' . $msg) }}
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				</p>
+				@endif @endforeach
+			</div>
 			<form class="form-horizontal" method="POST" action="{{ route('login') }}">
 				{{ csrf_field() }}
 				<span class="cjfm-loading"></span>
@@ -49,11 +85,10 @@
 					<span class="cjfm-relative">
 						<i class="fa fa-user"></i>
 						<input id="email" type="email" class="form-control form-type-login login_form_user_login" name="email" value="{{ old('email') }}"
-						 placeholder="Email Address" required autofocus>
-                         @if ($errors->has('email'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
+						    placeholder="Email Address" required autofocus> @if ($errors->has('email'))
+						<span class="help-block">
+							<strong>{{ $errors->first('email') }}</strong>
+						</span>
 						@endif
 					</span>
 				</div>
@@ -67,11 +102,10 @@
 					<span class="cjfm-relative">
 						<i class="fa fa-lock"></i>
 						<input id="password" type="password" class="form-control form-type-login login_form_user_pass" placeholder="********" name="password"
-						 required>
-                        @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
+						    required> @if ($errors->has('password'))
+						<span class="help-block">
+							<strong>{{ $errors->first('password') }}</strong>
+						</span>
 						@endif
 					</span>
 				</div>
@@ -84,18 +118,21 @@
 					</span>
 					<a class="button-suffix forgot-password-link" href="{{ route('password.request') }}">Forgot password?</a>
 				</div>
-                	<div class="form-group">
+				<div class="form-group">
 					<label for="social" class="control-label"></label>
 					<div class="col-md-12">
-                        <center>
-                            <a href="{{ route('social.facebook') }}"><img src="{{ asset('images/facebook.png') }}"/></a>
-                            <a href="{{ route('social.linkedin') }}"><img src="{{ asset('images/linkedin.png') }}"/></a>
-                        </center>
+						<center>
+							<a href="{{ route('social.facebook') }}">
+								<img src="{{ asset('images/facebook.png') }}" />
+							</a>
+							<a href="{{ route('social.linkedin') }}">
+								<img src="{{ asset('images/linkedin.png') }}" />
+							</a>
+						</center>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </section>
-@endif
-@stop
+@endif @stop

@@ -12,6 +12,7 @@
  */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::post('/submit/request', 'WelcomeController@request')->name('welcome.request');
 
 Auth::routes();
 

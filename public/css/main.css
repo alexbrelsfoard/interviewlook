@@ -411,6 +411,15 @@ SECTION#title H1 {
     text-transform: initial;
 }
 
+.section_h4 {
+    color: #153b65;
+    font-family: "Roboto", sans-serif;
+    letter-spacing: 0.3px;
+    position: inherit;
+    text-align: center;
+    text-transform: initial;
+}
+
 INPUT {
     height: 45px;
 }
@@ -1188,4 +1197,18 @@ BUTTON.disabled,
     font-style: normal;
     margin-top: -70px;
     font-size: 20px;
+}
+
+.color-blue {
+    color: #153b65 !important;
+}
+
+.error {
+    color: darkred;
+    font-style: italic;
+}
+
+.success {
+    color: #c3e6cb;
+    font-style: italic;
 }
