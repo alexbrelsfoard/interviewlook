@@ -33,6 +33,28 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/looks', 'LookController@showLooks')->name('look.looks');
+
+    Route::get('/getvideo', function () {
+        $video_name = DB::table('user_questions')->select('video')->where('user_id', auth()->user()->id)->where('id', \Illuminate\Support\Facades\Input::get('i'))->orderBy('id', 'desc')->get();
+        return $video_name[0]->video;
+    });
+
+    Route::get('/uservideos', function () {
+        $lastUsersQuestionsID = \Illuminate\Support\Facades\Input::get('li');
+        $videos = DB::table('user_questions')->join('questions', 'questions.id', '=', 'user_questions.question_id')->select('user_questions.id', 'user_questions.video', 'questions.question')->where('user_questions.user_id', auth()->user()->id)->where('user_questions.id', '>', $lastUsersQuestionsID)->where('user_questions.active', 1)->orderBy('user_questions.id', 'asc')->get();
+        //Log::warning("VIDEOS:\n".var_export($videos, true));
+
+        $lastVideoID = 0;
+        if (sizeof($videos)) {
+            $lastVideoID = $videos[sizeof($videos) - 1]->id;
+        }
+        $data = array(
+            'lastVideoID' => $lastVideoID,
+            'videos' => $videos,
+        );
+
+        return json_encode($data);
+    })->name('user.videos');
 });
 
 // Social Login Routes

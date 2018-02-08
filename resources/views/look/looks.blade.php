@@ -9,9 +9,6 @@ LOOKs&trade;
 
 @section('head_code')
 <script type="text/javascript">
-	// Set vars for Pipe Video Recorder.
-	var flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
-	var size = {width:400,height:330};
 
 	var collection = $('#new_look_collection');
 	function addItemToCollection( $item ) {
@@ -42,7 +39,7 @@ LOOKs&trade;
 	}
 
 	$( function() {
-		var knownQuestions = {!! $knownQuestions !!}};
+		var knownQuestions = {!! $knownQuestions !!};
 		$('#question').autocomplete({
 			source: knownQuestions,
 			appendTo: "#question_input",
@@ -134,7 +131,7 @@ LOOKs&trade;
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6 record_video" id="video_recorder">
+							<div class="col-md-6 record_video bal_video_section" id="video_recorder">
 								<input type="hidden" id="user_id" value="{{ auth()->id() }}"/>
 								<div id="question_input">
 									<h3>Record New Question</h3>
