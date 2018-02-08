@@ -9,6 +9,17 @@ LOOKs&trade;
 
 @section('head_code')
 <script type="text/javascript">
+var flashvars = {
+		qualityurl: "avq/480p.xml",
+		accountHash: "e1cacb83a1abc9814164437ad383ccbc",
+		eid: 1,
+		showMenu: "true",
+		mrt: 300,
+		sis: 0,
+		asv: 0,
+		mv: 1,
+		payload: $('.bal_video_section').length ? $('#user_id').val() + ":" + $('#question').val() : ''
+	};
 
 	var collection = $('#new_look_collection');
 	function addItemToCollection( $item ) {
@@ -45,7 +56,8 @@ LOOKs&trade;
 			appendTo: "#question_input",
 			open: function () {
 				$(this).data("uiAutocomplete").menu.element.addClass("question_lookup_suggestion");
-			}
+			},
+			select: IL.activateStartButton()
 		});
 
 		// get the list of videos.

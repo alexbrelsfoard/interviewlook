@@ -23,21 +23,21 @@ var IL = {
 	},
 
 	switchToIntros: function () {
-		$('#transitionwindow').fadeIn('fast');
+		$('#transitionwindow').removeClass('hidden').fadeIn('fast');
 		setTimeout(function () {
 			$('#questions-list').hide('fast');
 			$('#list_of_looks').hide('fast');
 			$('#new_look').hide('fast');
 			$('#list_of_videos_for_look').hide('fast');
 			$('#right-half-title').text('Saved Intros');
-			$('#intros-list').fadeIn('fast');
-			$('#video_recorder').fadeIn('fast');
-			$('#list_of_videos').fadeIn('fast');
+			$('#intros-list').removeClass('hidden').fadeIn('fast').show();
+			$('#video_recorder').removeClass('hidden').fadeIn('fast').show();
+			$('#list_of_videos').removeClass('hidden').fadeIn('fast').show();
 			$('#questions_tab_title').removeClass('active');
 			$('#looks_tab_title').removeClass('active');
 			$('#intros_tab_title').addClass('active');
 			$('#question_input').hide('fast');
-			$('#intro_header').show();
+			$('#intro_header').removeClass('hidden').show();
 			$('#question').val('321~~intro~~123');
 			IL.activateStartButton();
 			setTimeout(function () {
@@ -47,7 +47,7 @@ var IL = {
 	},
 
 	switchToQuestions: function () {
-		$('#transitionwindow').fadeIn('fast');
+		$('#transitionwindow').removeClass('hidden').fadeIn('fast');
 		setTimeout(function () {
 			$('#intros-list').hide('fast');
 			$('#list_of_looks').hide('fast');
@@ -56,9 +56,9 @@ var IL = {
 			$('#intro_header').hide('fast');
 			$('#hdfvr-content').hide('fast');
 			$('#right-half-title').text('Saved Questions');
-			$('#questions-list').fadeIn('fast');
-			$('#video_recorder').fadeIn('fast');
-			$('#list_of_videos').fadeIn('fast');
+			$('#questions-list').removeClass('hidden').fadeIn('fast').show();
+			$('#video_recorder').removeClass('hidden').fadeIn('fast').show();
+			$('#list_of_videos').removeClass('hidden').fadeIn('fast').show();
 			$('#looks_tab_title').removeClass('active');
 			$('#intros_tab_title').removeClass('active');
 			$('#questions_tab_title').addClass('active');
@@ -72,23 +72,23 @@ var IL = {
 	},
 
 	switchToLooks: function () {
-		$('#transitionwindow').fadeIn('fast');
+		$('#transitionwindow').removeClass('hidden').fadeIn('fast');
 		setTimeout(function () {
 			$('#intros-list').hide('fast');
 			$('#intro_header').hide('fast');
 			$('#questions-list').hide('fast');
 			$('#hdfvr-content').hide('fast');
 			$('#right-half-title').text('Saved Questions');
-			$('#looks-list').fadeIn('fast');
+			$('#looks-list').removeClass('hidden').fadeIn('fast');
 			$('#questions_tab_title').removeClass('active');
 			$('#intros_tab_title').removeClass('active');
 			$('#looks_tab_title').addClass('active');
 			$('#question_input').hide('fast');
 			$('#video_recorder').hide('fast');
 			$('#list_of_videos').hide('fast');
-			$('#list_of_looks').fadeIn('fast');
-			$('#new_look').fadeIn('fast');
-			$('#list_of_videos_for_look').fadeIn('fast');
+			$('#list_of_looks').removeClass('hidden').fadeIn('fast');
+			$('#new_look').removeClass('hidden').fadeIn('fast');
+			$('#list_of_videos_for_look').removeClass('hidden').fadeIn('fast');
 			IL.activateStartButton();
 			setTimeout(function () {
 				$('#transitionwindow').fadeOut('fast');
@@ -183,17 +183,6 @@ var IL = {
 
 function startVideoRecorder() {
 
-	var flashvars = {
-		qualityurl: "avq/480p.xml",
-		accountHash: "e1cacb83a1abc9814164437ad383ccbc",
-		eid: 1,
-		showMenu: "true",
-		mrt: 300,
-		sis: 0,
-		asv: 0,
-		mv: 1,
-		payload: $('.bal_video_section').length ? $('#user_id').val() + ":" + $('#question').val() : ''
-	};
 	//flashvars = {qualityurl: "avq/480p.xml",accountHash:"33efd27e442b0196af00a0633f6587e0", eid:1, showMenu:"true", mrt:300,sis:0,asv:0,mv:1, payload:$('#user_id').val()+":"+$('#question').val()};
 	//alert("Setting payload to: "+$('#user_id').val()+":"+$('#question').val());
 	// 	console.log("Setting payload to: "+$('#user_id').val()+":"+$('#question').val());
@@ -206,17 +195,6 @@ function startVideoRecorder() {
 }
 
 function showRecorder() {
-	var flashvars = {
-		qualityurl: "avq/480p.xml",
-		accountHash: "e1cacb83a1abc9814164437ad383ccbc",
-		eid: 1,
-		showMenu: "true",
-		mrt: 300,
-		sis: 0,
-		asv: 0,
-		mv: 1,
-		payload: $('.bal_video_section').length ? $('#user_id').val() + ":" + $('#question').val() : ''
-	};
 	$('div.recorder img#loading').show();
 	flashvars.payload = $('#user_id').val() + ":" + $('#question').val();
 	var newString;

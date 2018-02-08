@@ -31,13 +31,11 @@
 <section id="title" class="page-title-sec landing">
 	<div class="container">
 		<h3 class="section_h4">We are currently testing our beta, to get access please send your name and email</h3>
-		<center>
 			<div class="cjfm-form  cjfm-login-form">
-				<form class="form-horizontal" method="POST" action="{{ route('welcome.request') }}">
+				<form class="form-inline" method="POST" action="{{ route('welcome.request') }}">
 					{{ csrf_field() }}
 					<div class="form-group">
-						<label class="color-blue">Name</label>
-						<input type="text" class="form-control" name="user_name" value="{{ old('user_name') }}"/>
+						<input type="text" class="form-control" placeholder="Name" name="user_name" value="{{ old('user_name') }}"/>
 						@if ($errors->has('user_name'))
 							<div class="error">
 								<strong>{{ $errors->first('user_name') }}</strong>
@@ -45,19 +43,23 @@
 						@endif
 					</div>
 					<div class="form-group">
-						<label class="color-blue">Email</label>
-						<input type="email" class="form-control" name="email" value="{{ old('email') }}"/>
+						<input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}"/>
 						@if ($errors->has('email'))
 							<div class="error">
 								<strong>{{ $errors->first('email') }}</strong>
 							</div>
 						@endif
 					</div>
-					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+					<div class="form-group">
+						<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+						@if ($errors->has('name') || $errors->has('email'))
+							<div class="error">
+								<strong>&nbsp;</strong>
+							</div>
+						@endif
+					</div>
 				</form
 			</div>
-
-		</center>
 	</div>
 </section>
 @if(!auth()->check())
