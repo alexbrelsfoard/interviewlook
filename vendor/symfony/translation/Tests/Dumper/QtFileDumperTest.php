@@ -17,17 +17,13 @@ use Symfony\Component\Translation\Dumper\QtFileDumper;
 
 class QtFileDumperTest extends TestCase
 {
-    public function testDump()
+    public function testFormatCatalogue()
     {
         $catalogue = new MessageCatalogue('en');
         $catalogue->add(array('foo' => 'bar'), 'resources');
 
-        $tempDir = sys_get_temp_dir();
         $dumper = new QtFileDumper();
-        $dumper->dump($catalogue, array('path' => $tempDir));
 
-        $this->assertFileEquals(__DIR__.'/../fixtures/resources.ts', $tempDir.'/resources.en.ts');
-
-        unlink($tempDir.'/resources.en.ts');
+        $this->assertStringEqualsFile(__DIR__.'/../fixtures/resources.ts', $dumper->formatCatalogue($catalogue, 'resources'));
     }
 }

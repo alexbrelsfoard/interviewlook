@@ -15,6 +15,7 @@ use Symfony\Component\Config\Util\XmlUtils;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Translation\Exception\InvalidResourceException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Component\Config\Resource\FileResource;
 
 /**
@@ -37,10 +38,49 @@ class XliffFileLoader implements LoaderInterface
             throw new NotFoundResourceException(sprintf('File "%s" not found.', $resource));
         }
 
-        list($xml, $encoding) = $this->parseFile($resource);
-        $xml->registerXPathNamespace('xliff', 'urn:oasis:names:tc:xliff:document:1.2');
-
         $catalogue = new MessageCatalogue($locale);
+        $this->extract($resource, $catalogue, $domain);
+
+        if (class_exists('Symfony\Component\Config\Resource\FileResource')) {
+            $catalogue->addResource(new FileResource($resource));
+        }
+
+        return $catalogue;
+    }
+
+    private function extract($resource, MessageCatalogue $catalogue, $domain)
+    {
+        try {
+            $dom = XmlUtils::loadFile($resource);
+        } catch (\InvalidArgumentException $e) {
+            throw new InvalidResourceException(sprintf('Unable to load "%s": %s', $resource, $e->getMessage()), $e->getCode(), $e);
+        }
+
+        $xliffVersion = $this->getVersionNumber($dom);
+        $this->validateSchema($xliffVersion, $dom, $this->getSchema($xliffVersion));
+
+        if ('1.2' === $xliffVersion) {
+            $this->extractXliff1($dom, $catalogue, $domain);
+        }
+
+        if ('2.0' === $xliffVersion) {
+            $this->extractXliff2($dom, $catalogue, $domain);
+        }
+    }
+
+    /**
+     * Extract messages and metadata from DOMDocument into a MessageCatalogue.
+     *
+     * @param \DOMDocument     $dom       Source to extract messages and metadata
+     * @param MessageCatalogue $catalogue Catalogue where we'll collect messages and metadata
+     * @param string           $domain    The domain
+     */
+    private function extractXliff1(\DOMDocument $dom, MessageCatalogue $catalogue, string $domain)
+    {
+        $xml = simplexml_import_dom($dom);
+        $encoding = strtoupper($dom->encoding);
+
+        $xml->registerXPathNamespace('xliff', 'urn:oasis:names:tc:xliff:document:1.2');
         foreach ($xml->xpath('//xliff:trans-unit') as $translation) {
             $attributes = $translation->attributes();
 
@@ -55,100 +95,92 @@ class XliffFileLoader implements LoaderInterface
 
             $catalogue->set((string) $source, $target, $domain);
 
-            if (isset($translation->note)) {
-                $notes = array();
-                foreach ($translation->note as $xmlNote) {
-                    $noteAttributes = $xmlNote->attributes();
-                    $note = array('content' => $this->utf8ToCharset((string) $xmlNote, $encoding));
-                    if (isset($noteAttributes['priority'])) {
-                        $note['priority'] = (int) $noteAttributes['priority'];
-                    }
+            $metadata = array();
+            if ($notes = $this->parseNotesMetadata($translation->note, $encoding)) {
+                $metadata['notes'] = $notes;
+            }
 
-                    if (isset($noteAttributes['from'])) {
-                        $note['from'] = (string) $noteAttributes['from'];
-                    }
+            if (isset($translation->target) && $translation->target->attributes()) {
+                $metadata['target-attributes'] = array();
+                foreach ($translation->target->attributes() as $key => $value) {
+                    $metadata['target-attributes'][$key] = (string) $value;
+                }
+            }
 
-                    $notes[] = $note;
+            if (isset($attributes['id'])) {
+                $metadata['id'] = (string) $attributes['id'];
+            }
+
+            $catalogue->setMetadata((string) $source, $metadata, $domain);
+        }
+    }
+
+    private function extractXliff2(\DOMDocument $dom, MessageCatalogue $catalogue, string $domain)
+    {
+        $xml = simplexml_import_dom($dom);
+        $encoding = strtoupper($dom->encoding);
+
+        $xml->registerXPathNamespace('xliff', 'urn:oasis:names:tc:xliff:document:2.0');
+
+        foreach ($xml->xpath('//xliff:unit') as $unit) {
+            foreach ($unit->segment as $segment) {
+                $source = $segment->source;
+
+                // If the xlf file has another encoding specified, try to convert it because
+                // simple_xml will always return utf-8 encoded values
+                $target = $this->utf8ToCharset((string) (isset($segment->target) ? $segment->target : $source), $encoding);
+
+                $catalogue->set((string) $source, $target, $domain);
+
+                $metadata = array();
+                if (isset($segment->target) && $segment->target->attributes()) {
+                    $metadata['target-attributes'] = array();
+                    foreach ($segment->target->attributes() as $key => $value) {
+                        $metadata['target-attributes'][$key] = (string) $value;
+                    }
                 }
 
-                $catalogue->setMetadata((string) $source, array('notes' => $notes), $domain);
+                if (isset($unit->notes)) {
+                    $metadata['notes'] = array();
+                    foreach ($unit->notes->note as $noteNode) {
+                        $note = array();
+                        foreach ($noteNode->attributes() as $key => $value) {
+                            $note[$key] = (string) $value;
+                        }
+                        $note['content'] = (string) $noteNode;
+                        $metadata['notes'][] = $note;
+                    }
+                }
+
+                $catalogue->setMetadata((string) $source, $metadata, $domain);
             }
         }
-
-        if (class_exists('Symfony\Component\Config\Resource\FileResource')) {
-            $catalogue->addResource(new FileResource($resource));
-        }
-
-        return $catalogue;
     }
 
     /**
      * Convert a UTF8 string to the specified encoding.
-     *
-     * @param string $content  String to decode
-     * @param string $encoding Target encoding
-     *
-     * @return string
      */
-    private function utf8ToCharset($content, $encoding = null)
+    private function utf8ToCharset(string $content, string $encoding = null): string
     {
         if ('UTF-8' !== $encoding && !empty($encoding)) {
-            if (function_exists('mb_convert_encoding')) {
-                return mb_convert_encoding($content, $encoding, 'UTF-8');
-            }
-
-            if (function_exists('iconv')) {
-                return iconv('UTF-8', $encoding, $content);
-            }
-
-            throw new \RuntimeException('No suitable convert encoding function (use UTF-8 as your encoding or install the iconv or mbstring extension).');
+            return mb_convert_encoding($content, $encoding, 'UTF-8');
         }
 
         return $content;
     }
 
     /**
-     * Validates and parses the given file into a SimpleXMLElement.
+     * Validates and parses the given file into a DOMDocument.
      *
-     * @param string $file
-     *
-     * @return \SimpleXMLElement
-     *
-     * @throws \RuntimeException
      * @throws InvalidResourceException
      */
-    private function parseFile($file)
+    private function validateSchema(string $file, \DOMDocument $dom, string $schema)
     {
-        try {
-            $dom = XmlUtils::loadFile($file);
-        } catch (\InvalidArgumentException $e) {
-            throw new InvalidResourceException(sprintf('Unable to load "%s": %s', $file, $e->getMessage()), $e->getCode(), $e);
-        }
-
         $internalErrors = libxml_use_internal_errors(true);
-
-        $location = str_replace('\\', '/', __DIR__).'/schema/dic/xliff-core/xml.xsd';
-        $parts = explode('/', $location);
-        $locationstart = 'file:///';
-        if (0 === stripos($location, 'phar://')) {
-            $tmpfile = tempnam(sys_get_temp_dir(), 'sf2');
-            if ($tmpfile) {
-                copy($location, $tmpfile);
-                $parts = explode('/', str_replace('\\', '/', $tmpfile));
-            } else {
-                array_shift($parts);
-                $locationstart = 'phar:///';
-            }
-        }
-        $drive = '\\' === DIRECTORY_SEPARATOR ? array_shift($parts).'/' : '';
-        $location = $locationstart.$drive.implode('/', array_map('rawurlencode', $parts));
-
-        $source = file_get_contents(__DIR__.'/schema/dic/xliff-core/xliff-core-1.2-strict.xsd');
-        $source = str_replace('http://www.w3.org/2001/xml.xsd', $location, $source);
 
         $disableEntities = libxml_disable_entity_loader(false);
 
-        if (!@$dom->schemaValidateSource($source)) {
+        if (!@$dom->schemaValidateSource($schema)) {
             libxml_disable_entity_loader($disableEntities);
 
             throw new InvalidResourceException(sprintf('Invalid resource provided: "%s"; Errors: %s', $file, implode("\n", $this->getXmlErrors($internalErrors))));
@@ -160,18 +192,52 @@ class XliffFileLoader implements LoaderInterface
 
         libxml_clear_errors();
         libxml_use_internal_errors($internalErrors);
+    }
 
-        return array(simplexml_import_dom($dom), strtoupper($dom->encoding));
+    private function getSchema($xliffVersion)
+    {
+        if ('1.2' === $xliffVersion) {
+            $schemaSource = file_get_contents(__DIR__.'/schema/dic/xliff-core/xliff-core-1.2-strict.xsd');
+            $xmlUri = 'http://www.w3.org/2001/xml.xsd';
+        } elseif ('2.0' === $xliffVersion) {
+            $schemaSource = file_get_contents(__DIR__.'/schema/dic/xliff-core/xliff-core-2.0.xsd');
+            $xmlUri = 'informativeCopiesOf3rdPartySchemas/w3c/xml.xsd';
+        } else {
+            throw new InvalidArgumentException(sprintf('No support implemented for loading XLIFF version "%s".', $xliffVersion));
+        }
+
+        return $this->fixXmlLocation($schemaSource, $xmlUri);
+    }
+
+    /**
+     * Internally changes the URI of a dependent xsd to be loaded locally.
+     */
+    private function fixXmlLocation(string $schemaSource, string $xmlUri): string
+    {
+        $newPath = str_replace('\\', '/', __DIR__).'/schema/dic/xliff-core/xml.xsd';
+        $parts = explode('/', $newPath);
+        $locationstart = 'file:///';
+        if (0 === stripos($newPath, 'phar://')) {
+            $tmpfile = tempnam(sys_get_temp_dir(), 'symfony');
+            if ($tmpfile) {
+                copy($newPath, $tmpfile);
+                $parts = explode('/', str_replace('\\', '/', $tmpfile));
+            } else {
+                array_shift($parts);
+                $locationstart = 'phar:///';
+            }
+        }
+
+        $drive = '\\' === DIRECTORY_SEPARATOR ? array_shift($parts).'/' : '';
+        $newPath = $locationstart.$drive.implode('/', array_map('rawurlencode', $parts));
+
+        return str_replace($xmlUri, $newPath, $schemaSource);
     }
 
     /**
      * Returns the XML errors of the internal XML parser.
-     *
-     * @param bool $internalErrors
-     *
-     * @return array An array of errors
      */
-    private function getXmlErrors($internalErrors)
+    private function getXmlErrors(bool $internalErrors): array
     {
         $errors = array();
         foreach (libxml_get_errors() as $error) {
@@ -189,5 +255,60 @@ class XliffFileLoader implements LoaderInterface
         libxml_use_internal_errors($internalErrors);
 
         return $errors;
+    }
+
+    /**
+     * Gets xliff file version based on the root "version" attribute.
+     * Defaults to 1.2 for backwards compatibility.
+     *
+     * @throws InvalidArgumentException
+     */
+    private function getVersionNumber(\DOMDocument $dom): string
+    {
+        /** @var \DOMNode $xliff */
+        foreach ($dom->getElementsByTagName('xliff') as $xliff) {
+            $version = $xliff->attributes->getNamedItem('version');
+            if ($version) {
+                return $version->nodeValue;
+            }
+
+            $namespace = $xliff->attributes->getNamedItem('xmlns');
+            if ($namespace) {
+                if (0 !== substr_compare('urn:oasis:names:tc:xliff:document:', $namespace->nodeValue, 0, 34)) {
+                    throw new InvalidArgumentException(sprintf('Not a valid XLIFF namespace "%s"', $namespace));
+                }
+
+                return substr($namespace, 34);
+            }
+        }
+
+        // Falls back to v1.2
+        return '1.2';
+    }
+
+    private function parseNotesMetadata(\SimpleXMLElement $noteElement = null, string $encoding = null): array
+    {
+        $notes = array();
+
+        if (null === $noteElement) {
+            return $notes;
+        }
+
+        /** @var \SimpleXMLElement $xmlNote */
+        foreach ($noteElement as $xmlNote) {
+            $noteAttributes = $xmlNote->attributes();
+            $note = array('content' => $this->utf8ToCharset((string) $xmlNote, $encoding));
+            if (isset($noteAttributes['priority'])) {
+                $note['priority'] = (int) $noteAttributes['priority'];
+            }
+
+            if (isset($noteAttributes['from'])) {
+                $note['from'] = (string) $noteAttributes['from'];
+            }
+
+            $notes[] = $note;
+        }
+
+        return $notes;
     }
 }

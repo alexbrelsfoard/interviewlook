@@ -17,18 +17,14 @@ use Symfony\Component\Translation\Dumper\CsvFileDumper;
 
 class CsvFileDumperTest extends TestCase
 {
-    public function testDump()
+    public function testFormatCatalogue()
     {
         $catalogue = new MessageCatalogue('en');
         $catalogue->add(array('foo' => 'bar', 'bar' => 'foo
 foo', 'foo;foo' => 'bar'));
 
-        $tempDir = sys_get_temp_dir();
         $dumper = new CsvFileDumper();
-        $dumper->dump($catalogue, array('path' => $tempDir));
 
-        $this->assertFileEquals(__DIR__.'/../fixtures/valid.csv', $tempDir.'/messages.en.csv');
-
-        unlink($tempDir.'/messages.en.csv');
+        $this->assertStringEqualsFile(__DIR__.'/../fixtures/valid.csv', $dumper->formatCatalogue($catalogue, 'messages'));
     }
 }
