@@ -1,0 +1,22 @@
+<?php $__env->startSection('title'); ?>
+Register
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page_title'); ?>
+Register
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+
+<section id="content">
+	<div class="container">
+		
+		<div class="col-md-12">
+			Thank you for registering.  Please look for an email confirmation, including instructions on verifying your email address.<br>
+			You may now <a href="/login">log in</a> to your new interviewLook&trade; account.
+		</div>
+		
+	</div>
+</section>
+	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

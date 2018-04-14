@@ -1,0 +1,50 @@
+<?php $__env->startSection('title'); ?>
+My Profile
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page_title'); ?>
+My Profile
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+
+<section id="content">
+	<div class="container clearfix">
+		
+		<h2>Intro Video</h2>
+		
+		
+		<h2>Profile</h2>
+		<button type="button" onclick="window.location='<?php echo url("/edit-profile"); ?>'">edit</button>
+		<div class="clear"></div>
+		<table class="profile" cellspacing="0">
+			<tr>
+				<th>Name</th><td><?php echo $user->name; ?></td>
+			</tr>
+			<tr>
+				<th>Email</th><td><?php echo $user->email; ?></td>
+			</tr>
+			<tr>
+				<th>Current Position</th><td><?php echo $user->profile->current_position; ?></td>
+			</tr>
+			<tr>
+				<th>Current Company</th><td><?php echo $user->profile->current_company; ?></td>
+			</tr>
+			<tr>
+				<th>Current Location</th><td><?php echo $user->profile->current_location; ?></td>
+			</tr>
+			<tr>
+				<th>Preferred Location</th><td><?php echo $user->profile->preferred_location; ?></td>
+			</tr>
+			<tr>
+				<th>Years Experience</th><td><?php echo $user->profile->years_experience; ?></td>
+			</tr>
+			<tr>
+				<th>Highest Degree</th><td><?php echo $user->profile->highest_degree; ?></td>
+			</tr>
+		</table>
+		
+	</div>
+</section>
+	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
