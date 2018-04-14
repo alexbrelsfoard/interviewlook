@@ -1,0 +1,34 @@
+<?php $__env->startSection('title'); ?>
+My LOOKBook
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page_title'); ?>
+My LOOKBook
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+
+<section id="content">
+	<div class="container">
+		
+		<h3>My Documents:</h3>
+		
+		<form>
+			<button class="submit btn btn-primary">Upload New File</button>
+		</form>
+		
+		<div class="clear"></div>
+		
+		<hr>
+		
+		<h3>My LOOKs&trade;</h3>
+		
+		<form action="/looks" method="get">
+			<button class="submit btn btn-primary">Create New LOOK&trade;</button>
+		</form>
+		
+		<div class="clear"></div>
+	</div>
+</section>
+	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

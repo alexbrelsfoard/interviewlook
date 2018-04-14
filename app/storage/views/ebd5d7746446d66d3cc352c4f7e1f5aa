@@ -1,0 +1,55 @@
+<?php $__env->startSection('title'); ?>
+My Account
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page_title'); ?>
+My Account
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+
+<section id="content">
+	<div class="container">
+		
+		<div class="cjfm-form  cj-form-edit-profile">
+			<?php if($error): ?>
+			<p class="alert">Error: <?php echo $error; ?>
+
+				<ul>
+				<?php
+					foreach ($errors->messages() as $message) {
+					    echo "<li>$message</li>";
+					}
+				?>
+				</ul>
+			</p>
+			<?php endif; ?>
+			<form action="/profile" method="post">
+				<div id="container-user_name" class="control-group name">
+					<label class="control-label">Your Name (Required)</label>
+					<input type="text" name="name" value="<?php echo $user->name; ?>" size="40"/>
+				</div>
+				<div id="container-user_email" class="control-group email">
+					<label class="control-label">Your Email (Required)</label>
+					<input type="text" name="email" value="<?php echo $user->email; ?>" size="40"/>
+				</div>
+				<div id="container-user_password" class="control-group password">
+					<label class="control-label">Change Password</label>
+					<input type="password" name="password" size="40"/>
+				</div>
+				<div id="container-user_password_confirm" class="control-group password">
+					<label class="control-label">Confirm Password</label>
+					<input type="password_confirm" name="password" size="40"/>
+				</div>
+				<div class="control-group submit-button">
+					<button id="do_update_profile" class="btn btn-primary submit" type="submit" name="do_update_profile">Update Account</button>
+				</div>
+				
+			</form>
+
+		</div>
+		
+	</div>
+</section>
+	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

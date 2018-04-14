@@ -59,7 +59,11 @@ var flashvars = {
 			},
 			select: IL.activateStartButton()
 		});
+<<<<<<< HEAD:resources/views/look/looks.blade.php
 
+=======
+		
+>>>>>>> master:app/views/looks.blade.php
 		// get the list of videos.
 		IL.checkForNewVideos();
 		// Check for new videos every 2 seconds.
@@ -122,7 +126,11 @@ var flashvars = {
 								<h3>LOOKs&trade;</h3>
 								<div id="looks">
 									<ul>
+<<<<<<< HEAD:resources/views/look/looks.blade.php
 
+=======
+										
+>>>>>>> master:app/views/looks.blade.php
 									</ul>
 									<img id="new_icon" src="/images/add-icon.png" />
 								</div>
@@ -138,13 +146,22 @@ var flashvars = {
 								<div id="questions-list-for-looks">
 									<div id="list_of_questions_for_looks" class="questions-list">
 										<ul class="sortable">
+<<<<<<< HEAD:resources/views/look/looks.blade.php
 
+=======
+											
+>>>>>>> master:app/views/looks.blade.php
 										</ul>
 									</div>
 								</div>
 							</div>
+<<<<<<< HEAD:resources/views/look/looks.blade.php
 							<div class="col-md-6 record_video bal_video_section" id="video_recorder">
 								<input type="hidden" id="user_id" value="{{ auth()->id() }}"/>
+=======
+							<div class="col-md-6 record_video" id="video_recorder">
+								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
+>>>>>>> master:app/views/looks.blade.php
 								<div id="question_input">
 									<h3>Record New Question</h3>
 									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="IL.activateStartButton();" />
@@ -178,11 +195,19 @@ var flashvars = {
 								<div id="questions-list">
 									<div id="list_of_questions" class="questions-list">
 										<ul>
+<<<<<<< HEAD:resources/views/look/looks.blade.php
 
 										</ul>
 									</div>
 								</div>
 
+=======
+											
+										</ul>
+									</div>
+								</div>
+								
+>>>>>>> master:app/views/looks.blade.php
 								<div id="intros-list" class="hidden">
 									<p>Will need to institute a limit of ~3 saved intros, and only one active one.</p>
 									<div id="list_of_intros">

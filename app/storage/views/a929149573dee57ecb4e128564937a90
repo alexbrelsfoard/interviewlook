@@ -1,0 +1,31 @@
+<?php $__env->startSection('title'); ?>
+LOOKs
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page_title'); ?>
+LOOKs&trade;
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+
+<section id="content">
+	<div class="container">
+		<div class="error-spacer"></div>
+		<div role="main" class="main">
+
+			<h1>Restricted Access</h1>
+
+			<h2>Server Error: 403 (Forbidden)</h2>
+
+			<hr>
+
+			<h3>What does this mean?</h3>
+
+			<p>You're not supposed to be here. You've landed on a page that requires special access to view.</p>
+
+			<p>Perhaps you would like to go to our <a href="<?php echo e(URL::to('/')); ?>">home page</a>?</p>
+		</div>
+	</div>
+</section>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

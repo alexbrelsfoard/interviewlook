@@ -21,6 +21,7 @@ var IL = {
 
 		}
 	},
+<<<<<<< HEAD
 
 	switchToIntros: function () {
 		$('#transitionwindow').removeClass('hidden').fadeIn('fast');
@@ -93,6 +94,80 @@ var IL = {
 			setTimeout(function () {
 				$('#transitionwindow').fadeOut('fast');
 			}, 300);
+=======
+	
+	switchToIntros : function() {
+		$('#transitionwindow').fadeIn('fast');
+		setTimeout(function(){
+		$('#questions-list').hide('fast');
+		$('#list_of_looks').hide('fast');
+		$('#new_look').hide('fast');
+		$('#list_of_videos_for_look').hide('fast');
+		$('#right-half-title').text('Saved Intros');
+		$('#intros-list').fadeIn('fast');
+		$('#video_recorder').fadeIn('fast');
+		$('#list_of_videos').fadeIn('fast');
+		$('#questions_tab_title').removeClass('active');
+		$('#looks_tab_title').removeClass('active');
+		$('#intros_tab_title').addClass('active');
+		$('#question_input').hide('fast');
+		$('#intro_header').show();
+		$('#question').val('321~~intro~~123');
+		IL.activateStartButton();
+		setTimeout(function(){
+		$('#transitionwindow').fadeOut('fast');
+		}, 300);
+		}, 300);
+	},
+	
+	switchToQuestions : function() {
+		$('#transitionwindow').fadeIn('fast');
+		setTimeout(function(){
+		$('#intros-list').hide('fast');
+		$('#list_of_looks').hide('fast');
+		$('#new_look').hide('fast');
+		$('#list_of_videos_for_look').hide('fast');
+		$('#intro_header').hide('fast');
+		$('#hdfvr-content').hide('fast');
+		$('#right-half-title').text('Saved Questions');
+		$('#questions-list').fadeIn('fast');
+		$('#video_recorder').fadeIn('fast');
+		$('#list_of_videos').fadeIn('fast');
+		$('#looks_tab_title').removeClass('active');
+		$('#intros_tab_title').removeClass('active');
+		$('#questions_tab_title').addClass('active');
+		$('#question').val('');
+		$('#question_input').show('fast');
+		IL.activateStartButton();
+		setTimeout(function(){
+		$('#transitionwindow').fadeOut('fast');
+		}, 300);
+		}, 300);
+	},
+	
+	switchToLooks : function() {
+		$('#transitionwindow').fadeIn('fast');
+		setTimeout(function(){
+		$('#intros-list').hide('fast');
+		$('#intro_header').hide('fast');
+		$('#questions-list').hide('fast');
+		$('#hdfvr-content').hide('fast');
+		$('#right-half-title').text('Saved Questions');
+		$('#looks-list').fadeIn('fast');
+		$('#questions_tab_title').removeClass('active');
+		$('#intros_tab_title').removeClass('active');
+		$('#looks_tab_title').addClass('active');
+		$('#question_input').hide('fast');
+		$('#video_recorder').hide('fast');
+		$('#list_of_videos').hide('fast');
+		$('#list_of_looks').fadeIn('fast');
+		$('#new_look').fadeIn('fast');
+		$('#list_of_videos_for_look').fadeIn('fast');
+		IL.activateStartButton();
+		setTimeout(function(){
+		$('#transitionwindow').fadeOut('fast');
+		}, 300);
+>>>>>>> master
 		}, 300);
 	},
 
@@ -109,8 +184,13 @@ var IL = {
 				//loop through each video
 				for (var i = 0; i < data.videos.length; i++) {
 					//append to '#list_of_questions ul'
+<<<<<<< HEAD
 					$('#list_of_questions ul').prepend('<li><div class="screenshot" video-name="' + data.videos[i].video + '" style="background-image:url(\'/videos/' + data.videos[i].video + '.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo(' + data.videos[i].id + ');"></div><p>' + data.videos[i].question + '</p></li>');
 					$('#list_of_questions_for_looks ul').prepend('<li class="draggable"><div video-name="' + data.videos[i].video + '" class="screenshot" style="background-image:url(\'/videos/' + data.videos[i].video + '.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo(' + data.videos[i].id + ');"></div><p>' + data.videos[i].question + '</p></li>');
+=======
+					$('#list_of_questions ul').prepend('<li><div class="screenshot" video-name="'+data.videos[i].video+'" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
+					$('#list_of_questions_for_looks ul').prepend('<li class="draggable"><div video-name="'+data.videos[i].video+'" class="screenshot" style="background-image:url(\'/videos/'+data.videos[i].video+'.jpg\');"><img src="/images/play-video-triangle.png" onclick="IL.playVideo('+data.videos[i].id+');"></div><p>'+data.videos[i].question+'</p></li>');
+>>>>>>> master
 				}
 				IL.lastVideoID = latest_video_id;
 				$("li.draggable").draggable({
@@ -155,18 +235,28 @@ var IL = {
 			}
 		}
 	},
+<<<<<<< HEAD
 
 	saveLook: function () {
 		if ($('#name_of_look').val().length > 3) {
 			var videos = [];
 			if ($("#new_look_collection UL li").length) {
 				$("#new_look_collection UL li").each(function (idx, li) {
+=======
+	
+	saveLook : function() {
+		if ($('#name_of_look').val().length > 3) {
+			var videos = [];
+			if ($("#new_look_collection UL li").length) {
+				$("#new_look_collection UL li").each(function(idx, li) {
+>>>>>>> master
 					var video_div = $(li).children().first();
 					var video_name = video_div.attr('video-name');
 					videos[idx] = video_name;
 				});
 				var videos_json = JSON.stringify(videos);
 				var title = $('#name_of_look').val();
+<<<<<<< HEAD
 				$.post(site_url + "/savelook?t=" + title + '&l=' + videos_json, function (response) {
 					if (response == 'OK') {
 						// move LI items to videos list.
@@ -176,6 +266,17 @@ var IL = {
 				});
 			}
 		} else {
+=======
+				$.post("/savelook?t="+title+'&l='+videos_json, function(response){
+					if (response == 'OK') {
+						// move LI items to videos list.
+						// move title to left menu
+						$('#looks ul').append($('<li>'+title+'</li>'));
+					}
+				});
+			}
+		}else {
+>>>>>>> master
 			alert("Please provide a name for this LOOK");
 		}
 	}
