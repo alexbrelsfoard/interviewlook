@@ -7,8 +7,9 @@
 |
 */
 
-/*
+
 Route::get('/', 		'MainController@showWelcome');
+/*
 Route::get('/register', 'MainController@showRegister');
 Route::get('/contact',	'MainController@showContact');
 Route::get('/demos',	'MainController@showDemos');
@@ -27,10 +28,10 @@ Route::get('/account',	'LookController@showAccount');
 Route::get('/questions','LookController@showQuestions');
 */
 
-Route::any('/', array('as'=>'home', function(){
-	$data = array('results' => null);
-	return View::make('index')->with($data);
-}));
+//Route::any('/', array('as'=>'home', function(){
+//	$data = array('results' => null);
+//	return View::make('index')->with($data);
+//}));
 
 Route::get('/contact', function() {
 	return View::make('contact');

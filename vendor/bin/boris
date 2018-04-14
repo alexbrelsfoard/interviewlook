@@ -1,18 +1,17 @@
-#!/usr/bin/env php
-<?php
+#!/usr/bin/env sh
 
-require_once __DIR__ . '/../lib/autoload.php';
+dir=$(d=${0%[/\\]*}; cd "$d"; cd "../d11wtq/boris/bin" && pwd)
 
-if (!function_exists('pcntl_signal')) {
-    die("PCNTL support seems to be missing or disabled. See https://github.com/d11wtq/boris/issues/29 for details\n");
-}
+# See if we are running in Cygwin by checking for cygpath program
+if command -v 'cygpath' >/dev/null 2>&1; then
+	# Cygwin paths start with /cygdrive/ which will break windows PHP,
+	# so we need to translate the dir path to windows format. However
+	# we could be using cygwin PHP which does not require this, so we
+	# test if the path to PHP starts with /cygdrive/ rather than /usr/bin
+	if [[ $(which php) == /cygdrive/* ]]; then
+		dir=$(cygpath -m "$dir");
+	fi
+fi
 
-$boris = new \Boris\Boris();
-
-$config = new \Boris\Config();
-$config->apply($boris);
-
-$options = new \Boris\CLIOptionsHandler();
-$options->handle($boris);
-
-$boris->start();
+dir=$(echo $dir | sed 's/ /\ /g')
+"${dir}/boris" "$@"

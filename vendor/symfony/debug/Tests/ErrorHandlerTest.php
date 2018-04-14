@@ -34,7 +34,7 @@ class ErrorHandlerTest extends TestCase
 
             $newHandler = new ErrorHandler();
 
-            $this->assertSame($newHandler, ErrorHandler::register($newHandler, false));
+            $this->assertSame($handler, ErrorHandler::register($newHandler, false));
             $h = set_error_handler('var_dump');
             restore_error_handler();
             $this->assertSame(array($handler, 'handleError'), $h);
@@ -79,7 +79,9 @@ class ErrorHandlerTest extends TestCase
             $this->assertEquals(E_NOTICE, $exception->getSeverity());
             $this->assertEquals(__FILE__, $exception->getFile());
             $this->assertRegExp('/^Notice: Undefined variable: (foo|bar)/', $exception->getMessage());
-            $this->assertArrayHasKey('foobar', $exception->getContext());
+            if (\PHP_VERSION_ID < 70200) {
+                $this->assertArrayHasKey('foobar', $exception->getContext());
+            }
 
             $trace = $exception->getTrace();
             $this->assertEquals(__FILE__, $trace[0]['file']);
@@ -291,6 +293,9 @@ class ErrorHandlerTest extends TestCase
         @$handler->handleError(E_USER_DEPRECATED, 'Foo deprecation', __FILE__, __LINE__, array());
     }
 
+    /**
+     * @group no-hhvm
+     */
     public function testHandleException()
     {
         try {
@@ -373,6 +378,9 @@ class ErrorHandlerTest extends TestCase
         }
     }
 
+    /**
+     * @group no-hhvm
+     */
     public function testHandleFatalError()
     {
         try {
@@ -432,6 +440,9 @@ class ErrorHandlerTest extends TestCase
         $this->assertStringStartsWith("Attempted to load class \"Foo\" from the global namespace.\nDid you forget a \"use\" statement", $args[0]->getMessage());
     }
 
+    /**
+     * @group no-hhvm
+     */
     public function testHandleFatalErrorOnHHVM()
     {
         try {
@@ -518,5 +529,19 @@ class ErrorHandlerTest extends TestCase
 
             throw $e;
         }
+    }
+
+    /**
+     * @expectedException \Exception
+     * @group no-hhvm
+     */
+    public function testCustomExceptionHandler()
+    {
+        $handler = new ErrorHandler();
+        $handler->setExceptionHandler(function ($e) use ($handler) {
+            $handler->handleException($e);
+        });
+
+        $handler->handleException(new \Exception());
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class MainController extends BaseController {
+class LookController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
