@@ -28,7 +28,8 @@ var IL = {
 <
 << HEAD
 
-    switchToIntros: function () {
+    switchToIntros: function
+() {
     $('#transitionwindow').removeClass('hidden').fadeIn('fast');
     setTimeout(function () {
     $('#questions-list').hide('fast');

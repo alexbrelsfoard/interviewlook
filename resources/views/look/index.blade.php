@@ -1,7 +1,7 @@
 @extends('layouts.welcome') @section('title', 'Home') @section('head_code')
-<script type="text/javascript">
+<!--<script type="text/javascript">
 	$(function () {
-		var availableTitles = {
+		let availableTitles = {
 			{
 				$available_titles
 			}
@@ -11,7 +11,7 @@
 			appendTo: ".search_input"
 		});
 	});
-</script>
+</script>-->
 @stop @section('body')
 <section id="title" class="page-title-sec landing">
 	<div class="container">
