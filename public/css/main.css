@@ -849,7 +849,6 @@ ul.nav-pills {
     border-radius: 10px;
     height: 370px;
     margin: 10px auto;
-    padding: 20px 0 0px 20px;
     text-align: center;
     width: 440px;
     /* 	text-align: center; */
@@ -1229,4 +1228,15 @@ BUTTON.disabled,
 .success {
     color: #c3e6cb;
     font-style: italic;
+}
+.snapshot-image {
+    padding: 0;
+    height: 100%;
+}
+.snapshot-image img{
+    height: 100%;
+    width: 100%;
+}
+.snapshot-name {
+    text-align: center;
 }

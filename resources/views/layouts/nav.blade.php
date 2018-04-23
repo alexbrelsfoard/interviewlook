@@ -1,5 +1,5 @@
-<nav class="bal_nav">
-	<a class="close" href="#" onclick="IL.toggleMenu();">X</a>
+<nav id="nav-right" class="bal_nav">
+	<a id="nav-close" class="close" href="#">X</a>
 	<ul>
 		<li>
 			<a class="bal_nav" href="{{ route('welcome') }}">Home</a>

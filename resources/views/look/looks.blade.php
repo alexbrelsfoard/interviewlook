@@ -59,11 +59,11 @@ var flashvars = {
 			},
 			select: IL.activateStartButton()
 		});
-<<<<<<< HEAD:resources/views/look/looks.blade.php
+//<<<<<<< HEAD:resources/views/look/looks.blade.php
 
-=======
+//=======
 		
->>>>>>> master:app/views/looks.blade.php
+//>>>>>>> master:app/views/looks.blade.php
 		// get the list of videos.
 		IL.checkForNewVideos();
 		// Check for new videos every 2 seconds.
@@ -126,11 +126,7 @@ var flashvars = {
 								<h3>LOOKs&trade;</h3>
 								<div id="looks">
 									<ul>
-<<<<<<< HEAD:resources/views/look/looks.blade.php
 
-=======
-										
->>>>>>> master:app/views/looks.blade.php
 									</ul>
 									<img id="new_icon" src="/images/add-icon.png" />
 								</div>
@@ -146,22 +142,18 @@ var flashvars = {
 								<div id="questions-list-for-looks">
 									<div id="list_of_questions_for_looks" class="questions-list">
 										<ul class="sortable">
-<<<<<<< HEAD:resources/views/look/looks.blade.php
 
-=======
-											
->>>>>>> master:app/views/looks.blade.php
 										</ul>
 									</div>
 								</div>
 							</div>
-<<<<<<< HEAD:resources/views/look/looks.blade.php
-							<div class="col-md-6 record_video bal_video_section" id="video_recorder">
+
+							<div class="col-md-12 record_video bal_video_section" id="video_recorder">
 								<input type="hidden" id="user_id" value="{{ auth()->id() }}"/>
-=======
+
 							<div class="col-md-6 record_video" id="video_recorder">
 								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
->>>>>>> master:app/views/looks.blade.php
+
 								<div id="question_input">
 									<h3>Record New Question</h3>
 									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="IL.activateStartButton();" />
@@ -186,7 +178,14 @@ var flashvars = {
 								})();
 								</script>
 								<div id="hdfvr-content" class="recorder">
-									<img src="/images/loading_blue_blocks.gif" id="loading"/>
+									<!-- begin video recorder code -->
+									<script type="text/javascript">
+                                        var size = {width:440,height:400};
+                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"d1925da7e53d91eb3159d785f4dbad0a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1};
+                                        (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
+									</script>
+									<div id="hdfvr-content" ></div>
+									<!-- end video recorder code -->
 								</div>
 							</div>
 							<div class="col-md-6" id="list_of_videos" style="height: 96%;">
@@ -195,19 +194,27 @@ var flashvars = {
 								<div id="questions-list">
 									<div id="list_of_questions" class="questions-list">
 										<ul>
-<<<<<<< HEAD:resources/views/look/looks.blade.php
-
+											@foreach($video_list['videos'] as $videos)
+												<li class="video-list">
+													<div class="snapshot-image col-md-3">
+														<img src="https://{{$videos['snapshotURL']}}" />
+													</div>
+													<div class="snapshot-name col-md-9">
+														<p>{{$videos['name']}}</p>
+													</div>
+												</li>
+											@endforeach
 										</ul>
 									</div>
 								</div>
 
-=======
+
 											
 										</ul>
 									</div>
 								</div>
 								
->>>>>>> master:app/views/looks.blade.php
+
 								<div id="intros-list" class="hidden">
 									<p>Will need to institute a limit of ~3 saved intros, and only one active one.</p>
 									<div id="list_of_intros">
