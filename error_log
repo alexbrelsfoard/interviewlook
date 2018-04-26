@@ -1,0 +1,50 @@
+[26-Apr-2018 15:45:33 UTC] PHP Warning:  Uncaught ErrorException: require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php:66
+Stack trace:
+#0 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): Composer\Util\ErrorHandler::handle(2, 'require(/home/l...', '/home/lookcode/...', 66, Array)
+#1 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): require()
+#2 /home/lookcode/public_html/vendor/composer/autoload_real.php(56): composerRequire52b310b17d1d9d15af58c34932dd6cfa('2c102faa651ef8e...', '/home/lookcode/...')
+#3 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#4 /home/lookcode/public_html/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home/lookcode/...')
+#5 phar:///opt/cpanel/composer/bin/composer/src/Composer/EventDispatcher/EventDispatcher.php(255): Ill in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 15:45:33 UTC] PHP Fatal error:  composerRequire52b310b17d1d9d15af58c34932dd6cfa(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 15:54:49 UTC] PHP Warning:  Uncaught ErrorException: require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php:66
+Stack trace:
+#0 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): Composer\Util\ErrorHandler::handle(2, 'require(/home/l...', '/home/lookcode/...', 66, Array)
+#1 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): require()
+#2 /home/lookcode/public_html/vendor/composer/autoload_real.php(56): composerRequire52b310b17d1d9d15af58c34932dd6cfa('2c102faa651ef8e...', '/home/lookcode/...')
+#3 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#4 /home/lookcode/public_html/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home/lookcode/...')
+#5 phar:///opt/cpanel/composer/bin/composer/src/Composer/EventDispatcher/EventDispatcher.php(255): Ill in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 15:54:49 UTC] PHP Fatal error:  composerRequire52b310b17d1d9d15af58c34932dd6cfa(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:03:21 UTC] PHP Warning:  Uncaught ErrorException: require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php:66
+Stack trace:
+#0 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): Composer\Util\ErrorHandler::handle(2, 'require(/home/l...', '/home/lookcode/...', 66, Array)
+#1 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): require()
+#2 /home/lookcode/public_html/vendor/composer/autoload_real.php(56): composerRequire52b310b17d1d9d15af58c34932dd6cfa('2c102faa651ef8e...', '/home/lookcode/...')
+#3 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#4 /home/lookcode/public_html/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home/lookcode/...')
+#5 phar:///opt/cpanel/composer/bin/composer/src/Composer/EventDispatcher/EventDispatcher.php(255): Ill in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:03:21 UTC] PHP Fatal error:  composerRequire52b310b17d1d9d15af58c34932dd6cfa(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:07:38 UTC] PHP Warning:  require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:07:38 UTC] PHP Fatal error:  require(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:17:30 UTC] PHP Warning:  require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:17:30 UTC] PHP Fatal error:  require(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:18:13 UTC] PHP Warning:  Uncaught ErrorException: require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php:66
+Stack trace:
+#0 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): Composer\Util\ErrorHandler::handle(2, 'require(/home/l...', '/home/lookcode/...', 66, Array)
+#1 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): require()
+#2 /home/lookcode/public_html/vendor/composer/autoload_real.php(56): composerRequire52b310b17d1d9d15af58c34932dd6cfa('2c102faa651ef8e...', '/home/lookcode/...')
+#3 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#4 /home/lookcode/public_html/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home/lookcode/...')
+#5 phar:///opt/cpanel/composer/bin/composer/src/Composer/EventDispatcher/EventDispatcher.php(255): Ill in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:18:13 UTC] PHP Fatal error:  composerRequire52b310b17d1d9d15af58c34932dd6cfa(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:29:06 UTC] PHP Warning:  Uncaught ErrorException: require(/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php): failed to open stream: No such file or directory in /home/lookcode/public_html/vendor/composer/autoload_real.php:66
+Stack trace:
+#0 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): Composer\Util\ErrorHandler::handle(2, 'require(/home/l...', '/home/lookcode/...', 66, Array)
+#1 /home/lookcode/public_html/vendor/composer/autoload_real.php(66): require()
+#2 /home/lookcode/public_html/vendor/composer/autoload_real.php(56): composerRequire52b310b17d1d9d15af58c34932dd6cfa('2c102faa651ef8e...', '/home/lookcode/...')
+#3 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#4 /home/lookcode/public_html/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home/lookcode/...')
+#5 phar:///opt/cpanel/composer/bin/composer/src/Composer/EventDispatcher/EventDispatcher.php(255): Ill in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:29:06 UTC] PHP Fatal error:  composerRequire52b310b17d1d9d15af58c34932dd6cfa(): Failed opening required '/home/lookcode/public_html/vendor/composer/../swiftmailer/swiftmailer/lib/swift_required.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 66
+[26-Apr-2018 16:32:25 UTC] PHP Fatal error:  Interface 'Symfony\Component\HttpKernel\HttpKernelInterface' not found in /home/lookcode/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php on line 25
