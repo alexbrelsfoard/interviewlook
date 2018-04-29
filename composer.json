@@ -14,7 +14,6 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "psy/psysh": "^0.9.3",
         "symfony/symfony": "3.*"
     },
     "require-dev": {

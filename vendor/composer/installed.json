@@ -1846,80 +1846,6 @@
         ]
     },
     {
-        "name": "psy/psysh",
-        "version": "v0.9.3",
-        "version_normalized": "0.9.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bobthecow/psysh.git",
-            "reference": "79c280013cf0b30fa23f3ba8bd3649218075adf4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bobthecow/psysh/zipball/79c280013cf0b30fa23f3ba8bd3649218075adf4",
-            "reference": "79c280013cf0b30fa23f3ba8bd3649218075adf4",
-            "shasum": ""
-        },
-        "require": {
-            "dnoegel/php-xdg-base-dir": "0.1",
-            "jakub-onderka/php-console-highlighter": "0.3.*",
-            "nikic/php-parser": "~1.3|~2.0|~3.0|~4.0",
-            "php": ">=5.4.0",
-            "symfony/console": "~2.3.10|^2.4.2|~3.0|~4.0",
-            "symfony/var-dumper": "~2.7|~3.0|~4.0"
-        },
-        "require-dev": {
-            "hoa/console": "~2.15|~3.16",
-            "phpunit/phpunit": "~4.8.35|~5.0|~6.0|~7.0",
-            "symfony/finder": "~2.1|~3.0|~4.0"
-        },
-        "suggest": {
-            "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
-            "ext-pdo-sqlite": "The doc command requires SQLite to work.",
-            "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
-            "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
-            "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
-        },
-        "time": "2018-04-18T12:32:50+00:00",
-        "bin": [
-            "bin/psysh"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-develop": "0.9.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-4": {
-                "Psy\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Justin Hileman",
-                "email": "justin@justinhileman.info",
-                "homepage": "http://justinhileman.com"
-            }
-        ],
-        "description": "An interactive shell for modern PHP.",
-        "homepage": "http://psysh.org",
-        "keywords": [
-            "REPL",
-            "console",
-            "interactive",
-            "shell"
-        ]
-    },
-    {
         "name": "laravel/tinker",
         "version": "v1.0.6",
         "version_normalized": "1.0.6.0",
@@ -4655,6 +4581,80 @@
         "homepage": "https://symfony.com",
         "keywords": [
             "framework"
+        ]
+    },
+    {
+        "name": "psy/psysh",
+        "version": "v0.9.3",
+        "version_normalized": "0.9.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bobthecow/psysh.git",
+            "reference": "79c280013cf0b30fa23f3ba8bd3649218075adf4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bobthecow/psysh/zipball/79c280013cf0b30fa23f3ba8bd3649218075adf4",
+            "reference": "79c280013cf0b30fa23f3ba8bd3649218075adf4",
+            "shasum": ""
+        },
+        "require": {
+            "dnoegel/php-xdg-base-dir": "0.1",
+            "jakub-onderka/php-console-highlighter": "0.3.*",
+            "nikic/php-parser": "~1.3|~2.0|~3.0|~4.0",
+            "php": ">=5.4.0",
+            "symfony/console": "~2.3.10|^2.4.2|~3.0|~4.0",
+            "symfony/var-dumper": "~2.7|~3.0|~4.0"
+        },
+        "require-dev": {
+            "hoa/console": "~2.15|~3.16",
+            "phpunit/phpunit": "~4.8.35|~5.0|~6.0|~7.0",
+            "symfony/finder": "~2.1|~3.0|~4.0"
+        },
+        "suggest": {
+            "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
+            "ext-pdo-sqlite": "The doc command requires SQLite to work.",
+            "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
+            "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
+            "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
+        },
+        "time": "2018-04-18T12:32:50+00:00",
+        "bin": [
+            "bin/psysh"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-develop": "0.9.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-4": {
+                "Psy\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Justin Hileman",
+                "email": "justin@justinhileman.info",
+                "homepage": "http://justinhileman.com"
+            }
+        ],
+        "description": "An interactive shell for modern PHP.",
+        "homepage": "http://psysh.org",
+        "keywords": [
+            "REPL",
+            "console",
+            "interactive",
+            "shell"
         ]
     }
 ]
