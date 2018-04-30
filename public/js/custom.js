@@ -13,4 +13,9 @@ jQuery(document).ready(function($) {
             // Animation complete.
         });
     });
+
+    $( "#looks_tab_title" ).click(function() {
+        $( "#video_recorder" ).toggle();
+        $( "#compile" ).toggle();
+    });
 });

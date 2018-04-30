@@ -972,7 +972,6 @@ ul.nav-pills {
 }
 
 div#exTab1 {
-    margin-bottom: 40px;
     margin-top: 45px;
 }
 
@@ -1087,7 +1086,10 @@ div#exTab1 {
 	height: 40px;
 	cursor: pointer;
 }
-
+#compile-list-for-looks {
+    min-height: 500px;
+    border: 1px dotted #AAA;
+}
 #new_look_collection {
 	min-height: 500px;
 	border: 1px dotted #AAA;

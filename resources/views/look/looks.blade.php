@@ -8,76 +8,7 @@ LOOKs&trade;
 @stop
 
 @section('head_code')
-<script type="text/javascript">
-var flashvars = {
-		qualityurl: "avq/480p.xml",
-		accountHash: "e1cacb83a1abc9814164437ad383ccbc",
-		eid: 1,
-		showMenu: "true",
-		mrt: 300,
-		sis: 0,
-		asv: 0,
-		mv: 1,
-		payload: $('.bal_video_section').length ? $('#user_id').val() + ":" + $('#question').val() : ''
-	};
 
-	var collection = $('#new_look_collection');
-	function addItemToCollection( $item ) {
-		$item.fadeOut(function() {
-			var list;
-			if ($( "#new_look_collection ul" ).length) {
-				list = $( "#new_look_collection ul");
-			}else {
-				list = $( '<ul class="sortable"/>' ).appendTo( $('#new_look_collection') );
-				list.sortable();
-			}
-
-			$item.appendTo( list ).fadeIn();
-		});
-	}
-	function returnItemToQueue( $item ) {
-		$item.fadeOut(function() {
-			var list;
-			if ($( "#list_of_questions_for_looks ul" ).length) {
-				list = $( "#list_of_questions_for_looks ul");
-			}else {
-				list = $( '<ul class="sortable"/>' ).appendTo( $('#list_of_questions_for_looks') );
-				list.sortable();
-			}
-
-			$item.appendTo( list ).fadeIn();
-		});
-	}
-
-	$( function() {
-		var knownQuestions = {!! $knownQuestions !!};
-		$('#question').autocomplete({
-			source: knownQuestions,
-			appendTo: "#question_input",
-			open: function () {
-				$(this).data("uiAutocomplete").menu.element.addClass("question_lookup_suggestion");
-			},
-			select: IL.activateStartButton()
-		});
-//<<<<<<< HEAD:resources/views/look/looks.blade.php
-
-//=======
-		
-//>>>>>>> master:app/views/looks.blade.php
-		// get the list of videos.
-		IL.checkForNewVideos();
-		// Check for new videos every 2 seconds.
-		setInterval(function(){
-			IL.checkForNewVideos();
-		}, 5000);
-		$('#new_look_collection').droppable({ accept: "li", tolerance: 'pointer', drop: function( event, ui ) { addItemToCollection(ui.draggable); } });
-		$('#questions-list-for-looks').droppable({ accept: "li", tolerance: 'pointer', drop: function( event, ui ) { returnItemToQueue(ui.draggable); } });
-	});
-	$(document).ready(function() {
-		IL.jsready = 1;
-		IL.activateStartButton();
-	});
-</script>
 <style>
 	.ui-autocomplete {
 		margin: 80px 0px 0px 77px;
@@ -107,16 +38,17 @@ var flashvars = {
 
 		<div id="exTab1" class="">
 			<ul class="nav nav-pills">
-				<li id="intros_tab_title" class="" onclick="IL.switchToIntros();">
+				<li id="intros_tab_title" class="" >
 					My Intro LOOKs&trade;
 				</li>
-				<li id="questions_tab_title" class="active" onclick="IL.switchToQuestions();">
+				<li id="questions_tab_title" class="active">
 					My Questions
 				</li>
-				<li id="looks_tab_title" onclick="IL.switchToLooks();">
+				<li id="looks_tab_title">
 					Complete LOOK&trade;
 				</li>
 			</ul>
+		</div>
 			<div class="tab-content clearfix">
 				<div class="tab-pane active">
 					<div class="row">
@@ -148,7 +80,7 @@ var flashvars = {
 								</div>
 							</div>
 
-							<div class="col-md-12 record_video bal_video_section" id="video_recorder">
+							<div class="col-md-12 record_video bal_video_section">
 								<input type="hidden" id="user_id" value="{{ auth()->id() }}"/>
 
 							<div class="col-md-6 record_video" id="video_recorder">
@@ -156,8 +88,8 @@ var flashvars = {
 
 								<div id="question_input">
 									<h3>Record New Question</h3>
-									<b>Question:</b> <input type="text" id="question" size="40" onkeyup="IL.activateStartButton();" />
-									<button id="start_button" class="btn btn-primary" onclick="showRecorder();" disabled="disabled">Start</button>
+									<b>Question:</b> <input type="text" id="question" size="40"  value=""/>
+									<button id="start_button" class="btn btn-primary" >Start</button>
 								</div>
 								<div id="intro_header" class="center hidden">
 									<h3>Record New Intro</h3>
@@ -172,22 +104,38 @@ var flashvars = {
 								  <button onclick="$('#video-complete-message').fadeOut();">OK</button>
 								  <div class="clear"></div>
 								</div>
-								<script type="text/javascript">
-								(function() {
-									startVideoRecorder();
-								})();
-								</script>
+
 								<div id="hdfvr-content" class="recorder">
 									<!-- begin video recorder code -->
 									<script type="text/javascript">
+										var video_title ='';
+                                        $('#start_button').click(function() {
+                                            var $field = $(this);
+                                            setTimeout(function() {
+                                                var video_title = $field.val();
+                                                console.log(video_title);
+                                            }, 0);
+                                        });
+
+                                        var user_id = document.getElementById('user_id').value;
                                         var size = {width:440,height:400};
-                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"d1925da7e53d91eb3159d785f4dbad0a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1};
+                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"d1925da7e53d91eb3159d785f4dbad0a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_title":"'+video_title+'"}'};
                                         (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
 									</script>
 									<div id="hdfvr-content" ></div>
 									<!-- end video recorder code -->
 								</div>
 							</div>
+								<div id="compile" class="col-md-6 record_video" style="display:none">
+									<h3>Compile New LOOK&trade;</h3>
+									<div id="compile-list-for-looks">
+										<div id="compile_questions_for_looks" class="questions-list">
+											<ul class="sortable">
+
+											</ul>
+										</div>
+									</div>
+								</div>
 							<div class="col-md-6" id="list_of_videos" style="height: 96%;">
 								<h3 id="right-half-title">Saved Questions</h3>
 
@@ -200,7 +148,7 @@ var flashvars = {
 														<img src="https://{{$videos['snapshotURL']}}" />
 													</div>
 													<div class="snapshot-name col-md-9">
-														<p>{{$videos['name']}}</p>
+														<p>{{$videos['payload']}}</p>
 													</div>
 												</li>
 											@endforeach
@@ -210,7 +158,7 @@ var flashvars = {
 
 
 											
-										</ul>
+
 									</div>
 								</div>
 								
@@ -229,7 +177,6 @@ var flashvars = {
 			</div>
 		</div>
 
-	</div>
 </section>
 
 @stop

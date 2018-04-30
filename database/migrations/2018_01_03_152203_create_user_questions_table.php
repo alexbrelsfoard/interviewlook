@@ -17,7 +17,9 @@ class CreateUserQuestionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('question_id')->unsigned();
-            $table->string('video')->nullable();
+            $table->integer('video_id')->unsigned();
+            $table->string('video_title')->nullable();
+            $table->string('video_url')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
 
