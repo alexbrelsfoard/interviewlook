@@ -1,4 +1,4 @@
-<?php
+`<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,11 +16,13 @@ class CreateLooksTable extends Migration
         Schema::create('looks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->bigInteger('video_id')->unsigned();
+            $table->bigInteger('add_pipe_id')->unsigned();
             $table->string('title')->nullable();
+            $table->string('img_url')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

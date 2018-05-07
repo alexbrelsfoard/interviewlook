@@ -1242,3 +1242,6 @@ BUTTON.disabled,
 .snapshot-name {
     text-align: center;
 }
+.pipeRecordRTC {
+    display: none;
+}

@@ -85,6 +85,7 @@ LOOKs&trade;
 
 							<div class="col-md-6 record_video" id="video_recorder">
 								<input type="hidden" id="user_id" value="{{ $user->id }}"/>
+								<input type="hidden" id="video_id" value="{{ $video_id }}"/>
 
 								<div id="question_input">
 									<h3>Record New Question</h3>
@@ -108,18 +109,12 @@ LOOKs&trade;
 								<div id="hdfvr-content" class="recorder">
 									<!-- begin video recorder code -->
 									<script type="text/javascript">
-										var video_title ='';
-                                        $('#start_button').click(function() {
-                                            var $field = $(this);
-                                            setTimeout(function() {
-                                                var video_title = $field.val();
-                                                console.log(video_title);
-                                            }, 0);
-                                        });
 
                                         var user_id = document.getElementById('user_id').value;
+                                        var video_id = document.getElementById('video_id').value;
+
                                         var size = {width:440,height:400};
-                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"d1925da7e53d91eb3159d785f4dbad0a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_title":"'+video_title+'"}'};
+                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"d1925da7e53d91eb3159d785f4dbad0a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_id":"'+video_id+'"}'};
                                         (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
 									</script>
 									<div id="hdfvr-content" ></div>
@@ -142,13 +137,13 @@ LOOKs&trade;
 								<div id="questions-list">
 									<div id="list_of_questions" class="questions-list">
 										<ul>
-											@foreach($video_list['videos'] as $videos)
+											@foreach($video_list as $videos)
 												<li class="video-list">
 													<div class="snapshot-image col-md-3">
-														<img src="https://{{$videos['snapshotURL']}}" />
+														<img src="https://{{$videos->img_url}}" />
 													</div>
 													<div class="snapshot-name col-md-9">
-														<p>{{$videos['payload']}}</p>
+														<p>{{$videos->title}}</p>
 													</div>
 												</li>
 											@endforeach

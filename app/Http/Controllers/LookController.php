@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Notifications\ContactEmail;
 use App\User;
-use App\Http\Controllers\AddPipeController;
+use App\Models\Look;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Notification;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AddPipeController;
 
 class LookController extends Controller
 {
@@ -40,25 +41,18 @@ class LookController extends Controller
     public function showLooks()
     {
 
+        //$t = new AddPipeController;
+        //$t->importVideoData();
+
         $id = Auth::user()->id;
         $user = User::find($id);
 
-        $method = 'GET';
-        $url = 'https://api.addpipe.com/video/all';
-        $data = '';
-        $headers = array(
-            'Cache-Control: no-cache',
-            'content-type: application/json',
-            'X-PIPE-AUTH: 8b1f187e986df04613fe4eef718a703887ca932c6d21301abaa954723daa40c2'
-        );
+        $video_id = round(microtime(true) * 1000);
 
-        $get_videos = new AddPipeController();
-        $video_list = $get_videos->apiRequest($method, $url, $data, $headers);
-
-        $video_list = json_decode($video_list, true);
+        $video_list = Look::select('title', 'img_url')->where('user_id', $id)->get();
 
         $knownQuestions = Question::getDistinctQuestions();
-        return view('look.looks', compact('knownQuestions', 'user', 'video_list'));
+        return view('look.looks', compact('knownQuestions', 'user', 'video_id', 'video_list'));
     }
 
     public function send(Request $request)

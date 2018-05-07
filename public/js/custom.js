@@ -18,4 +18,12 @@ jQuery(document).ready(function($) {
         $( "#video_recorder" ).toggle();
         $( "#compile" ).toggle();
     });
+
+    $( "#start_button" ).click(function() {
+        $( ".pipeRecordRTC" ).toggle( "slow", function() {
+            // Animation complete.
+        });
+    });
+
 });
+
