@@ -18,6 +18,7 @@ Route::get('/logout',	'MainController@doLogout');
 */
 
 // Lookie / Looker
+//Route::get('/start-video','LookController@startRecording');
 /*
 Route::get('/profile',	'LookController@showProfile');
 Route::get('/jobs',		'LookController@showJobs');
@@ -26,6 +27,7 @@ Route::get('/book',		'LookController@showBook');
 Route::get('/looks',	'LookController@showLooks');
 Route::get('/account',	'LookController@showAccount');
 Route::get('/questions','LookController@showQuestions');
+
 */
 
 //Route::any('/', array('as'=>'home', function(){

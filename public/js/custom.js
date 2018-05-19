@@ -20,9 +20,37 @@ jQuery(document).ready(function($) {
     });
 
     $( "#start_button" ).click(function() {
-        $( ".pipeRecordRTC" ).toggle( "slow", function() {
-            // Animation complete.
-        });
+
+        if( !$("#question").val() ) {
+
+            $( "#no-question" ).show( "slow", function() { });
+
+        } else {
+
+            $( "#no-question" ).hide( "slow", function() { });
+
+
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                        $.ajax({
+                            /* the route pointing to the post function */
+                            url: '/start-video',
+                            type: 'POST',
+                            /* send the csrf-token and the input to the controller */
+                            data: {_token: CSRF_TOKEN, video_id: $("#video_id").val(), question: $("#question").val()},
+                            dataType: 'JSON',
+                            /* remind that 'data' is the response of the AjaxController */
+                            success: function (data) {
+                                
+                                //$(".writeinfo").append(data.msg);
+                                $( ".pipeRecordRTC" ).show( "slow", function() { });
+                            }
+                        });
+
+
+                }
+
+
     });
 
 });

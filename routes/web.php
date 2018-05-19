@@ -11,6 +11,8 @@
 |
  */
 
+Route::post('/start-video','LookController@startRecording');
+
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::post('/submit/request', 'WelcomeController@request')->name('welcome.request');
 

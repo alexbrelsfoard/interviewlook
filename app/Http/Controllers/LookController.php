@@ -74,4 +74,23 @@ class LookController extends Controller
             return redirect()->route('look.about');
         }
     }
+
+    public function startRecording(Request $request)
+    {
+
+        $id = Auth::user()->id;
+
+
+        $response = array(
+            'status' => 'success',
+            'question' => $request->question,
+            'video_id' => $request->video_id,
+        );
+
+        Look::updateOrCreate(
+           ['video_id' => $request->video_id],
+           ['title' => $request->question, 'user_id' => $id]
+        );
+        return response()->json($response);
+    }
 }

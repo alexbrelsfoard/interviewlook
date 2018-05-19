@@ -64,7 +64,10 @@ LOOKs&trade;
 								</div>
 							</div>
 							<div class="col-md-5 hidden" id="new_look">
-								<div style="padding: 0px 0px 5px 0px;">Title: <input type="text" size="30" id="name_of_look"/> &nbsp; <button class="btn btn-primary" style="padding: 3px 20px;" onclick="IL.saveLook();">Save</button></div>
+								<div style="padding: 0px 0px 5px 0px;">Title:
+									<input type="text" size="30" id="name_of_look"/> &nbsp;
+									<button class="btn btn-primary" style="padding: 3px 20px;" onclick="IL.saveLook();">Save</button></div>
+
 								<div id="new_look_collection" class="questions-list">
 
 								</div>
@@ -89,8 +92,10 @@ LOOKs&trade;
 
 								<div id="question_input">
 									<h3>Record New Question</h3>
+									<p id="no-question" class="warning" style="display:none;">Please Enter a Question</p>
 									<b>Question:</b> <input type="text" id="question" size="40"  value=""/>
 									<button id="start_button" class="btn btn-primary" >Start</button>
+									<meta name="csrf-token" content="{{ csrf_token() }}" />
 								</div>
 								<div id="intro_header" class="center hidden">
 									<h3>Record New Intro</h3>
@@ -114,7 +119,7 @@ LOOKs&trade;
                                         var video_id = document.getElementById('video_id').value;
 
                                         var size = {width:440,height:400};
-                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"d1925da7e53d91eb3159d785f4dbad0a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_id":"'+video_id+'"}'};
+                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"7270e8121643c01b20ad8f19f910a51a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_id":"'+video_id+'"}'};
                                         (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
 									</script>
 									<div id="hdfvr-content" ></div>

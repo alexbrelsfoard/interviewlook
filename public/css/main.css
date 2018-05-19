@@ -1245,3 +1245,13 @@ BUTTON.disabled,
 .pipeRecordRTC {
     display: none;
 }
+.warning {
+    background: #f18888;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #d62929;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}

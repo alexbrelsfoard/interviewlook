@@ -60,7 +60,7 @@ class AddPipeController extends Controller
         $headers = array(
             'Cache-Control: no-cache',
             'content-type: application/json',
-            'X-PIPE-AUTH: 8b1f187e986df04613fe4eef718a703887ca932c6d21301abaa954723daa40c2'
+            'X-PIPE-AUTH: b92d5464d2ef0f5d8988c0784e5b23859dea8a7c8ef27cb3e060c04404d9a332'
         );
 
         $video_list = $this->apiRequest($method, $url, $data, $headers);
