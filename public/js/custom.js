@@ -15,8 +15,39 @@ jQuery(document).ready(function($) {
     });
 
     $( "#looks_tab_title" ).click(function() {
-        $( "#video_recorder" ).toggle();
-        $( "#compile" ).toggle();
+        $( "#video_recorder" ).hide();
+        $( "#compile" ).show();
+        $( "#list_of_videos" ).show();
+        $(this).addClass( "active" );
+        $("#questions_tab_title").removeClass( "active" );
+        $("#intros_tab_title").removeClass( "active" );
+        $( "#list_of_intros" ).addClass( "hidden" );
+        $("#intro_input").hide();
+        $("#question_input").show();
+    });
+
+    $( "#questions_tab_title" ).click(function() {
+        $( "#video_recorder" ).show();
+        $( "#list_of_videos" ).show();
+        $( "#compile" ).hide();
+        $(this).addClass( "active" );
+        $("#looks_tab_title").removeClass( "active" );
+        $("#intros_tab_title").removeClass( "active" );
+        $( "#list_of_intros" ).addClass( "hidden" );
+        $("#intro_input").hide();
+        $("#question_input").show();
+    });
+
+    $( "#intros_tab_title" ).click(function() {
+        $( "#video_recorder").show();
+        $( "#compile" ).hide();
+        $( "#list_of_videos" ).hide();
+        $( "#list_of_intros" ).show().removeClass( "hidden" );
+        $(this).addClass( "active" );
+        $("#questions_tab_title").removeClass( "active" );
+        $("#looks_tab_title").removeClass( "active" );
+        $("#intro_input").show();
+        $("#question_input").hide();
     });
 
     $( "#start_button" ).click(function() {
@@ -41,7 +72,7 @@ jQuery(document).ready(function($) {
                             dataType: 'JSON',
                             /* remind that 'data' is the response of the AjaxController */
                             success: function (data) {
-                                
+
                                 //$(".writeinfo").append(data.msg);
                                 $( ".pipeRecordRTC" ).show( "slow", function() { });
                             }

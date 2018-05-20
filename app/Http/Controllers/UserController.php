@@ -52,6 +52,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+
         $v = Validator::make($request->all(), [
             'email' => 'required|string|email|unique:users,email,' . auth()->user()->id,
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=200,min_height=200',
@@ -73,9 +74,13 @@ class UserController extends Controller
             'skills_privacy' => 'required',
         ]);
 
+
+
         if ($v->fails()) {
             return redirect()->back()->withErrors($v)->withInput();
         } else {
+
+
             $profile = Profile::where('user_id', auth()->user()->id)->first();
             $social = Social::where('user_id', auth()->user()->id)->first();
             $privacy = Privacy::where('user_id', auth()->user()->id)->first();

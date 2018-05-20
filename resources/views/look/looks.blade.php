@@ -93,10 +93,18 @@ LOOKs&trade;
 								<div id="question_input">
 									<h3>Record New Question</h3>
 									<p id="no-question" class="warning" style="display:none;">Please Enter a Question</p>
-									<b>Question:</b> <input type="text" id="question" size="40"  value=""/>
+									<b>Question: </b> <input type="text" id="question" size="40"  value=""/>
 									<button id="start_button" class="btn btn-primary" >Start</button>
 									<meta name="csrf-token" content="{{ csrf_token() }}" />
 								</div>
+
+								<div id="intro_input" style="display:none;">
+									<h3>Record New Intro</h3>
+									<p id="no-intro" class="warning" style="display:none;">Please Enter Intro Title</p>
+									<b>Intoro Title: </b> <input type="text" id="intro-title" size="40"  value=""/>
+									<button id="start_intro" class="btn btn-primary" >Start</button>
+								</div>
+
 								<div id="intro_header" class="center hidden">
 									<h3>Record New Intro</h3>
 									<button id="start_button_intro" class="btn btn-primary center" onclick="showRecorder();" disabled="disabled">Start Recording New intro</button>
@@ -118,11 +126,11 @@ LOOKs&trade;
                                         var user_id = document.getElementById('user_id').value;
                                         var video_id = document.getElementById('video_id').value;
 
-                                        var size = {width:440,height:400};
+                                        var size = {width:200,height:400};
                                         var flashvars = {qualityurl: "avq/300p.xml",accountHash:"7270e8121643c01b20ad8f19f910a51a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_id":"'+video_id+'"}'};
                                         (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
 									</script>
-									<div id="hdfvr-content" ></div>
+
 									<!-- end video recorder code -->
 								</div>
 							</div>
@@ -138,38 +146,44 @@ LOOKs&trade;
 								</div>
 							<div class="col-md-6" id="list_of_videos" style="height: 96%;">
 								<h3 id="right-half-title">Saved Questions</h3>
+									<div id="questions-list">
+										<div id="list_of_questions" class="questions-list">
+											<ul>
+												@foreach($video_list as $videos)
+													<li class="video-list">
+														<div class="snapshot-image col-md-3">
+															<img src="https://{{$videos->img_url}}" />
+														</div>
+														<div class="snapshot-name col-md-9">
+															<p>{{$videos->title}}</p>
+														</div>
+													</li>
+												@endforeach
+											</ul>
+										</div>
+									</div>
+							</div>
 
-								<div id="questions-list">
-									<div id="list_of_questions" class="questions-list">
-										<ul>
-											@foreach($video_list as $videos)
-												<li class="video-list">
-													<div class="snapshot-image col-md-3">
-														<img src="https://{{$videos->img_url}}" />
-													</div>
-													<div class="snapshot-name col-md-9">
-														<p>{{$videos->title}}</p>
-													</div>
-												</li>
-											@endforeach
-										</ul>
+								<div id="list_of_intros" class="hidden col-md-6" style="height: 96%;">
+									<h3 id="right-half-title">Saved Intros</h3>
+									<div id="intros-list">
+										<div id="list_of_intros" class="questions-list">
+											<ul>
+
+													<li class="video-list">
+														<div class="snapshot-image col-md-3">
+
+														</div>
+														<div class="snapshot-name col-md-9">
+
+														</div>
+													</li>
+
+											</ul>
+										</div>
 									</div>
 								</div>
-
-
-											
-
-									</div>
-								</div>
-								
-
-								<div id="intros-list" class="hidden">
-									<p>Will need to institute a limit of ~3 saved intros, and only one active one.</p>
-									<div id="list_of_intros">
-
-									</div>
-								</div>
-
+							</div>
 							</div>
 						</div>
 					</div>

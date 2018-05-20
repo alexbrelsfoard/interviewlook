@@ -972,7 +972,7 @@ ul.nav-pills {
 }
 
 div#exTab1 {
-    margin-top: 45px;
+    /^ margin-top: 45px; */
 }
 
 .search_results_container {
@@ -1254,4 +1254,8 @@ BUTTON.disabled,
     border-radius: 5px;
     font-size: 15px;
     margin-bottom: 10px;
+}
+#intros-list {
+    min-height: 500px;
+    border: 1px dotted #AAA;
 }

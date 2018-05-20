@@ -24,7 +24,7 @@
 								<div class="blue-frame-10">
 									<div class="white-frame-10">
 										<div class="blue-frame-5">
-											<img class="img-responsive md-margin-bottom-10" src="{{ $user->photo }}" alt="">
+											<img class="img-responsive md-margin-bottom-10" src="{{ isset($user->profile->photo) && $user->profile->photo ? $user->profile->photo : $user->photo }}" alt="">
 										</div>
 									</div>
 								</div>
@@ -59,10 +59,10 @@
 									@if ($errors->has('industry_summary')) {{ $errors->first('industry_summary') }} @endif
 								</div>
 								<label class="radio-inline">
-									<input type="radio" value="1" name="industry_summary_privacy" {{ old( 'industry_summary_privacy')=='1' ? 'checked': (isset($user->privacy->industry_summary) && $user->privacy->industry_summary == '1' ? 'checked' : 'checked') }} >Public
+									<input type="radio" value="1" name="industry_summary_privacy" {{ old( 'industry_summary_privacy')=='1' ? 'checked': (isset($user->privacy->industry_summary) && $user->privacy->industry_summary == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="industry_summary_privacy" {{ old( 'industry_summary_privacy')=='0' ? 'checked': (isset($user->privacy->industry_summary) && $user->privacy->industry_summary == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="industry_summary_privacy" {{ old( 'industry_summary_privacy')=='0' ? 'checked': (isset($user->privacy->industry_summary) && $user->privacy->industry_summary == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 									<input type="radio" value="1" name="current_position_privacy" {{ old( 'current_position_privacy')=='1' ? 'checked': (isset($user->privacy->current_position) && $user->privacy->current_position == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="current_position_privacy" {{ old( 'industry_summary_privacy')=='0' ? 'checked': (isset($user->privacy->current_position) && $user->privacy->current_position == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="current_position_privacy" {{ old( 'industry_summary_privacy')=='0' ? 'checked': (isset($user->privacy->current_position) && $user->privacy->current_position == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -96,7 +96,7 @@
 									<input type="radio" value="1" name="current_company_privacy" {{ old( 'current_company_privacy')=='1' ? 'checked': (isset($user->privacy->current_company) && $user->privacy->current_company == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="current_company_privacy" {{ old( 'current_company_privacy')=='0' ? 'checked': (isset($user->privacy->current_company) && $user->privacy->current_company == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="current_company_privacy" {{ old( 'current_company_privacy')=='0' ? 'checked': (isset($user->privacy->current_company) && $user->privacy->current_company == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 									<input type="radio" value="1" name="current_location_privacy" {{ old( 'current_location_privacy')=='1' ? 'checked': (isset($user->privacy->current_location) && $user->privacy->current_location == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="current_location_privacy" {{ old( 'current_location_privacy')=='0' ? 'checked': (isset($user->privacy->current_location) && $user->privacy->current_location == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="current_location_privacy" {{ old( 'current_location_privacy')=='0' ? 'checked': (isset($user->privacy->current_location) && $user->privacy->current_location == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -131,7 +131,7 @@
 									<input type="radio" value="1" name="preferred_location_privacy" {{ old( 'preferred_location_privacy')=='1' ? 'checked': (isset($user->privacy->preferred_location) && $user->privacy->preferred_location == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="preferred_location_privacy" {{ old( 'preferred_location_privacy')=='0' ? 'checked': (isset($user->privacy->preferred_location) && $user->privacy->preferred_location == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="preferred_location_privacy" {{ old( 'preferred_location_privacy')=='0' ? 'checked': (isset($user->privacy->preferred_location) && $user->privacy->preferred_location == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -154,7 +154,7 @@
 									<input type="radio" value="1" name="years_experience_privacy" {{ old( 'years_experience_privacy')=='1' ? 'checked': (isset($user->privacy->years_experience) && $user->privacy->years_experience == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="years_experience_privacy" {{ old( 'years_experience_privacy')=='0' ? 'checked': (isset($user->privacy->years_experience) && $user->privacy->years_experience == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="years_experience_privacy" {{ old( 'years_experience_privacy')=='0' ? 'checked': (isset($user->privacy->years_experience) && $user->privacy->years_experience == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -185,7 +185,7 @@
 									<input type="radio" value="1" name="highest_degree_privacy" {{ old( 'highest_degree_privacy')=='1' ? 'checked': (isset($user->privacy->highest_degree) && $user->privacy->highest_degree == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="highest_degree_privacy" {{ old( 'highest_degree_privacy')=='0' ? 'checked': (isset($user->privacy->highest_degree) && $user->privacy->highest_degree == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="highest_degree_privacy" {{ old( 'highest_degree_privacy')=='0' ? 'checked': (isset($user->privacy->highest_degree) && $user->privacy->highest_degree == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>
@@ -202,7 +202,7 @@
 									<input type="radio" value="1" name="skills_privacy" {{ old( 'skills_privacy')=='1' ? 'checked': (isset($user->privacy->skills) && $user->privacy->skills == '1' ? 'checked' : '') }} >Public
 								</label>
 								<label class="radio-inline">
-									<input type="radio" value="0" name="skills_privacy" {{ old( 'skills_privacy')=='0' ? 'checked': (isset($user->privacy->skills) && $user->privacy->skills == '0' ? 'checked' : '') }} >Private
+									<input type="radio" value="0" name="skills_privacy" {{ old( 'skills_privacy')=='0' ? 'checked': (isset($user->privacy->skills) && $user->privacy->skills == '0' ? 'checked' : (!isset($user->privacy->industry_summary)) ? 'checked' : '' )}} >Private
 								</label>
 							</div>
 						</div>

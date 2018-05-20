@@ -30,15 +30,15 @@
 							<br/> @if($user->social)
 							<center>
 								@if($user->social->facebook)
-								<a class="btn btn-info btn-xs" href="{{ $user->social->facebook }}">
+								<a class="btn btn-info btn-xs" href="{{ $user->social->facebook }}" target="_blank">
 									<i class="fa fa-facebook"></i>
 								</a>
 								@endif @if($user->social->twitter)
-								<a class="btn btn-info btn-xs" href="{{ $user->social->twitter }}">
+								<a class="btn btn-info btn-xs" href="{{ $user->social->twitter }}" target="_blank">
 									<i class="fa fa-twitter"></i>
 								</a>
 								@endif @if($user->social->instagram)
-								<a class="btn btn-info btn-xs" href="{{ $user->social->instagram }}">
+								<a class="btn btn-info btn-xs" href="{{ $user->social->instagram }}" target="_blank">
 									<i class="fa fa-instagram"></i>
 								</a>
 								@endif
