@@ -93,4 +93,50 @@ class LookController extends Controller
         );
         return response()->json($response);
     }
+
+    public function uploadVideo(Request $request) 
+    {
+
+            
+            $file_idx = 'video-blob';
+            $fileName = $request['video-filename'];
+            $tempName = $request->file('video-blob')->getPathName();
+            if (empty($fileName) || empty($tempName)) {
+                if(empty($tempName)) {
+                    echo 'Invalid temp_name: '.$tempName;
+                    return;
+                }
+
+                echo 'Invalid file name: '.$fileName;
+                return;
+            }
+            
+            $filePath = 'uploads/' . $fileName;
+            
+            // make sure that one can upload only allowed audio/video files
+            $allowed = array(
+                'webm',
+                'wav',
+                'mp4',
+                "mkv",
+                'mp3',
+                'ogg'
+            );
+            $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+            if (!$extension || empty($extension) || !in_array($extension, $allowed)) {
+                echo 'Invalid file extension: '.$extension;
+                return;
+            }
+            
+            if (!move_uploaded_file($tempName, $filePath)) {
+                echo 'Problem saving file: '.$tempName;
+                return;
+            }
+            
+            echo 'success';
+
+
+    }
+
+
 }

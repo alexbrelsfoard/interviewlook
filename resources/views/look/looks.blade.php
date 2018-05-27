@@ -94,7 +94,7 @@ LOOKs&trade;
 									<h3>Record New Question</h3>
 									<p id="no-question" class="warning" style="display:none;">Please Enter a Question</p>
 									<b>Question: </b> <input type="text" id="question" size="40"  value=""/>
-									<button id="start_button" class="btn btn-primary" >Start</button>
+									<button id="start_recording" class="btn btn-primary" style="vertical-align: top;height: 43px;">Start</button>
 									<meta name="csrf-token" content="{{ csrf_token() }}" />
 								</div>
 
@@ -121,15 +121,7 @@ LOOKs&trade;
 
 								<div id="hdfvr-content" class="recorder">
 									<!-- begin video recorder code -->
-									<script type="text/javascript">
-
-                                        var user_id = document.getElementById('user_id').value;
-                                        var video_id = document.getElementById('video_id').value;
-
-                                        var size = {width:200,height:400};
-                                        var flashvars = {qualityurl: "avq/300p.xml",accountHash:"7270e8121643c01b20ad8f19f910a51a", eid:1, showMenu:"true", mrt:120,sis:0,asv:1,mv:0, dpv:0, ao:0, dup:1, payload:'{"user_id":"'+user_id+'", "video_id":"'+video_id+'"}'};
-                                        (function() {var pipe = document.createElement('script'); pipe.type = 'text/javascript'; pipe.async = true;pipe.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's1.addpipe.com/1.3/pipe.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pipe, s);})();
-									</script>
+									@include('look._record')
 
 									<!-- end video recorder code -->
 								</div>
