@@ -11,6 +11,10 @@
 |
  */
 
+Route::get('demos/tasks','LookController@showTasks');
+Route::patch('/looks/{id}', 'LookController@updateTasksStatus');
+Route::put('/looks/updateAll', 'LookController@updateTasksOrder');
+
 Route::post('/start-video','LookController@startRecording');
 Route::post('/upload-video','LookController@uploadVideo')->name('upload.video');
 

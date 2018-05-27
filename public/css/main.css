@@ -1044,7 +1044,6 @@ div#exTab1 {
 
 #questions-list {
     min-height: 500px;
-    border: 1px dotted #AAA;
 }
 
 #questions-list-for-looks {
@@ -1258,4 +1257,17 @@ BUTTON.disabled,
 #intros-list {
     min-height: 500px;
     border: 1px dotted #AAA;
+}
+.list-view{
+    padding: 0;
+    background: #fff;
+    border: 0;
+}
+.card{
+    border: 1px solid #ccc;
+    min-height: 50px;
+}
+.drag-area {
+    min-height: 500px;
+    border: 1px solid #ccc;
 }

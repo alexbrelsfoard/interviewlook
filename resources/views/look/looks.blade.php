@@ -126,34 +126,16 @@ LOOKs&trade;
 									<!-- end video recorder code -->
 								</div>
 							</div>
-								<div id="compile" class="col-md-6 record_video" style="display:none">
-									<h3>Compile New LOOK&trade;</h3>
-									<div id="compile-list-for-looks">
-										<div id="compile_questions_for_looks" class="questions-list">
-											<ul class="sortable">
 
-											</ul>
-										</div>
-									</div>
-								</div>
 							<div class="col-md-6" id="list_of_videos" style="height: 96%;">
-								<h3 id="right-half-title">Saved Questions</h3>
 									<div id="questions-list">
 										<div id="list_of_questions" class="questions-list">
-											<ul>
-												@foreach($video_list as $videos)
-													<li class="video-list">
-														<div class="snapshot-image col-md-3">
-															<img src="https://{{$videos->img_url}}" />
-														</div>
-														<div class="snapshot-name col-md-9">
-															<p>{{$videos->title}}</p>
-														</div>
-													</li>
-												@endforeach
-											</ul>
+											<div class="list-view" id="app">
+												<look-draggable :tasks-completed="{{ $videosCompiled }}" :tasks-not-completed="{{ $videosSaved }}"></look-draggable>
+											</div> <!-- end app -->
 										</div>
 									</div>
+
 							</div>
 
 								<div id="list_of_intros" class="hidden col-md-6" style="height: 96%;">
@@ -184,5 +166,5 @@ LOOKs&trade;
 		</div>
 
 </section>
-
+<script src="{{ asset('js/app.js') }}"></script>
 @stop

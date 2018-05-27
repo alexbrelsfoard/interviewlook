@@ -17,18 +17,18 @@ jQuery(document).ready(function($) {
     $( "#looks_tab_title" ).click(function() {
         $( "#video_recorder" ).hide();
         $( "#compile" ).show();
-        $( "#list_of_videos" ).show();
         $(this).addClass( "active" );
         $("#questions_tab_title").removeClass( "active" );
         $("#intros_tab_title").removeClass( "active" );
         $( "#list_of_intros" ).addClass( "hidden" );
         $("#intro_input").hide();
-        $("#question_input").show();
+        $("#completed-look").show();
+        $("#saved-questions").attr('class', 'col-md-6');
+        $("#list_of_videos").attr('class', 'col-md-12').show();
     });
 
     $( "#questions_tab_title" ).click(function() {
         $( "#video_recorder" ).show();
-        $( "#list_of_videos" ).show();
         $( "#compile" ).hide();
         $(this).addClass( "active" );
         $("#looks_tab_title").removeClass( "active" );
@@ -36,18 +36,24 @@ jQuery(document).ready(function($) {
         $( "#list_of_intros" ).addClass( "hidden" );
         $("#intro_input").hide();
         $("#question_input").show();
+        $("#completed-look").hide();
+        $("#saved-questions").attr('class', 'col-md-12');
+        $("#list_of_videos").attr('class', 'col-md-6').show();
+
     });
 
     $( "#intros_tab_title" ).click(function() {
         $( "#video_recorder").show();
         $( "#compile" ).hide();
-        $( "#list_of_videos" ).hide();
         $( "#list_of_intros" ).show().removeClass( "hidden" );
         $(this).addClass( "active" );
         $("#questions_tab_title").removeClass( "active" );
         $("#looks_tab_title").removeClass( "active" );
         $("#intro_input").show();
         $("#question_input").hide();
+        $("#completed-look").hide();
+        $("#saved-questions").attr('class', 'col-md-12');
+        $("#list_of_videos").attr('class', 'col-md-6').hide();
     });
 
     $( "#start_button" ).click(function() {

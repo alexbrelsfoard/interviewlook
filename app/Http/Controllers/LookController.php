@@ -49,10 +49,55 @@ class LookController extends Controller
 
         $video_id = round(microtime(true) * 1000);
 
-        $video_list = Look::select('title', 'img_url')->where('user_id', $id)->get();
+        //$video_list = Look::select('title', 'img_url')->where('user_id', $id)->get();
+
+        $videos = Look::orderBy('order')->select('id','title','order','status', 'img_url')->where('user_id', $id)->get();
+
+        $videosCompiled = $videos->filter(function ($task, $key) {
+            return $task->status;
+        })->values();
+
+        $videosSaved = $videos->filter(function ($task, $key) {
+            return  ! $task->status;
+        })->values();
 
         $knownQuestions = Question::getDistinctQuestions();
-        return view('look.looks', compact('knownQuestions', 'user', 'video_id', 'video_list'));
+
+        return view('look.looks', compact('knownQuestions', 'user', 'video_id', 'videos', 'videosCompiled', 'videosSaved'));
+    }
+
+    public function updateTasksStatus(Request $request, $id)
+    {
+        $this->validate($request, [
+            'status' => 'required|boolean',
+        ]);
+
+        $video = Look::find($id);
+        $video->status = $request->status;
+        $video->save();
+
+        return response('Updated Successfully.', 200);
+
+    }
+
+    public function updateTasksOrder(Request $request)
+    {
+        $this->validate($request, [
+            'tasks.*.order' => 'required|numeric',
+        ]);
+
+        $videos = Look::all();
+
+        foreach ($videos as $video) {
+            $id = $video->id;
+            foreach ($request->tasks as $videosNew) {
+                if ($videosNew['id'] == $id) {
+                    $video->update(['order' => $videosNew['order']]);
+                }
+            }
+        }
+
+        return response('Updated Successfully.', 200);
     }
 
     public function send(Request $request)
