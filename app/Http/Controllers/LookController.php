@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Notifications\ContactEmail;
 use App\User;
 use App\Models\Look;
+use App\Models\Interview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Notification;
@@ -15,6 +16,65 @@ use App\Http\Controllers\AddPipeController;
 
 class LookController extends Controller
 {
+    public function index() {
+        $id = Auth::user()->id;
+        $interviews = interview::where('user_id', $id)->paginate(5);
+        return view('look.looks.index')->withInterviews($interviews);
+    }
+
+    public function create() {
+        return view('look.looks.create');
+    }
+
+    public function show($id) {
+
+        $user_id = Auth::user()->id;
+
+        //$video_list = Look::select('title', 'img_url')->where('user_id', $id)->get();
+
+        $videos = Look::orderBy('order')
+                  ->where('interview_id', $id)
+                  ->where('user_id', $user_id)
+                  ->get();
+
+        $videosSaved = $videos->filter(function ($task, $key) {
+            return  ! $task->status;
+        })->values();
+
+
+        return view('look.looks.show', compact('videosSaved', 'id'));
+
+    }
+
+    public function edit($id) {
+
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        $interview = interview::find($id);
+
+        $video_id = round(microtime(true) * 1000);
+
+        $videos = Look::orderBy('order')
+                  ->where('interview_id', $id)
+                  ->where('user_id', $user_id)
+                  ->get();
+
+        $videosCompiled = $videos->filter(function ($task, $key) {
+            return $task->status;
+        })->values();
+
+        $videosSaved = $videos->filter(function ($task, $key) {
+            return  ! $task->status;
+        })->values();
+
+
+        $knownQuestions = Question::getDistinctQuestions();
+
+        return view('look.looks.edit', compact('knownQuestions', 'user', 'video_id', 'videos', 'videosCompiled', 'videosSaved', 'interview'));
+
+    }
+
     public function demos()
     {
         return view('look.demos');
@@ -51,19 +111,48 @@ class LookController extends Controller
 
         //$video_list = Look::select('title', 'img_url')->where('user_id', $id)->get();
 
-        $videos = Look::orderBy('order')->select('id','title','order','status', 'img_url')->where('user_id', $id)->get();
+        $videosCompiled = Look::orderBy('order')->where('user_id', $id)->where('status', 1)->get();
 
-        $videosCompiled = $videos->filter(function ($task, $key) {
-            return $task->status;
-        })->values();
+        $videosSaved = interview::where('user_id', $id)->with(array('looks'=>function($query){
+            $query->where('status', 0);
+        }))->get();
 
-        $videosSaved = $videos->filter(function ($task, $key) {
-            return  ! $task->status;
-        })->values();
+        // $videosSaved = $videos->filter(function ($task, $key) {
+        //     return  ! $task->status;
+        // })->groupBy('interview_id');
+
+        // dd($videosSaved);
 
         $knownQuestions = Question::getDistinctQuestions();
 
         return view('look.looks', compact('knownQuestions', 'user', 'video_id', 'videos', 'videosCompiled', 'videosSaved'));
+    }
+
+    public function videosData() {
+        $videosCompiled = Look::orderBy('order')->where('user_id', Auth::user()->id)->where('status', 1)->get();
+
+        $videosSaved = interview::where('user_id', Auth::user()->id)->with(array('looks'=>function($query){
+            $query->where('status', 0);
+        }))->get();
+
+        return response()->json([
+            'videosCompiled' => $videosCompiled,
+            'videosSaved' => $videosSaved,
+        ]);
+    }
+    public function editTitle(Request $request) {
+        $interview = Interview::find($request->id);
+        $interview->title = $request->title;
+        $interview->save();
+        return "success";
+    }
+
+    public function addInterview(Request $request) {
+        $interview = new Interview;
+        $interview->user_id = Auth::user()->id;
+        $interview->title = $request->title;
+        $interview->save();
+        return redirect()->route('look.edit', $interview->id);
     }
 
     public function updateTasksStatus(Request $request, $id)
@@ -125,6 +214,12 @@ class LookController extends Controller
 
         $id = Auth::user()->id;
 
+        $image = $request->image_blob;  // your base64 encoded
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = str_random(10).'.'.'png';
+
+        \File::put(public_path(). '/uploads/thumbnails/' . $imageName, base64_decode($image));
 
         $response = array(
             'status' => 'success',
@@ -134,8 +229,13 @@ class LookController extends Controller
 
         Look::updateOrCreate(
            ['video_id' => $request->video_id],
-           ['title' => $request->question, 'user_id' => $id]
+           ['title' => $request->question,
+            'user_id' => $id,
+            'img_url' =>  $imageName,
+            'interview_id' => $request->interview_id
+            ]
         );
+
         return response()->json($response);
     }
 
@@ -156,16 +256,11 @@ class LookController extends Controller
                 return;
             }
             
-            $filePath = 'uploads/' . $fileName;
+            $filePath = 'uploads/videos/' . $fileName;
             
             // make sure that one can upload only allowed audio/video files
             $allowed = array(
-                'webm',
-                'wav',
-                'mp4',
-                "mkv",
-                'mp3',
-                'ogg'
+                'webm'
             );
             $extension = pathinfo($filePath, PATHINFO_EXTENSION);
             if (!$extension || empty($extension) || !in_array($extension, $allowed)) {
@@ -183,5 +278,21 @@ class LookController extends Controller
 
     }
 
+    public function delete(Request $request){
+        $look = Look::find($request->id);
+        \File::delete(public_path(). '/uploads/videos/'.$look->video_id.'.webm');
+        \File::delete(public_path(). '/uploads/thumbnails/'.$look->img_url);
+        $look->delete();
+    }
 
+    public function interviewDelete(Request $request){
+        $interview = Interview::find($request->id);
+        $looks = Look::where('interview_id', $request->id)->get();
+        foreach ($looks as $look) {
+            \File::delete(public_path(). '/uploads/videos/'.$look->video_id.'.webm');
+            \File::delete(public_path(). '/uploads/thumbnails/'.$look->img_url);
+            $look->delete();
+        }
+        $interview->delete();
+    }
 }

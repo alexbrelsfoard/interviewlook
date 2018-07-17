@@ -67,3 +67,15 @@ Stack trace:
 #1 /home/lookcode/public_html/public/index.php(24): require('/home/lookcode/...')
 #2 {main}
   thrown in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 30
+[28-May-2018 00:08:46 UTC] PHP Fatal error:  Uncaught Error: Class 'Composer\Autoload\ComposerStaticInit52b310b17d1d9d15af58c34932dd6cfa' not found in /home/lookcode/public_html/vendor/composer/autoload_real.php:30
+Stack trace:
+#0 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#1 /home/lookcode/public_html/public/index.php(24): require('/home/lookcode/...')
+#2 {main}
+  thrown in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 30
+[28-May-2018 00:08:49 UTC] PHP Fatal error:  Uncaught Error: Class 'Composer\Autoload\ComposerStaticInit52b310b17d1d9d15af58c34932dd6cfa' not found in /home/lookcode/public_html/vendor/composer/autoload_real.php:30
+Stack trace:
+#0 /home/lookcode/public_html/vendor/autoload.php(7): ComposerAutoloaderInit52b310b17d1d9d15af58c34932dd6cfa::getLoader()
+#1 /home/lookcode/public_html/public/index.php(24): require('/home/lookcode/...')
+#2 {main}
+  thrown in /home/lookcode/public_html/vendor/composer/autoload_real.php on line 30

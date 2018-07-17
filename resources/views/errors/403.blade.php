@@ -14,13 +14,7 @@ LOOKs&trade;
 		<div class="error-spacer"></div>
 		<div role="main" class="main">
 
-			<h1>Restricted Access</h1>
-
-			<h2>Server Error: 403 (Forbidden)</h2>
-
-			<hr>
-
-			<h3>What does this mean?</h3>
+			<h1 style="margin-bottom: 40px;">Unauthorized Access</h1>
 
 			<p>You're not supposed to be here. You've landed on a page that requires special access to view.</p>
 

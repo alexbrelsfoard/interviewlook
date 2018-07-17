@@ -18,7 +18,7 @@ class CreateLooksTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->bigInteger('video_id')->unsigned();
             $table->string('title')->nullable();
-            $table->string('img_url')->nullable();
+            $table->text('img_url')->nullable();
             $table->boolean('active')->default(1);
             $table->integer('order')->unsigned()->default(0);
             $table->integer('status')->unsigned()->default(1);

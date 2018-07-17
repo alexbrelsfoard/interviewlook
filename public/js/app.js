@@ -43313,7 +43313,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-145d24ee"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -43356,13 +43356,13 @@ var content = __webpack_require__(44);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(46)("29a62925", content, false, {});
+var update = __webpack_require__(46)("95dfb688", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-145d24ee\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./VideoDraggable.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-145d24ee\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./VideoDraggable.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-145d24ee\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./VideoDraggable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-145d24ee\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./VideoDraggable.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -43380,7 +43380,7 @@ exports = module.exports = __webpack_require__(45)(false);
 
 
 // module
-exports.push([module.i, "\n.list>header {\n  font-weight: bold;\n  color: white;\n  text-align: center;\n  font-size: 20px;\n  line-height: 28px;\n}\n.list .card {\n  background-color: #FFF;\n  padding: 15px 10px;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: bolder;\n}\n.list .card:hover {\n  background-color: #F0F0F0;\n}\n", ""]);
+exports.push([module.i, "\n#completed-look[data-v-145d24ee] {\n    position: unset;\n}\nvideo[data-v-145d24ee]{\n    width: 100%;\n    max-width: 100%;\n}\n.modal-title[data-v-145d24ee]{\n    text-transform: none;\n}\n.snapshot-name[data-v-145d24ee] {\n    text-align: left;\n}\n.close-btn[data-v-145d24ee]{\n    margin-top: 6px;\n    display: block;\n}\n.list>header[data-v-145d24ee] {\n  font-weight: bold;\n  color: white;\n  text-align: center;\n  font-size: 20px;\n  line-height: 28px;\n}\n.list .card[data-v-145d24ee] {\n  background-color: #FFF;\n  padding: 15px 10px;\n  cursor: pointer;\n  font-size: 16px;\n  font-weight: bolder;\n}\n.list .card[data-v-145d24ee]:hover {\n  background-color: #F0F0F0;\n}\nimg[data-v-145d24ee] {\n    max-height: 50px;\n    width: auto;\n    max-width: 100%;\n    height: auto;\n}\n.fa-times[data-v-145d24ee]{\n    font-size: 17px;\n    color: #9f9f9f;\n}\n.fa-times[data-v-145d24ee]:hover{\n    color: #333;\n}\n", ""]);
 
 // exports
 
@@ -43771,6 +43771,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43782,7 +43809,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             tasksNotCompletedNew: this.tasksNotCompleted,
-            tasksCompletedNew: this.tasksCompleted
+            tasksCompletedNew: this.tasksCompleted,
+            modalVideoId: ''
         };
     },
 
@@ -43815,6 +43843,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        openVideo: function openVideo($video_id) {
+            $('#exampleModal').modal('show');
+            this.modalVideoId = $video_id;
+        },
+        deleteTask: function deleteTask($id) {
+            var confirmation = confirm("Are you sure you want to remove this question?");
+            if (confirmation) {
+                axios.put('/video/delete', { id: $id }).then(function (response) {
+                    $('article[data-id="' + $id + '"]').remove();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         }
     }
 });
@@ -45794,11 +45836,61 @@ var render = function() {
     _c(
       "div",
       {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("video", {
+                  attrs: {
+                    src: "/uploads/videos/" + _vm.modalVideoId + ".webm",
+                    controls: ""
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
         staticClass: "col-md-6 col-md-offset-0",
         staticStyle: { display: "none" },
         attrs: { id: "completed-look" }
       },
       [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-green pull-right",
+            staticStyle: {
+              position: "absolute",
+              right: "31px",
+              "z-index": "9"
+            },
+            attrs: { href: "/looks" }
+          },
+          [_vm._v("Save")]
+        ),
+        _vm._v(" "),
         _c(
           "section",
           { staticClass: "list" },
@@ -45828,17 +45920,67 @@ var render = function() {
                   "article",
                   {
                     key: task.id,
-                    staticClass: "card",
+                    staticClass: "card row",
                     attrs: { "data-id": task.id }
                   },
                   [
-                    _c("div", { staticClass: "snapshot-image col-md-3" }),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "snapshot-image col-md-3",
+                        on: {
+                          click: function($event) {
+                            _vm.openVideo(task.video_id)
+                          }
+                        }
+                      },
+                      [
+                        task.img_url
+                          ? _c("img", {
+                              attrs: {
+                                src: "/uploads/thumbnails/" + task.img_url
+                              }
+                            })
+                          : _vm._e()
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "snapshot-name col-md-9" }, [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(task.title) +
-                          "\n                    "
+                    _c(
+                      "div",
+                      {
+                        staticClass: "snapshot-name col-md-8",
+                        on: {
+                          click: function($event) {
+                            _vm.openVideo(task.video_id)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(task.title) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-1 text-right" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "close-btn",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteTask(task.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-times",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ]
                       )
                     ])
                   ]
@@ -45881,17 +46023,67 @@ var render = function() {
                 "article",
                 {
                   key: task.id,
-                  staticClass: "card",
+                  staticClass: "card row",
                   attrs: { "data-id": task.id }
                 },
                 [
-                  _c("div", { staticClass: "snapshot-image col-md-3" }),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "snapshot-image col-md-3",
+                      on: {
+                        click: function($event) {
+                          _vm.openVideo(task.video_id)
+                        }
+                      }
+                    },
+                    [
+                      task.img_url
+                        ? _c("img", {
+                            attrs: {
+                              src: "/uploads/thumbnails/" + task.img_url
+                            }
+                          })
+                        : _vm._e()
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "snapshot-name col-md-9" }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(task.title) +
-                        "\n                    "
+                  _c(
+                    "div",
+                    {
+                      staticClass: "snapshot-name col-md-8",
+                      on: {
+                        click: function($event) {
+                          _vm.openVideo(task.video_id)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(task.title) +
+                          "\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-1 text-right" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "close-btn",
+                        on: {
+                          click: function($event) {
+                            _vm.deleteTask(task.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fa fa-times",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
                     )
                   ])
                 ]
@@ -45904,7 +46096,35 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h4",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Interview Question")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

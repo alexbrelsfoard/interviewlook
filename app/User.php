@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Admin;
 
 class User extends Authenticatable
 {
@@ -46,4 +47,21 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Metric');
     }
+
+    static function userName($id){
+
+        return User::find( $id )->first()->name;
+
+    }
+
+    static function isAdmin($id){
+
+        if( Admin::where('user_id', $id )->first() ){
+            return true;
+        }
+
+        return false;
+
+    }
+
 }

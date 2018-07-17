@@ -10,10 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/looks', 'LookController@index')->name('look.index');
+    Route::get('/looks/create', 'LookController@create')->name('look.create');
+    Route::get('/looks/{id}', 'LookController@show')->name('look.show');
+    Route::get('/looks/edit/{id}', 'LookController@edit')->name('look.edit');
 
-Route::get('demos/tasks','LookController@showTasks');
-Route::patch('/looks/{id}', 'LookController@updateTasksStatus');
-Route::put('/looks/updateAll', 'LookController@updateTasksOrder');
+    Route::get('demos/tasks','LookController@showTasks');
+    Route::patch('/looks/{id}', 'LookController@updateTasksStatus');
+    Route::put('/looks/updateAll', 'LookController@updateTasksOrder');
+    Route::put('/video/delete', 'LookController@delete');
+
+    Route::post('/looks/edit-interview', 'LookController@editTitle');
+    Route::post('/looks/add-interview', 'LookController@addInterview')->name('add.interview');
+
+    Route::put('/look/delete', 'LookController@interviewDelete');
+    Route::get('/looks/data', 'LookController@videosData');
+});
+
 
 Route::post('/start-video','LookController@startRecording');
 Route::post('/upload-video','LookController@uploadVideo')->name('upload.video');
@@ -39,7 +53,6 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/looks', 'LookController@showLooks')->name('look.looks');
 
     Route::get('/getvideo', function () {
         $video_name = DB::table('user_questions')->select('video')->where('user_id', auth()->user()->id)->where('id', \Illuminate\Support\Facades\Input::get('i'))->orderBy('id', 'desc')->get();
@@ -70,4 +83,16 @@ Route::prefix('social')->group(function () {
     Route::get('linkedin/callback', 'SocialController@linkedinCallback')->name('social.linkedin.callback');
     Route::get('facebook', 'SocialController@facebook')->name('social.facebook');
     Route::get('facebook/callback', 'SocialController@facebookCallback')->name('social.facebook.callback');
+});
+
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'admin']], function()
+{
+
+    Route::get('/', 'AdminController@index')->name('dashboard.index');
+    Route::get('users', 'AdminController@users')->name('dashboard.users');
+    Route::get('videos', 'AdminController@videos')->name('dashboard.videos');
+
+    Route::post('make-admin', 'AdminController@makeAdmin')->name('dashboard.make-admin');
+    Route::post('remove-admin', 'AdminController@removeAdmin')->name('dashboard.remove-admin');
+
 });

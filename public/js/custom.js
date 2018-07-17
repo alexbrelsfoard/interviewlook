@@ -6,12 +6,14 @@ jQuery(document).ready(function($) {
         $( "#nav-right" ).toggle( "slow", function() {
             // Animation complete.
         });
+        $('#close-overlay').show()
     });
 
-    $( "#nav-close" ).click(function() {
+    $( "#nav-close, #close-overlay" ).click(function() {
         $( "#nav-right" ).toggle( "slow", function() {
             // Animation complete.
         });
+        $('#close-overlay').hide()
     });
 
     $( "#looks_tab_title" ).click(function() {
